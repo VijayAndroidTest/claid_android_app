@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_bg"
+    tools:context=".measurement">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button10"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/back_icon"
+
+                        android:text="" />
+
+                    <Button
+                        android:textColor="@color/colorwhite"
+                        android:id="@+id/button7"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/bose_bg"
+                        android:text="MEASURMENTS" />
+
+                    <Button
+                        android:onClick="chat"
+                        android:id="@+id/button16"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/mesa_icon"
+
+                        android:text=""
+                        tools:ignore="OnClick" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_60sdp"
+
+                        android:background="@drawable/ddd_icon"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:layout_width="@dimen/_275sdp"
+                        android:layout_height="@dimen/_400sdp"
+
+                        android:layout_gravity="center"
+                        android:background="@drawable/frame"
+                        android:paddingLeft="@dimen/_30sdp"
+                        android:paddingTop="@dimen/_50sdp"
+                        android:paddingRight="@dimen/_30sdp"
+                        android:paddingBottom="@dimen/_30sdp" />
+
+                    <Button
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_gravity="center"
+                        android:id="@+id/button9"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/btn"
+                        android:onClick="confirm"
+                        android:text="confirm"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorwhite"
+                        android:textSize="@dimen/_16sdp"
+                        tools:ignore="OnClick"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

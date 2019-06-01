@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".forget">
+
+    <LinearLayout
+        android:background="@drawable/bg_two"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="@dimen/_150sdp"
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorwhite"
+            android:text="Lorem lpsum,giving information on its origins,as well\n as a random Lipsum generator" />
+
+        <EditText
+            android:layout_marginTop="@dimen/_15sdp"
+            android:textColor="@color/colorwhite"
+            android:background="@drawable/inp_cir"
+            android:id="@+id/editText_phone"
+            android:paddingLeft="@dimen/_20sdp"
+            android:paddingRight="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_width="@dimen/_275sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:ems="10"
+            android:hint="Enter mobile no"
+            android:textAlignment="center"
+            android:paddingTop="@dimen/_25sdp"
+            android:textColorHint="@color/colorwhite"
+            android:inputType="phone"
+            />
+
+        <Button
+            android:id="@+id/button20"
+
+            android:layout_marginTop="@dimen/_175sdp"
+            android:layout_gravity="center"
+            android:background="@drawable/go_btn"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+             />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_25sdp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button22"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:text=""
+                android:background="@drawable/wechat_icon"/>
+
+            <Button
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@drawable/qq"
+                android:id="@+id/button21"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+
+                android:text="" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
