@@ -2,6 +2,7 @@ package com.example.claid;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,13 +33,16 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.claid.R.drawable.edit_text_focuses_bg;
+import static com.example.claid.R.drawable.edit_text_normal_bg;
+
 public class Profile extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     EditText editText_name,editText_age,editText_height,editText_weight;
 
     String[] country = new String[]{ "Head","mid_neck","neck_base"," Front Shoulder","Shoulder",
             " chest","underbust","neck_base"," Front Shoulder","Shoulder"};
     String[] age,id,weight,height,username;
-    Button button_save;
+    Button button_save,button_cam;
 
 
 
@@ -52,7 +56,9 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         setContentView(R.layout.activity_profile);
         Button button_back=findViewById(R.id.button8);
          button_save=findViewById(R.id.button_save);
+        button_cam=findViewById(R.id.button_camara);
         button_save.getBackground().setAlpha(50);
+        button_cam.getBackground().setAlpha(50);
         button_save.setTextColor(Color.parseColor("#8A8687"));
 
 
@@ -66,26 +72,9 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         editText_name=findViewById(R.id.editText_name);
         editText_height=findViewById(R.id.editText_height);
         editText_weight=findViewById(R.id.editText_weight);
-
         editText_name.setOnClickListener(this);
 
-        editText_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasfocus) {
-
-                if(hasfocus){
-                    Toast.makeText(Profile.this, "fff", Toast.LENGTH_SHORT).show();
-
-                    view.setBackgroundResource( R.drawable.focus_border_style);
-                }
-                else{
-                    view.setBackgroundResource( R.drawable.lost_focus_style);
-                }
-
-            }
-        });
-
-editText_name.addTextChangedListener(new TextWatcher() {
+        editText_name.addTextChangedListener(new TextWatcher() {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -99,10 +88,59 @@ editText_name.addTextChangedListener(new TextWatcher() {
     @Override
     public void afterTextChanged(Editable s) {
 
-        editText_name.setBackgroundResource(R.drawable.sqr_shap);
 
+        editText_name.setBackgroundResource(edit_text_focuses_bg);
+        editText_age.setBackgroundResource(edit_text_normal_bg);
+        editText_height.setBackgroundResource(edit_text_normal_bg);
+        editText_weight.setBackgroundResource(edit_text_normal_bg);
     }
 });
+
+    editText_age.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            editText_name.setBackgroundResource(edit_text_normal_bg);
+            editText_age.setBackgroundResource(edit_text_focuses_bg);
+            editText_height.setBackgroundResource(edit_text_normal_bg);
+            editText_weight.setBackgroundResource(edit_text_normal_bg);
+
+        }
+    });
+
+
+    editText_height.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+
+            editText_name.setBackgroundResource(edit_text_normal_bg);
+            editText_height.setBackgroundResource(edit_text_focuses_bg);
+            editText_age.setBackgroundResource(edit_text_normal_bg);
+            editText_weight.setBackgroundResource(edit_text_normal_bg);
+
+        }
+    });
 
         editText_weight.addTextChangedListener(new TextWatcher() {
             @Override
@@ -117,6 +155,13 @@ editText_name.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+
+                editText_name.setBackgroundResource(edit_text_normal_bg);
+                editText_age.setBackgroundResource(edit_text_normal_bg);
+                editText_height.setBackgroundResource(edit_text_normal_bg);
+                editText_weight.setBackgroundResource(edit_text_focuses_bg);
+
 
                 if(editText_weight.getText().toString().isEmpty() && editText_age.getText().toString().isEmpty() && editText_name.getText().toString().isEmpty() && editText_height.getText().toString().isEmpty()){
                     Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
@@ -185,6 +230,9 @@ editText_name.addTextChangedListener(new TextWatcher() {
                         Constant.age=editText_age.getText().toString();
                         Constant.height=editText_height.getText().toString();
                         Constant.weight=editText_weight.getText().toString();
+
+
+
                         next_act();
 
                     }
@@ -198,7 +246,6 @@ editText_name.addTextChangedListener(new TextWatcher() {
 
     void next_act(){
 
-       // Toast.makeText(this, "please wait", Toast.LENGTH_SHORT).show();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -319,8 +366,8 @@ editText_name.addTextChangedListener(new TextWatcher() {
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.update, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                  Toast.makeText (Profile.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
-
+                button_cam.getBackground().setAlpha(250);
+                button_cam.setEnabled(true);
 
 
 
@@ -355,6 +402,9 @@ editText_name.addTextChangedListener(new TextWatcher() {
 
                 return params;
             }
+
+
+
         };
         Volley.newRequestQueue(this).add(request);
 

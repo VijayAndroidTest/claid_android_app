@@ -75,6 +75,8 @@ LinearLayout linearLayout;
         videoView=findViewById(R.id.videoView3);
         linearLayout=findViewById(R.id.vidlyout);
         coverFlow = (FeatureCoverFlow) findViewById(R.id.coverflow);
+        coverFlow.setVisibility(View.GONE);
+        videoView.setVisibility(View.VISIBLE);
         button_play=findViewById(R.id.button_play);
         button_play.setVisibility(View.GONE);
             settingDummyData();

@@ -95,17 +95,15 @@
 
 
                 <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
+
                     android:id="@+id/coverflow"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_280sdp"
-
-
                     coverflow:alignAnimationTime="50"
                     coverflow:coverHeight="@dimen/_250sdp"
                     coverflow:coverWidth="@dimen/_150sdp"
                     coverflow:maxScaleFactor="1.1"
                     coverflow:reflectionGap="1000px"
-
                     coverflow:rotationThreshold=".5"
                     coverflow:scalingThreshold=".5"
                     coverflow:spacing="0.4"></it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow>

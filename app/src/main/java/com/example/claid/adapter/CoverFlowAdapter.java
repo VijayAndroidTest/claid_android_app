@@ -48,6 +48,9 @@ public class CoverFlowAdapter extends BaseAdapter {
         this.data = objects;
     }
 
+
+
+
     @Override
     public int getCount() {
         return data.size();

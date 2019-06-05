@@ -35,7 +35,7 @@
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_25sdp"
+                    android:layout_marginRight="@dimen/_150sdp"
                     android:background="@drawable/circle"
                     android:drawableTop="@drawable/logout"
                     android:paddingTop="@dimen/_15sdp"
@@ -46,7 +46,7 @@
                     android:textStyle="bold" />
 
                 <Button
-android:visibility="gone"
+                    android:visibility="gone"
                     android:onClick="confirm"
                     android:id="@+id/button9"
                     android:layout_width="@dimen/_150sdp"
@@ -146,28 +146,21 @@ android:visibility="gone"
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
+android:layout_marginTop="@dimen/_25sdp"
                             android:orientation="vertical">
-                            <RelativeLayout
-                                android:layout_marginTop="50dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:focusable="true"
-                                android:focusableInTouchMode="true"
-                                >
+
 
 
                             <EditText
 
 
-                                android:layout_margin="@dimen/_15sdp"
                                 android:id="@+id/editText_name"
+                                android:layout_margin="@dimen/_15sdp"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:background="@drawable/edit_text_bg_selector"
+                                android:layout_marginTop="@dimen/_25sdp"
+                                android:background="@drawable/edit_text_normal_bg"
                                 android:ems="10"
                                 android:gravity="center"
                                 android:hint="Name"
@@ -175,57 +168,67 @@ android:visibility="gone"
                                 android:paddingTop="@dimen/_3sdp"
                                 android:text=""
                                 android:textColor="@color/colorwhite"
-                                android:textColorHint="@color/colorwhite">
+                                android:textColorHint="@color/colorwhite"
+
+
+                                >
 
                                 <requestFocus/>
                             </EditText>
 
 
-    </RelativeLayout>
+
 
                             <EditText
                                 android:id="@+id/editText_age"
-                                android:layout_width="@dimen/_250sdp"
-                                android:layout_height="@dimen/_80sdp"
+                                android:layout_margin="@dimen/_15sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
                                 android:layout_gravity="center"
-                                android:background="@drawable/inp_cir"
-                                android:ems="10"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="@drawable/edit_text_normal_bg"
+
                                 android:gravity="center"
-                                android:hint="AGE"
-                                android:inputType="numberDecimal"
-                                android:paddingTop="@dimen/_30sdp"
+                                android:hint="Age"
+                                android:inputType="number"
+                                android:paddingTop="@dimen/_3sdp"
+                                android:text=""
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/colorwhite" />
 
                             <EditText
                                 android:id="@+id/editText_height"
-                                android:layout_width="@dimen/_250sdp"
-                                android:layout_height="@dimen/_80sdp"
+                                android:layout_margin="@dimen/_15sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:background="@drawable/inp_cir"
+                                android:background="@drawable/edit_text_normal_bg"
                                 android:ems="10"
                                 android:gravity="center"
-                                android:hint="Your Height(cm)"
+                                android:hint="Height"
                                 android:inputType="numberDecimal"
-                                android:paddingTop="@dimen/_30sdp"
+                                android:paddingTop="@dimen/_3sdp"
+                                android:text=""
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/colorwhite" />
 
                             <EditText
                                 android:id="@+id/editText_weight"
-                                android:layout_width="@dimen/_250sdp"
-                                android:layout_height="@dimen/_80sdp"
+                                android:layout_margin="@dimen/_15sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:background="@drawable/inp_cir"
+                                android:background="@drawable/edit_text_normal_bg"
                                 android:ems="10"
                                 android:gravity="center"
-                                android:hint="Your Weight(Kg)"
+                                android:hint="Weight"
                                 android:inputType="numberDecimal"
-                                android:paddingTop="@dimen/_30sdp"
+                                android:paddingTop="@dimen/_3sdp"
+                                android:text=""
                                 android:textColor="@color/colorwhite"
-                                android:textColorHint="@color/colorwhite" />
+                                android:textColorHint="@color/colorwhite"/>
 
                             <Button
                                 android:onClick="save"
@@ -247,26 +250,26 @@ android:visibility="gone"
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_30sdp"
 
                             android:gravity="center"
                             android:orientation="horizontal">
 
                             <Button
                                 android:id="@+id/button_manual"
-                                android:layout_width="@dimen/_70sdp"
-                                android:layout_height="@dimen/_70sdp"
-                                android:layout_marginRight="@dimen/_30sdp"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_marginRight="@dimen/_50sdp"
                                 android:background="@drawable/measure_size"
-
                                 android:text="" />
 
                             <Button
+                                android:enabled="false"
                                 
                                 android:onClick="clickcamara"
                                 android:id="@+id/button_camara"
-                                android:layout_width="@dimen/_70sdp"
-                                android:layout_height="@dimen/_70sdp"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_60sdp"
                                 android:layout_marginLeft="@dimen/_30sdp"
                                 android:background="@drawable/photo"
                                 android:text=""
