@@ -146,7 +146,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-android:layout_marginTop="@dimen/_25sdp"
+android:layout_marginTop="@dimen/_15sdp"
                             android:orientation="vertical">
 
 
@@ -154,10 +154,12 @@ android:layout_marginTop="@dimen/_25sdp"
                             <EditText
 
 
+                                android:drawableLeft="@drawable/ava_img"
+                                android:paddingLeft="@dimen/_15sdp"
                                 android:id="@+id/editText_name"
                                 android:layout_margin="@dimen/_15sdp"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
+                                android:layout_height="@dimen/_50sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_25sdp"
                                 android:background="@drawable/edit_text_normal_bg"
@@ -165,7 +167,8 @@ android:layout_marginTop="@dimen/_25sdp"
                                 android:gravity="center"
                                 android:hint="Name"
                                 android:inputType="text"
-                                android:paddingTop="@dimen/_3sdp"
+                                android:paddingTop="@dimen/_15sdp"
+                                android:paddingBottom="@dimen/_15sdp"
                                 android:text=""
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/colorwhite"
@@ -180,10 +183,12 @@ android:layout_marginTop="@dimen/_25sdp"
 
 
                             <EditText
+                                android:drawableLeft="@drawable/age"
+                                android:paddingLeft="@dimen/_15sdp"
                                 android:id="@+id/editText_age"
                                 android:layout_margin="@dimen/_15sdp"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
+                                android:layout_height="@dimen/_50sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:background="@drawable/edit_text_normal_bg"
@@ -191,16 +196,19 @@ android:layout_marginTop="@dimen/_25sdp"
                                 android:gravity="center"
                                 android:hint="Age"
                                 android:inputType="number"
-                                android:paddingTop="@dimen/_3sdp"
+
                                 android:text=""
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/colorwhite" />
 
                             <EditText
+
+                                android:drawableLeft="@drawable/height_icon"
+                                android:paddingLeft="@dimen/_15sdp"
                                 android:id="@+id/editText_height"
                                 android:layout_margin="@dimen/_15sdp"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
+                                android:layout_height="@dimen/_50sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:background="@drawable/edit_text_normal_bg"
@@ -208,16 +216,18 @@ android:layout_marginTop="@dimen/_25sdp"
                                 android:gravity="center"
                                 android:hint="Height"
                                 android:inputType="numberDecimal"
-                                android:paddingTop="@dimen/_3sdp"
+                                android:paddingTop="@dimen/_15sdp"
+                                android:paddingBottom="@dimen/_15sdp"
                                 android:text=""
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/colorwhite" />
 
                             <EditText
+                                android:drawableLeft="@drawable/weight_icon"
                                 android:id="@+id/editText_weight"
                                 android:layout_margin="@dimen/_15sdp"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
+                                android:layout_height="@dimen/_50sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:background="@drawable/edit_text_normal_bg"
@@ -225,14 +235,16 @@ android:layout_marginTop="@dimen/_25sdp"
                                 android:gravity="center"
                                 android:hint="Weight"
                                 android:inputType="numberDecimal"
-                                android:paddingTop="@dimen/_3sdp"
+                                android:paddingLeft="@dimen/_15sdp"
+                                android:paddingBottom="@dimen/_15sdp"
+                                android:paddingTop="@dimen/_15sdp"
                                 android:text=""
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/colorwhite"/>
 
                             <Button
                                 android:onClick="save"
-                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
                                 android:id="@+id/button_save"
                                 android:layout_gravity="center"
                                 android:layout_width="@dimen/_120sdp"
@@ -250,7 +262,7 @@ android:layout_marginTop="@dimen/_25sdp"
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
 
                             android:gravity="center"
                             android:orientation="horizontal">

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     int mCurrentVideoPosition;
     String STpass,STname;
     String[] error,api_key,user_id;
+    Button button_go;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         editText_password= findViewById(R.id.editText_pass);
         editText_username=findViewById(R.id.editText_user);
         progressBar=findViewById(R.id.progressBar2);
+        button_go=findViewById(R.id.button_go);
 
         Uri uri = Uri.parse("android.resource://" // First start with this,
                 + getPackageName()
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     public void ok(View view)
 
     {
-      //  progressBar.setVisibility(View.VISIBLE);
+        button_go.animate().rotation(button_go.getRotation()+360).start();
         log();
 
 

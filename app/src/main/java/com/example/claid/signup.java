@@ -9,9 +9,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -35,6 +38,9 @@ import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.example.claid.R.drawable.edit_text_focuses_bg;
+import static com.example.claid.R.drawable.edit_text_normal_bg;
+
 public class
 signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     EditText editText_name,editText_email,editText_phonenumber,editText_pass,editText_cpass;
@@ -42,6 +48,7 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
     private Timer timer = new Timer();
     private final long DELAY = 1000; // in ms
     Spinner spinner_state;
+    Button button_go;
     String[] name,st_id;
 
     @Override
@@ -51,13 +58,15 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_signup);
-        spinner_state=findViewById(R.id.spinner);
+       // spinner_state=findViewById(R.id.spinner);
         editText_cpass=findViewById(R.id.editText_cpassword);
         editText_email=findViewById(R.id.editText_email);
         editText_name=findViewById(R.id.editText_name);
         editText_phonenumber=findViewById(R.id.editText_phonenumer);
         editText_pass=findViewById(R.id.editText_password);
-        spinner_state.setOnItemSelectedListener(this);
+        button_go=findViewById(R.id.button_ok);
+        button_go.getBackground().setAlpha(100);
+      //  spinner_state.setOnItemSelectedListener(this);
 
 
         getstate();
@@ -66,7 +75,7 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
             @Override
             public void afterTextChanged(Editable arg0) {
                 // user typed: start the timer
-                timer = new Timer();
+               /* timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -96,7 +105,19 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
                         // InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         // in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     }
-                }, 1000); // 600ms delay before the timer executes the "run" method from TimerTask
+                }, 1000); // 600ms delay before the timer executes the "run" method from TimerTask*/
+
+                if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
+                    button_go.getBackground().setAlpha(250);
+                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
             }
 
             @Override
@@ -107,9 +128,18 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // user is typing: reset already started timer (if existing)
-                if (timer != null) {
-                    timer.cancel();
+                if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
+                    button_go.getBackground().setAlpha(250);
+                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
                 }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
@@ -128,19 +158,178 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
+                    button_go.getBackground().setAlpha(250);
+                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+                editText_name.setBackgroundResource(edit_text_normal_bg);
+                editText_phonenumber.setBackgroundResource(edit_text_normal_bg);
+                editText_cpass.setBackgroundResource(edit_text_normal_bg);
+                editText_pass.setBackgroundResource(edit_text_focuses_bg);
                 
                 
                 if ( isValidPassword(editText_pass.getText().toString())==true){
 
-                    Toast.makeText(signup.this, " valid password ", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(signup.this, " valid password ", Toast.LENGTH_SHORT).show();
                 }
 
             else {
 
-                    Toast.makeText(signup.this, "invalid password ", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(signup.this, "invalid password ", Toast.LENGTH_SHORT).show();
                 }  
             }
             
+        });
+        editText_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+                if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
+                    button_go.getBackground().setAlpha(250);
+                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                editText_pass.setBackgroundResource(edit_text_normal_bg);
+                editText_phonenumber.setBackgroundResource(edit_text_normal_bg);
+                editText_cpass.setBackgroundResource(edit_text_normal_bg);
+                editText_name.setBackgroundResource(edit_text_focuses_bg);
+
+
+                if ( isValidPassword(editText_pass.getText().toString())==true){
+
+                   // Toast.makeText(signup.this, " valid password ", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+
+                  //  Toast.makeText(signup.this, "invalid password ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+        editText_cpass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+                if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
+                    button_go.getBackground().setAlpha(250);
+                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                editText_name.setBackgroundResource(edit_text_normal_bg);
+                editText_phonenumber.setBackgroundResource(edit_text_normal_bg);
+                editText_pass.setBackgroundResource(edit_text_normal_bg);
+                editText_cpass.setBackgroundResource(edit_text_focuses_bg);
+
+
+                if ( isValidPassword(editText_pass.getText().toString())==true){
+
+                   // Toast.makeText(signup.this, " valid password ", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+
+                   // Toast.makeText(signup.this, "invalid password ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+        editText_phonenumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+                if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
+                    button_go.getBackground().setAlpha(250);
+                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+                editText_name.setBackgroundResource(edit_text_normal_bg);
+                editText_cpass.setBackgroundResource(edit_text_normal_bg);
+                editText_pass.setBackgroundResource(edit_text_normal_bg);
+                editText_phonenumber.setBackgroundResource(edit_text_focuses_bg);
+
+
+                if ( isValidPassword(editText_pass.getText().toString())==true){
+
+                   // Toast.makeText(signup.this, " valid password ", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+
+                   // Toast.makeText(signup.this, "invalid password ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
         });
 
 
@@ -166,6 +355,10 @@ void toast(){
 
 
     public void go(View view){
+
+
+
+        button_go.animate().rotation(button_go.getRotation()+360).start();
 
        if(editText_name.getText().toString().isEmpty()){
 
@@ -262,7 +455,7 @@ void toast(){
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.state, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText (signup.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
+
 
                 try {
                     getstate_json(response);
@@ -314,7 +507,7 @@ void toast(){
         }
 
         AppointmentAdapter adapter = new AppointmentAdapter();
-        spinner_state.setAdapter(adapter);
+     //   spinner_state.setAdapter(adapter);
 
 
 

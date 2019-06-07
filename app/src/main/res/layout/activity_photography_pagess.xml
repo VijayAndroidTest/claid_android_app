@@ -31,38 +31,28 @@
                 <Button
 
                     android:id="@+id/button18"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:background="@drawable/back_icon"
                     android:text=""
 
                     />
 
-                <Button
-                    android:id="@+id/button17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button_video"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_marginLeft="@dimen/_80sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_weight="1"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:background="@drawable/video_onclick"
                     android:onClick="click_video"
                     android:text=""
@@ -70,11 +60,10 @@
 
                 <Button
                     android:id="@+id/button_camara"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_80sdp"
-                    android:layout_weight="1"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginLeft="@dimen/_25sdp"
+
                     android:background="@drawable/camera_onclick"
                     android:onClick="click_camara"
                     android:text=""
@@ -84,18 +73,22 @@
             <LinearLayout
                 android:id="@+id/ll"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_340sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_5sdp"
-
-                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical">>
 
 
+                <android.support.v4.view.ViewPager
 
+                    android:id="@+id/myviewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                   />
 
                 <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
-
+                    android:visibility="gone"
                     android:id="@+id/coverflow"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_280sdp"
@@ -149,7 +142,7 @@
             </LinearLayout>
 
             <LinearLayout
-
+android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -166,17 +159,17 @@
                     <TextView
 
                         android:id="@+id/textView3"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_marginLeft="@dimen/_50sdp"
-                        android:background="@drawable/smal_frame"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:background="@drawable/demo_btn"
                         android:text="" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_50sdp"
+                        android:layout_marginLeft="@dimen/_150sdp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -199,7 +192,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="accept terms and conditions?"
+                            android:text="Accept"
                             android:textColor="@color/colorwhite" />
 
                     </LinearLayout>
@@ -207,7 +200,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:layout_gravity="bottom"
                     android:gravity="bottom"
                     android:layout_width="match_parent"
@@ -217,9 +210,9 @@
                     <Button
                         android:id="@+id/button9"
                         android:onClick="okk"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="@dimen/_50sdp"
+android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="@dimen/_40sdp"
                         android:layout_gravity="center"
                         android:background="@drawable/btn"
                         android:text="next"

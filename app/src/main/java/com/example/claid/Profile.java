@@ -410,7 +410,11 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
     }
 
-    public void save(View view){updat();
+    public void save(View view){
+
+        Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blinking_animation);
+        button_save.startAnimation(startAnimation);
+        updat();
     }
 
 

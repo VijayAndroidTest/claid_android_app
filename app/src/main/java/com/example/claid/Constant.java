@@ -3,13 +3,13 @@ package com.example.claid;
 public class Constant {
 
     public static String img_1;
-    public static int pos_1=0;
+    public static int pos_1=1;
     public static int pos_2=0;
     public static int pos_3=0;
-    public static int pos_4=0;
+    public static int pos_4=1;
     public static int pos_5=0;
     public static int pos_6=0;
-    public static int pos_7=0;
+    public static int pos_7=1;
     public static int pos_8=0;
 
     //profile
@@ -54,5 +54,7 @@ public class Constant {
 
 
     public static  int viediostates=0;
+    public static  int demo_viediostates=0;
+
 
 }

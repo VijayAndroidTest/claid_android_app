@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.claid.CarouselLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_container"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:background="@android:color/transparent"
+
+    android:gravity="center"
+
+
+    android:orientation="vertical">
+
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@drawable/bose_bg"
+android:textColor="@color/colorwhite"
+        android:id="@+id/text"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content" />
+
+    <ImageView
+android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/pagerImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/frame"
+        android:contentDescription="@string/app_name"
+        android:paddingLeft="@dimen/_15sdp"
+        android:paddingTop="@dimen/_25sdp"
+        android:paddingRight="@dimen/_15sdp"
+        android:paddingBottom="@dimen/_25sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/front_bose" />
+
+    >
+
+</com.example.claid.CarouselLinearLayout>

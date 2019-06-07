@@ -2,7 +2,9 @@ package com.example.claid;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,9 +12,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -57,9 +61,16 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     private String pathToFile;
     VideoView videoView;
     Button button_play;
+    SharedPreferences sharedpreferences;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String Name = "nameKey";
+    LinearLayout linearLayout;
+    public final static int LOOPS = 1000;
+    public CarouselPagerAdapter cpaadapter;
+    public ViewPager pager;
+    public static int count = 8; //ViewPager items size
+    public static int FIRST_PAGE = 8;
 
-
-LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +80,22 @@ LinearLayout linearLayout;
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_photography_pagess);
 
+        pager=(ViewPager)findViewById(R.id.myviewpager) ;
+
+        //set page margin between pages for viewpager
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int pageMargin = ((metrics.widthPixels / 4) * 2);
+        pager.setPageMargin(-pageMargin);
+        cpaadapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
+        pager.setAdapter(cpaadapter);
+        cpaadapter.notifyDataSetChanged();
+        pager.addOnPageChangeListener(cpaadapter);
+        pager.setCurrentItem(FIRST_PAGE);
+        pager.setOffscreenPageLimit(2);
+
         EnableRuntimePermission();
+
 
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         videoView=findViewById(R.id.videoView3);
@@ -79,12 +105,31 @@ LinearLayout linearLayout;
         videoView.setVisibility(View.VISIBLE);
         button_play=findViewById(R.id.button_play);
         button_play.setVisibility(View.GONE);
+        linearLayout.setVisibility(View.VISIBLE);
+        button_play.setVisibility(View.VISIBLE);
+        coverFlow.setVisibility(View.GONE);
+        videoView.setVisibility(View.GONE);
+
+
             settingDummyData();
             adapter = new CoverFlowAdapter(this, games);
             coverFlow.setAdapter(adapter);
             coverFlow.setOnScrollPositionListener(onScrollListener());
             coverFlow.setOnItemClickListener(this);
             videoView.setOnTouchListener(this);
+
+try {
+    sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+    String Astatus = sharedpreferences.getString("name", "");
+
+    Constant.demo_viediostates = Integer.parseInt(Astatus);
+
+
+
+}catch (Exception e){}
+
+            Demo_video();
+
 
 
             if(Constant.viediostates==1){
@@ -103,6 +148,21 @@ LinearLayout linearLayout;
 
 
             }
+
+
+        }
+
+
+        void Demo_video(){
+
+        if(Constant.demo_viediostates==0){
+            sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("name","1");
+            editor.apply();
+            Intent myIntent = new Intent(photography_pages.this, video_view_url.class);
+            photography_pages.this.startActivity(myIntent);
+        }
 
 
         }

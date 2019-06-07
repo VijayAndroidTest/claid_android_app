@@ -11,7 +11,7 @@
 
 
         <Button
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_25sdp"
             android:id="@+id/button2"
 
             android:layout_width="@dimen/_250sdp"
@@ -35,43 +35,47 @@
             android:orientation="vertical" >
 
             <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/editText_name"
-                    android:layout_width="@dimen/_275sdp"
-                    android:layout_height="@dimen/_90sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/inp_cir"
+                    android:drawableLeft="@drawable/ava_img"
+                    android:drawablePadding="@dimen/_15sdp"
+                    android:paddingLeft="@dimen/_15sdp"
+
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/edit_text_normal_bg"
                     android:ems="10"
-                    android:gravity="center"
                     android:hint="Name"
                     android:inputType="text"
-                    android:paddingTop="@dimen/_30sdp"
                     android:text=""
-                    android:nextFocusDown="@+id/editText_phonenumer"
                     android:textColor="@color/colorwhite"
                     android:textColorHint="@color/colorwhite"
-
                     />
 
                 <EditText
                     android:maxLength="11"
                     android:id="@+id/editText_phonenumer"
-                    android:layout_width="@dimen/_275sdp"
-                    android:layout_height="@dimen/_90sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/inp_cir"
+
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:drawableLeft="@drawable/mob_ico"
+                    android:drawablePadding="@dimen/_15sdp"
+                    android:paddingLeft="@dimen/_15sdp"
+
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_50sdp"
+
+                    android:background="@drawable/edit_text_normal_bg"
                     android:ems="10"
-                    android:gravity="center"
                     android:hint="Phone Number"
-                    android:inputType="phone"
-                    android:paddingTop="@dimen/_30sdp"
+                    android:inputType="text"
                     android:text=""
                     android:textColor="@color/colorwhite"
                     android:textColorHint="@color/colorwhite" />
@@ -93,7 +97,7 @@
                     android:textColor="@color/colorwhite"
                     android:textColorHint="@color/colorwhite" />
 
-                <Spinner
+                Spinner
                     android:id="@+id/spinner"
                     android:layout_width="@dimen/_275sdp"
                     android:layout_height="@dimen/_90sdp"
@@ -102,50 +106,56 @@
                     />
 
                 <EditText
+
                     android:id="@+id/editText_password"
-                    android:layout_width="@dimen/_275sdp"
-                    android:layout_height="@dimen/_90sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/inp_cir"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:drawableLeft="@drawable/pwd"
+                    android:drawablePadding="@dimen/_15sdp"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/edit_text_normal_bg"
                     android:ems="10"
-                    android:gravity="center"
                     android:hint="Password"
                     android:inputType="text"
-                    android:paddingTop="@dimen/_30sdp"
                     android:text=""
                     android:textColor="@color/colorwhite"
-                    android:textColorHint="@color/colorwhite" />
+                    android:textColorHint="@color/colorwhite"/>
 
                 <EditText
+
                     android:id="@+id/editText_cpassword"
-                    android:layout_width="@dimen/_275sdp"
-                    android:layout_height="@dimen/_90sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/inp_cir"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:drawableLeft="@drawable/pwd_img"
+                    android:drawablePadding="@dimen/_15sdp"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/edit_text_normal_bg"
                     android:ems="10"
-                    android:gravity="center"
-                    android:hint="confirm password"
-                    android:inputType="phone"
-                    android:paddingTop="@dimen/_30sdp"
+                    android:hint="Confirmation Password"
+                    android:inputType="text"
                     android:text=""
                     android:textColor="@color/colorwhite"
                     android:textColorHint="@color/colorwhite" />
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginRight="@dimen/_25sdp"
+                    android:layout_marginLeft="@dimen/_25sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/line"
                     android:orientation="vertical"></LinearLayout>
 
                 <Button
+                    android:enabled="false"
                     android:onClick="go"
-                    android:id="@+id/button28"
+                    android:id="@+id/button_ok"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/go_btn" />
 
 
@@ -153,7 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -161,8 +171,8 @@
                         android:id="@+id/button22"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        android:layout_marginLeft="@dimen/_15sdp"
-                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_50sdp"
+                        android:layout_marginRight="@dimen/_50sdp"
                         android:background="@drawable/wechat_icon"
                         android:text="" />
 
@@ -170,8 +180,8 @@
                         android:id="@+id/button21"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        android:layout_marginLeft="@dimen/_15sdp"
-                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_50sdp"
+                        android:layout_marginRight="@dimen/_50sdp"
                         android:background="@drawable/qq"
 
                         android:text="" />
