@@ -54,13 +54,12 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     private CoverFlowAdapter adapter;
     private ArrayList<Game> games;
     int img_no;
-
     ToggleButton tButton;
     public  static final int RequestPermissionCode  = 1;
     private static final int CAMERA_REQUEST = 1888;
     private String pathToFile;
     VideoView videoView;
-    Button button_play;
+    Button button_play,button_cam,button_video;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String Name = "nameKey";
@@ -79,10 +78,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_photography_pagess);
-
         pager=(ViewPager)findViewById(R.id.myviewpager) ;
-
-        //set page margin between pages for viewpager
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int pageMargin = ((metrics.widthPixels / 4) * 2);
@@ -93,29 +89,28 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         pager.addOnPageChangeListener(cpaadapter);
         pager.setCurrentItem(FIRST_PAGE);
         pager.setOffscreenPageLimit(2);
-
         EnableRuntimePermission();
-
-
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         videoView=findViewById(R.id.videoView3);
         linearLayout=findViewById(R.id.vidlyout);
         coverFlow = (FeatureCoverFlow) findViewById(R.id.coverflow);
-        coverFlow.setVisibility(View.GONE);
         videoView.setVisibility(View.VISIBLE);
         button_play=findViewById(R.id.button_play);
         button_play.setVisibility(View.GONE);
         linearLayout.setVisibility(View.VISIBLE);
         button_play.setVisibility(View.VISIBLE);
-        coverFlow.setVisibility(View.GONE);
+//      coverFlow.setVisibility(View.GONE);
         videoView.setVisibility(View.GONE);
-
-
-            settingDummyData();
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
-            coverFlow.setOnScrollPositionListener(onScrollListener());
-            coverFlow.setOnItemClickListener(this);
+        button_cam=findViewById(R.id.button_camara);
+        button_video=findViewById(R.id.button_video);
+        button_video.getBackground().setAlpha(250);
+        button_cam.getBackground().setAlpha(50);
+        pager.setVisibility(View.GONE);
+        settingDummyData();
+           // adapter = new CoverFlowAdapter(this, games);
+           // coverFlow.setAdapter(adapter);
+           // coverFlow.setOnScrollPositionListener(onScrollListener());
+          //  coverFlow.setOnItemClickListener(this);
             videoView.setOnTouchListener(this);
 
 try {
@@ -135,7 +130,7 @@ try {
             if(Constant.viediostates==1){
 
                 linearLayout.setVisibility(View.VISIBLE);
-                coverFlow.setVisibility(View.GONE);
+               // coverFlow.setVisibility(View.GONE);
                 button_play.setVisibility(View.GONE);
                 videoView.setVisibility(View.VISIBLE);
                 Uri vid_uri= Uri.parse("/sdcard/myvideo.mp4");
@@ -464,7 +459,7 @@ try {
            settingDummyData();
 
            adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+         //  coverFlow.setAdapter(adapter);
        }
        if (mimg_no == 2) {
            Constant.pos_2 = 1;
@@ -484,7 +479,7 @@ try {
            settingDummyData();
 
            adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+          // coverFlow.setAdapter(adapter);
        }
        if (mimg_no == 3) {
 
@@ -506,7 +501,7 @@ try {
            settingDummyData();
 
            adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+          // coverFlow.setAdapter(adapter);
        }
 
 
@@ -527,8 +522,8 @@ try {
            games.clear();
            settingDummyData();
 
-           adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+           //adapter = new CoverFlowAdapter(this, games);
+          // coverFlow.setAdapter(adapter);
        }
        if (mimg_no == 5) {
            Constant.pos_5 = 1;
@@ -548,7 +543,7 @@ try {
            settingDummyData();
 
            adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+          // coverFlow.setAdapter(adapter);
        }
        if (mimg_no == 6) {
 
@@ -570,7 +565,7 @@ try {
            settingDummyData();
 
            adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+          // coverFlow.setAdapter(adapter);
        }
 
 
@@ -592,7 +587,7 @@ try {
            settingDummyData();
 
            adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+          // coverFlow.setAdapter(adapter);
        }
        if (mimg_no == 8) {
            Constant.pos_8 = 1;
@@ -611,7 +606,7 @@ try {
            settingDummyData();
 
            adapter = new CoverFlowAdapter(this, games);
-           coverFlow.setAdapter(adapter);
+          // coverFlow.setAdapter(adapter);
        }
 
 
@@ -636,7 +631,11 @@ try {
 
        linearLayout.setVisibility(View.VISIBLE);
        button_play.setVisibility(View.VISIBLE);
-       coverFlow.setVisibility(View.GONE);
+       pager.setVisibility(View.GONE);
+       button_cam.getBackground().setAlpha(50);
+       button_video.getBackground().setAlpha(250);
+       Constant.viediostates = 1;
+      // coverFlow.setVisibility(View.GONE);
 
    }
 
@@ -644,8 +643,13 @@ try {
 
     {
         linearLayout.setVisibility(View.GONE);
+        button_play.setVisibility(View.GONE);
+        linearLayout.setVisibility(View.GONE);
         videoView.setVisibility(View.GONE);
-        coverFlow.setVisibility(View.VISIBLE);
+        pager.setVisibility(View.VISIBLE);
+        button_cam.getBackground().setAlpha(250);
+        button_video.getBackground().setAlpha(50);
+      //  coverFlow.setVisibility(View.VISIBLE);
 
     }
 

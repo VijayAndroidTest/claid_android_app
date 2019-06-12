@@ -79,54 +79,28 @@ public class ozos_cam extends AppCompatActivity {
         File image=null;
         try {
             image=File.createTempFile(name,".jpg",storageDir);
+           image_path_in_constant(1,""+File.createTempFile(name,".jpg",storageDir));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        finish();
         return image;
 
     }
 
-    /*public void image_path_in_constant(int mimg_no,String path) {
+    public void image_path_in_constant(int mimg_no,String path) {
         Log.d("path","path:"+pathToFile);
         if (mimg_no == 1) {
             Constant.pos_1 = 1;
             Constant.img_path_1= path;
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
         if (mimg_no == 2) {
             Constant.pos_2 = 1;
             Constant.img_path_2 = path;
 
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
         if (mimg_no == 3) {
 
@@ -134,21 +108,7 @@ public class ozos_cam extends AppCompatActivity {
             Constant.pos_3 = 1;
             Constant.img_path_3 = path;
 
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
 
 
@@ -156,41 +116,12 @@ public class ozos_cam extends AppCompatActivity {
             Constant.pos_4 = 1;
             Constant.img_path_4= path;
 
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
         if (mimg_no == 5) {
             Constant.pos_5 = 1;
             Constant.img_path_5 = path;
 
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
         if (mimg_no == 6) {
 
@@ -198,21 +129,7 @@ public class ozos_cam extends AppCompatActivity {
             Constant.pos_6 = 1;
             Constant.img_path_6 = path;
 
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
 
 
@@ -220,40 +137,12 @@ public class ozos_cam extends AppCompatActivity {
             Constant.pos_7 = 1;
             Constant.img_path_7= path;
 
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
         if (mimg_no == 8) {
             Constant.pos_8 = 1;
             Constant.img_path_8 = path;
-            try {
-                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-                Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-                upload(bitmap);
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            games.clear();
-            settingDummyData();
-
-            adapter = new CoverFlowAdapter(this, games);
-            coverFlow.setAdapter(adapter);
         }
 
 
@@ -261,7 +150,7 @@ public class ozos_cam extends AppCompatActivity {
 
 
 
-    void upload (final Bitmap bitmaps) {
+  /*  void upload (final Bitmap bitmaps) {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.upload, new Response.Listener<String>() {

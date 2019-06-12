@@ -8,6 +8,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import static com.example.claid.R.drawable.edit_text_focuses_bg;
 
 public class forget extends AppCompatActivity implements View.OnClickListener {
 EditText editText_phone;
@@ -24,18 +27,21 @@ EditText editText_phone;
         editText_phone.addTextChangedListener(new TextWatcher() {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        editText_phone.setBackgroundResource(R.drawable.inp_cir_hover);
+
 
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        editText_phone.setBackgroundResource(R.drawable.inp_cir_hover);
+
     }
 
     @Override
     public void afterTextChanged(Editable s) {
-        editText_phone.setBackgroundResource(R.drawable.inp_cir_hover);
+        editText_phone.setBackgroundResource(edit_text_focuses_bg);
+        if(editText_phone.getText().length()<=11){
+            //Toast.makeText(forget.this, "max character length 11", Toast.LENGTH_SHORT).show();
+        }
     }
 });
 

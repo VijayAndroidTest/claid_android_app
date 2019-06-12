@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ozos_cam"></activity>
+        <activity android:name=".zoso_cam_2"></activity>
+        <activity android:name=".ozos_cam" />
         <activity android:name=".video_view_url" />
         <activity android:name=".signup" />
         <activity android:name=".model_3d" />
@@ -35,14 +36,17 @@
         <activity android:name=".preview_screen" />
         <activity android:name=".confirmation_screen" />
         <activity android:name=".photography_pages">
+
+        </activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile" />
-        <activity android:name=".MainActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

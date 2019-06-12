@@ -45,9 +45,9 @@
                 <EditText
                     android:id="@+id/editText_name"
                     android:drawableLeft="@drawable/ava_img"
-                    android:drawablePadding="@dimen/_15sdp"
-                    android:paddingLeft="@dimen/_15sdp"
 
+                    android:paddingLeft="@dimen/_15sdp"
+                    android:drawablePadding="@dimen/_15sdp"
                     android:layout_width="@dimen/_250sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_15sdp"
