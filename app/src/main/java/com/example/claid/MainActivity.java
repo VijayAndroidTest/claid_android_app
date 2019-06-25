@@ -175,26 +175,15 @@ public class MainActivity extends AppCompatActivity {
     private void log_json(String json) throws JSONException {
 
         JSONArray jsonArray = new JSONArray(json);
-
         error = new String[jsonArray.length()];
         api_key = new String[jsonArray.length()];
         user_id = new String[jsonArray.length()];
-
-
-
-
-
-
         String[] date = new String[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             error[i] = obj.getString("error");
             api_key[i] = obj.getString("access_token");
             user_id[i]=obj.getString("user_id");
-
-
-
-
         }
         try {
             Constant.lgg_api = api_key[0];
