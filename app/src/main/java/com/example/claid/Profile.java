@@ -42,8 +42,8 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     String[] country = new String[]{ "Head","mid_neck","neck_base"," Front Shoulder","Shoulder",
             " chest","underbust","neck_base"," Front Shoulder","Shoulder"};
     String[] age,id,weight,height,username;
-    Button button_save,button_cam;
-
+    Button button_save,button_cam,button_female,button_male;
+    TextView textView_male,textView_female;
 
 
 
@@ -57,11 +57,15 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         Button button_back=findViewById(R.id.button8);
          button_save=findViewById(R.id.button_save);
         button_cam=findViewById(R.id.button_camara);
+        button_female=findViewById(R.id.button_female);
+        button_male=findViewById(R.id.button_male);
+        textView_female=(findViewById(R.id.textView16));
+        textView_male=(findViewById(R.id.textView15));
         button_save.getBackground().setAlpha(50);
         button_cam.getBackground().setAlpha(50);
         button_save.setTextColor(Color.parseColor("#8A8687"));
-
-
+        textView_female.setTextColor(Color.parseColor("#8A8687"));
+        button_female.getBackground().setAlpha(100);
 
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
         final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
@@ -89,10 +93,28 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     public void afterTextChanged(Editable s) {
 
 
-        editText_name.setBackgroundResource(edit_text_focuses_bg);
+        editText_weight.setBackgroundResource(edit_text_normal_bg);
         editText_age.setBackgroundResource(edit_text_normal_bg);
         editText_height.setBackgroundResource(edit_text_normal_bg);
-        editText_weight.setBackgroundResource(edit_text_normal_bg);
+        editText_name.setBackgroundResource(edit_text_focuses_bg);
+
+
+        if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
+            Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
+
+
+            button_save.getBackground().setAlpha(250);
+            button_save.setTextColor(Color.parseColor("#ffffff"));
+            button_save.setEnabled(true);
+        }
+        else {
+            button_save.getBackground().setAlpha(50);
+            button_save.setTextColor(Color.parseColor("#8A8687"));
+            button_save.setEnabled(false);
+
+
+        }
+
     }
 });
 
@@ -111,9 +133,27 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         public void afterTextChanged(Editable s) {
 
             editText_name.setBackgroundResource(edit_text_normal_bg);
-            editText_age.setBackgroundResource(edit_text_focuses_bg);
-            editText_height.setBackgroundResource(edit_text_normal_bg);
             editText_weight.setBackgroundResource(edit_text_normal_bg);
+            editText_height.setBackgroundResource(edit_text_normal_bg);
+            editText_age.setBackgroundResource(edit_text_focuses_bg);
+
+
+            if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
+                Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
+
+
+                button_save.getBackground().setAlpha(250);
+                button_save.setEnabled(true);
+            }
+            else {
+                button_save.getBackground().setAlpha(50);
+                button_save.setTextColor(Color.parseColor("#8A8687"));
+                button_save.setEnabled(false);
+
+
+
+            }
+
 
         }
     });
@@ -135,9 +175,28 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
 
             editText_name.setBackgroundResource(edit_text_normal_bg);
-            editText_height.setBackgroundResource(edit_text_focuses_bg);
             editText_age.setBackgroundResource(edit_text_normal_bg);
             editText_weight.setBackgroundResource(edit_text_normal_bg);
+            editText_height.setBackgroundResource(edit_text_focuses_bg);
+
+
+            if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
+                Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
+
+
+                button_save.getBackground().setAlpha(250);
+                button_save.setTextColor(Color.parseColor("#ffffff"));
+                button_save.setEnabled(true);
+            }
+            else {
+                button_save.getBackground().setAlpha(50);
+                button_save.setTextColor(Color.parseColor("#8A8687"));
+                button_save.setEnabled(false);
+
+
+
+            }
+
 
         }
     });
@@ -163,15 +222,20 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
                 editText_weight.setBackgroundResource(edit_text_focuses_bg);
 
 
-                if(editText_weight.getText().toString().isEmpty() && editText_age.getText().toString().isEmpty() && editText_name.getText().toString().isEmpty() && editText_height.getText().toString().isEmpty()){
+                if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
                     Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
-                    button_save.getBackground().setAlpha(50);
-                    button_save.setTextColor(Color.parseColor("#8A8687"));
-                }
-                else {
+
 
                     button_save.getBackground().setAlpha(250);
                     button_save.setTextColor(Color.parseColor("#ffffff"));
+                    button_save.setEnabled(true);
+                }
+                else {
+                    button_save.getBackground().setAlpha(50);
+                    button_save.setTextColor(Color.parseColor("#8A8687"));
+                    button_save.setEnabled(false);
+
+
 
                 }
 
@@ -230,9 +294,6 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
                         Constant.age=editText_age.getText().toString();
                         Constant.height=editText_height.getText().toString();
                         Constant.weight=editText_weight.getText().toString();
-
-
-
                         next_act();
 
                     }
@@ -253,11 +314,18 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
                 Intent myIntent = new Intent(Profile.this, photography_pages.class);
 
                 Profile.this.startActivity(myIntent);
+                finish();
 
             }
         }, 1);
     }
 
+    void back(View view){
+        Intent myIntent = new Intent(Profile.this, MainActivity.class);
+
+        Profile.this.startActivity(myIntent);
+
+    }
 
     void details () {
 
@@ -337,14 +405,14 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         if(age[0].isEmpty()){}
         else {
 
-            editText_age.setText(age[0]);
+           // editText_age.setText(age[0]);
 
         }
 
         if(height[0].isEmpty()){}
         else {
 
-            editText_height.setText(height[0]+" (Cm)");
+           // editText_height.setText(height[0]+" (Cm)");
 
         }
 
@@ -354,11 +422,14 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
 
         }
-        editText_name.setText(username[0]);
+      //  editText_name.setText(username[0]);
 
 
 
     }
+
+
+
 
     void updat () {
 
@@ -368,9 +439,8 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
             public void onResponse(String response) {
                 button_cam.getBackground().setAlpha(250);
                 button_cam.setEnabled(true);
-
-
-
+                button_save.setTextColor(Color.parseColor("#00ffde"));
+                button_save.setText("Save");
             }
         }, new Response.ErrorListener() {
             @Override
@@ -421,6 +491,29 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     @Override
     public void onClick(View v) {
         Toast.makeText(this, "22", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void female_click(View view){
+        textView_male.setTextColor(Color.parseColor("#8A8687"));
+        textView_female.setTextColor(Color.parseColor("#ffffff"));
+
+
+        button_male.getBackground().setAlpha(100);
+        button_female.getBackground().setAlpha(250);
+
+
+    }
+
+
+    public void male_click(View view){
+        textView_female.setTextColor(Color.parseColor("#8A8687"));
+        textView_male.setTextColor(Color.parseColor("#ffffff"));
+
+
+        button_male.getBackground().setAlpha(250);
+        button_female.getBackground().setAlpha(100);
+
 
     }
 }

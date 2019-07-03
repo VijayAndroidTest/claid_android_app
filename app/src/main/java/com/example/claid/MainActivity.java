@@ -5,11 +5,13 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText_username,editText_password;
     ProgressBar progressBar;
     MediaPlayer mMediaPlayer;
+    LinearLayout linearLayout;
     int mCurrentVideoPosition;
     String STpass,STname;
     String[] error,api_key,user_id;
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         videoBG = (VideoView) findViewById(R.id.videoView);
+       linearLayout=findViewById(R.id.linearlayout);
+        linearLayout.setGravity(Gravity.CENTER );
         editText_password= findViewById(R.id.editText_pass);
         editText_username=findViewById(R.id.editText_user);
         progressBar=findViewById(R.id.progressBar2);
@@ -106,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     public void ok(View view)
 
     {
-        button_go.animate().rotation(button_go.getRotation()+360).start();
+        button_go.animate().rotation(button_go.getRotation()+180).start();
         log();
 
 

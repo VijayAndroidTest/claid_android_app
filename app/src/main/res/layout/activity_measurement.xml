@@ -38,7 +38,7 @@
                     <Button
                         android:textColor="@color/colorwhite"
                         android:id="@+id/button7"
-                        android:layout_width="@dimen/_150sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_marginRight="@dimen/_5sdp"
@@ -46,12 +46,12 @@
                         android:text="MEASURMENTS" />
 
                     <Button
-                        android:onClick="chat"
                         android:id="@+id/button16"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_50sdp"
+                        android:layout_width="61dp"
+                        android:layout_height="63dp"
                         android:background="@drawable/mesa_icon"
-
+                        android:onClick="chat"
+android:layout_marginLeft="@dimen/_5sdp"
                         android:text=""
                         tools:ignore="OnClick" />
 
@@ -59,9 +59,11 @@
                         android:id="@+id/button4"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_60sdp"
-
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/ddd_icon"
-                        android:text="" />
+                        android:onClick="three_d"
+                        android:text=""
+                        tools:ignore="OnClick" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -71,12 +73,13 @@
                     android:orientation="vertical">
 
                     <ListView
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_20sdp"
+                        android:id="@+id/listview"
                         android:layout_width="@dimen/_275sdp"
                         android:layout_height="@dimen/_400sdp"
-
                         android:layout_gravity="center"
+
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
                         android:background="@drawable/frame"
                         android:paddingLeft="@dimen/_30sdp"
                         android:paddingTop="@dimen/_50sdp"

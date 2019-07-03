@@ -36,8 +36,9 @@
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:background="@drawable/back_icon"
                     android:text=""
+                    android:onClick="back"
 
-                    />
+                    tools:ignore="OnClick" />
 
             </LinearLayout>
 
@@ -146,9 +147,9 @@ android:layout_marginTop="@dimen/_5sdp"
 
                     android:orientation="horizontal">
 
-                    <TextView
+                    <Button
 
-                        android:id="@+id/textView3"
+                        android:id="@+id/help3"
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="@dimen/_60sdp"
                         android:layout_marginLeft="@dimen/_15sdp"
@@ -159,7 +160,7 @@ android:layout_marginTop="@dimen/_5sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_150sdp"
+                        android:layout_marginLeft="@dimen/_130sdp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -167,7 +168,7 @@ android:layout_marginTop="@dimen/_5sdp"
                         <Switch
 
                             android:id="@+id/switch1"
-                            android:layout_width="@dimen/_60sdp"
+                            android:layout_width="@dimen/_75sdp"
                             android:layout_height="@dimen/_1sdp"
                             android:text="@null"
                             android:textOn="accept terms and conditions"

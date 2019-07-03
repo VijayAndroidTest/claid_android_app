@@ -40,8 +40,8 @@ public class  confirmation_screen extends AppCompatActivity {
         ViewPager viewPager=findViewById(R.id.viewpager);
         textView_hight=findViewById(R.id.textView_height);
         textView_weight=findViewById(R.id.textView_weight);
-        textView_weight.setText("78");
-        textView_hight.setText("165");
+        textView_weight.setText(""+Constant.weight);
+        textView_hight.setText(""+Constant.height);
         adapter=new confirmation_Adapter(confirmation_screen.this,imagess,imagess2,pose,pose2);
         viewPager.setAdapter(adapter);
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -59,7 +60,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     private static final int CAMERA_REQUEST = 1888;
     private String pathToFile;
     VideoView videoView;
-    Button button_play,button_cam,button_video;
+    Button button_play,button_cam,button_video,button_help;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String Name = "nameKey";
@@ -99,12 +100,15 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         button_play.setVisibility(View.GONE);
         linearLayout.setVisibility(View.VISIBLE);
         button_play.setVisibility(View.VISIBLE);
+        button_help=findViewById(R.id.help3);
+        button_help.setVisibility(View.VISIBLE);
 //      coverFlow.setVisibility(View.GONE);
         videoView.setVisibility(View.GONE);
         button_cam=findViewById(R.id.button_camara);
         button_video=findViewById(R.id.button_video);
+        button_video.setBackgroundResource(R.drawable.video_on_onclick);
         button_video.getBackground().setAlpha(250);
-        button_cam.getBackground().setAlpha(50);
+        button_cam.getBackground().setAlpha(100);
         pager.setVisibility(View.GONE);
         settingDummyData();
            // adapter = new CoverFlowAdapter(this, games);
@@ -162,11 +166,15 @@ try {
 
         }
 
-    @Override
-    public  void onBackPressed(){
-        Toast.makeText(this, "Use The Back Button", Toast.LENGTH_SHORT).show();
 
-    }
+         public void back(View view){
+
+              Intent myIntent = new Intent(photography_pages.this, Profile.class);
+              photography_pages.this.startActivity(myIntent);
+
+
+          }
+
 
 
 
@@ -632,8 +640,13 @@ try {
        linearLayout.setVisibility(View.VISIBLE);
        button_play.setVisibility(View.VISIBLE);
        pager.setVisibility(View.GONE);
-       button_cam.getBackground().setAlpha(50);
+
+       button_help.setVisibility(View.VISIBLE);
+       button_video.setBackgroundResource(R.drawable.video_on_onclick);
        button_video.getBackground().setAlpha(250);
+       button_cam.setBackgroundResource(R.drawable.camera_onclick);
+       button_cam.getBackground().setAlpha(175);
+
        Constant.viediostates = 1;
       // coverFlow.setVisibility(View.GONE);
 
@@ -642,13 +655,17 @@ try {
     public void click_camara(View view)
 
     {
+
         linearLayout.setVisibility(View.GONE);
         button_play.setVisibility(View.GONE);
         linearLayout.setVisibility(View.GONE);
         videoView.setVisibility(View.GONE);
+        button_help.setVisibility(View.INVISIBLE);
         pager.setVisibility(View.VISIBLE);
+        button_video.setBackgroundResource(R.drawable.video_onclick);
+        button_video.getBackground().setAlpha(175);
+        button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
         button_cam.getBackground().setAlpha(250);
-        button_video.getBackground().setAlpha(50);
       //  coverFlow.setVisibility(View.VISIBLE);
 
     }

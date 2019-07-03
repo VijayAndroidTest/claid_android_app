@@ -26,14 +26,14 @@ public class Constant {
 
 
 
-    public  static String img_path_1="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
-    public  static String img_path_2="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
-    public  static String img_path_3="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
-    public  static String img_path_4="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
-    public  static String img_path_5="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
-    public  static String img_path_6="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
-    public  static String img_path_7="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
-    public  static String img_path_8="/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg";
+    public  static String img_path_1="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+    public  static String img_path_2="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+    public  static String img_path_3="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+    public  static String img_path_4="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+    public  static String img_path_5="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+    public  static String img_path_6="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+    public  static String img_path_7="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+    public  static String img_path_8="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
 
    public static   String[] imagess={
 

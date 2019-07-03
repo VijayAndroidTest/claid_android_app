@@ -18,7 +18,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:background="@drawable/bose_bg"
-android:textColor="@color/colorwhite"
+        android:textColor="@color/colorwhite"
         android:id="@+id/text"
 
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@ android:textColor="@color/colorwhite"
 
     <ImageView
 
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_25sdp"
         android:id="@+id/pagerImg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
