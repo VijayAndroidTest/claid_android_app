@@ -41,9 +41,10 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
     String[] country = new String[]{ "Head","mid_neck","neck_base"," Front Shoulder","Shoulder",
             " chest","underbust","neck_base"," Front Shoulder","Shoulder"};
-    String[] age,id,weight,height,username;
+    String[] age,id,weight,height,username,child_id;
     Button button_save,button_cam,button_female,button_male;
     TextView textView_male,textView_female;
+    String sex="male";
 
 
 
@@ -100,7 +101,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
 
         if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
-            Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
+
 
 
             button_save.getBackground().setAlpha(250);
@@ -139,7 +140,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
 
             if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
-                Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
+
 
 
                 button_save.getBackground().setAlpha(250);
@@ -159,7 +160,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     });
 
 
-    editText_height.addTextChangedListener(new TextWatcher() {
+        editText_height.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -181,7 +182,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
 
             if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
-                Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
+
 
 
                 button_save.getBackground().setAlpha(250);
@@ -223,7 +224,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
 
                 if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
-                    Toast.makeText(Profile.this, "kk", Toast.LENGTH_SHORT).show();
+
 
 
                     button_save.getBackground().setAlpha(250);
@@ -320,7 +321,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         }, 1);
     }
 
-    void back(View view){
+   public void back(View view){
         Intent myIntent = new Intent(Profile.this, MainActivity.class);
 
         Profile.this.startActivity(myIntent);
@@ -434,9 +435,15 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     void updat () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.update, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.crear_child, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+               // Toast.makeText(Profile.this, "child"+response, Toast.LENGTH_SHORT).show();
+                try {
+                    details_json2("["+response+"]");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 button_cam.getBackground().setAlpha(250);
                 button_cam.setEnabled(true);
                 button_save.setTextColor(Color.parseColor("#00ffde"));
@@ -464,10 +471,12 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("id", Constant.user_id);
+                params.put("name",editText_name.getText().toString());
                 params.put("age", editText_age.getText().toString());
                 params.put("weight", editText_weight.getText().toString());
                 params.put("height", editText_height.getText().toString());
+                params.put("sex", ""+sex);
+
 
 
                 return params;
@@ -478,6 +487,20 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         };
         Volley.newRequestQueue(this).add(request);
 
+    }
+
+
+    private void details_json2(String json) throws JSONException {
+
+        JSONArray jsonArray = new JSONArray(json);
+        child_id = new String[jsonArray.length()];
+
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            child_id[i] = obj.getString("id");
+        }
+       Constant.child_id=child_id[0];
     }
 
     public void save(View view){
@@ -495,6 +518,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     }
 
     public void female_click(View view){
+        sex="female";
         textView_male.setTextColor(Color.parseColor("#8A8687"));
         textView_female.setTextColor(Color.parseColor("#ffffff"));
 
@@ -507,6 +531,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
 
     public void male_click(View view){
+        sex="male";
         textView_female.setTextColor(Color.parseColor("#8A8687"));
         textView_male.setTextColor(Color.parseColor("#ffffff"));
 
@@ -514,6 +539,13 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         button_male.getBackground().setAlpha(250);
         button_female.getBackground().setAlpha(100);
 
+
+    }
+
+    public void history(View view){
+        Intent myIntent = new Intent(Profile.this, chilid_history.class);
+
+        Profile.this.startActivity(myIntent);
 
     }
 }

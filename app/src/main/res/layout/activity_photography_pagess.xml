@@ -145,46 +145,44 @@ android:layout_marginTop="@dimen/_5sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
 
+
                     android:orientation="horizontal">
 
                     <Button
 
                         android:id="@+id/help3"
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="@dimen/_60sdp"
-                        android:layout_marginLeft="@dimen/_15sdp"
+
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginLeft="@dimen/_30sdp"
                         android:background="@drawable/demo_btn"
-                        android:text="" />
+                        android:onClick="help_video_url"
+                        android:text=""
+                        tools:ignore="OnClick" />
+
+
+                    <Switch
+                        android:layout_marginLeft="@dimen/_120sdp"
+                        android:id="@+id/switch1"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="@dimen/_1sdp"
+                        android:text="接受條件"
+                        android:textColor="@color/colorwhite"
+                        android:textOn="accept terms and conditions"
+                        android:thumb="@drawable/on_btn"
+                        android:track="@drawable/on_bg" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_130sdp"
+                        android:layout_marginLeft="@dimen/_150sdp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <Switch
 
-                            android:id="@+id/switch1"
-                            android:layout_width="@dimen/_75sdp"
-                            android:layout_height="@dimen/_1sdp"
-                            android:text="@null"
-                            android:textOn="accept terms and conditions"
-                            android:thumb="@drawable/on_btn"
-                            android:track="@drawable/on_bg" />
 
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Accept"
-                            android:textColor="@color/colorwhite" />
 
                     </LinearLayout>
 

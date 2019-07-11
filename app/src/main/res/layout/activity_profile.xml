@@ -39,13 +39,14 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_150sdp"
                     android:background="@drawable/logout"
-
                     android:paddingTop="@dimen/_15sdp"
                     android:text=""
+                    android:onClick="history"
                     android:textAlignment="center"
                     android:textColor="@color/colorwhite"
                     android:textSize="@dimen/_25sdp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="OnClick" />
 
                 <Button
                     android:id="@+id/button_confirm"

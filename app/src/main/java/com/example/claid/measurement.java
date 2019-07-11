@@ -2,14 +2,18 @@ package com.example.claid;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,8 +32,10 @@ import java.util.Map;
 
 public class measurement extends AppCompatActivity {
     ListView listView;
+    LinearLayout linearLayout_ll3d;
     private int json_val;
-    private String[] mname,ename,mvalues;
+    private String[] mname,ename,mvalues,url_path;
+    Button button_3d,button_measurement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,18 @@ public class measurement extends AppCompatActivity {
       //  getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
               //  WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_measurement);
+
         listView=findViewById(R.id.listview);
+        button_3d=findViewById(R.id.button4);
+        button_measurement=findViewById(R.id.button6);
+        linearLayout_ll3d=findViewById(R.id.ll3d);
         details();
+
+        button_3d.setBackgroundColor(getResources().getColor(R.color.button_shado));
+
+        button_measurement.getBackground().setAlpha(250);
+        button_3d.getBackground().setAlpha(150);
+        button_3d.setTextColor(getResources().getColor(R.color.button_shado));
 
 
 
@@ -99,6 +115,8 @@ public class measurement extends AppCompatActivity {
         mname = new String[jsonArray.length()];
         ename= new String[jsonArray.length()];
         mvalues= new String[jsonArray.length()];
+        url_path= new String[jsonArray.length()];
+
 
 
 
@@ -107,12 +125,14 @@ public class measurement extends AppCompatActivity {
         {
             JSONObject obj = jsonArray.getJSONObject(i);
             mname[i] = obj.getString("mname");
-            ename[i] = obj.getString("ename");
+
             mvalues[i] = obj.getString("mvalues");
+            url_path[i]=obj.getString("path");
         }
+json_val=jsonArray.length();
 
-
-
+        AppointmentAdapter2 adapter2=new AppointmentAdapter2();
+        listView.setAdapter(adapter2);
 
 
     }
@@ -124,15 +144,35 @@ public class measurement extends AppCompatActivity {
 
     public  void chat(View view){
 
+
+
         Intent myIntent = new Intent(measurement.this, Messages.class);
 
         measurement.this.startActivity(myIntent);
     }
 
     public void three_d(View view){
+        button_3d.setBackgroundColor(getResources().getColor(R.color.button_no_shado));
+        button_measurement.setBackgroundColor(getResources().getColor(R.color.button_no_shado));
+        button_3d.getBackground().setAlpha(250);
+        button_measurement.getBackground().setAlpha(100);
+        button_measurement.setTextColor(getResources().getColor(R.color.hintcolor));
+        button_3d.setTextColor(getResources().getColor(R.color.colorwhite));
+        Intent myIntent = new Intent(measurement.this, three_d_body.class);
+        measurement.this.startActivity(myIntent);
+
+
+    }
+    public void measure(View view){
+        button_3d.setBackgroundColor(getResources().getColor(R.color.button_no_shado));
+        button_measurement.setBackgroundColor(getResources().getColor(R.color.button_no_shado));
+        button_measurement.getBackground().setAlpha(250);
+        button_3d.getBackground().setAlpha(100);
+        button_measurement.setTextColor(getResources().getColor(R.color.colorwhite));
+        button_3d.setTextColor(getResources().getColor(R.color.hintcolor));
         Intent myIntent = new Intent(measurement.this, three_d_body.class);
 
-        measurement.this.startActivity(myIntent);
+       measurement.this.startActivity(myIntent);
 
 
     }
@@ -170,11 +210,13 @@ public class measurement extends AppCompatActivity {
             convertView = null;
 
             if (convertView == null) {
-               // convertView = getLayoutInflater().inflate(R.layout.image_layout, null);
-               // ImageView img = convertView.findViewById(R.id.imageView);
-
-
-                //Picasso.with ( measurement.this ).load ( mname[position] ).into ( img);
+                convertView = getLayoutInflater().inflate(R.layout.measurements_temp, null);
+                TextView part_body=convertView.findViewById(R.id.part_body);
+                TextView measure=convertView.findViewById(R.id.measurents);
+                ImageView img = convertView.findViewById(R.id.imageView5);
+                part_body.setText(mname[position]);
+                measure.setText(mvalues[position]);
+               Picasso.with ( measurement.this ).load ( url_path[position] ).into ( img);
 
 
 

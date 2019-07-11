@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_bg"
+    tools:context=".chilid_history">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button28"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/back_icon"
+                android:onClick="back"
+                android:text=""
+                tools:ignore="OnClick" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_marginLeft="@dimen/_80sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/ess_bg"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_50sdp"
+
+                android:textColor="@color/colorwhite"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/_20sdp"
+                android:textAlignment="center"
+                android:text="Previous Measurements" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/_15sdp"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_15sdp"
+            android:paddingTop="@dimen/_25sdp"
+            android:dividerHeight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:background="@drawable/list_view_bk"
+            android:divider="@null"
+            android:smoothScrollbar="true"
+            android:scrollbarThumbVertical="@android:color/white"
+            />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

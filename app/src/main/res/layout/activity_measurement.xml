@@ -23,75 +23,117 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="78dp"
-                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/button10"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_50sdp"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
                         android:background="@drawable/back_icon"
-
+                        android:layout_marginLeft="@dimen/_15sdp"
                         android:text="" />
 
                     <Button
-                        android:textColor="@color/colorwhite"
+
                         android:id="@+id/button7"
                         android:layout_width="@dimen/_140sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/bose_bg"
-                        android:text="MEASURMENTS" />
+                        android:background="@null"
+                        android:text="MEASURMENTS"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/colorwhite" />
 
                     <Button
                         android:id="@+id/button16"
-                        android:layout_width="61dp"
-                        android:layout_height="63dp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
                         android:background="@drawable/mesa_icon"
                         android:onClick="chat"
-android:layout_marginLeft="@dimen/_5sdp"
                         android:text=""
                         tools:ignore="OnClick" />
 
                     <Button
-                        android:id="@+id/button4"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_60sdp"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:background="@drawable/ddd_icon"
-                        android:onClick="three_d"
-                        android:text=""
-                        tools:ignore="OnClick" />
+                        android:id="@+id/button31"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/digg_icon"
+                        android:text="" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:id="@+id/ll3d"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginRight="@dimen/_2sdp"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:drawableLeft="@drawable/drddd"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:background="#3d89a8"
+                        android:text="3D-BODY"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorwhite"
+                        android:onClick="three_d"
+                        tools:ignore="OnClick"
+                        />
+
+                    <Button
+                        android:id="@+id/button6"
+                        android:layout_width="172dp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:background="#3d89a8"
+                        android:drawableLeft="@drawable/drmeasure"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:onClick="measure"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="measurement"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorwhite" />
+                </LinearLayout>
+
+                <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <ListView
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:id="@+id/listview"
-                        android:layout_width="@dimen/_275sdp"
-                        android:layout_height="@dimen/_400sdp"
-                        android:layout_gravity="center"
-
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        android:background="@drawable/frame"
-                        android:paddingLeft="@dimen/_30sdp"
-                        android:paddingTop="@dimen/_50sdp"
-                        android:paddingRight="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_30sdp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_360sdp"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:dividerHeight="@dimen/_1sdp"
+                        android:paddingLeft="@dimen/_2sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingRight="@dimen/_2sdp" />
 
                     <Button
-                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_40sdp"
                         android:layout_gravity="center"
                         android:id="@+id/button9"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="@dimen/_50sdp"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_40sdp"
                         android:background="@drawable/btn"
                         android:onClick="confirm"
                         android:text="confirm"

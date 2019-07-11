@@ -14,6 +14,7 @@ public class Constant {
 
     //profile
     public  static  String mname="";
+    public  static  String child_id="";
     public  static  String age="";
     public  static  String height="";
     public  static  String weight="";

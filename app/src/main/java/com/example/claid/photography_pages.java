@@ -122,10 +122,7 @@ try {
     String Astatus = sharedpreferences.getString("name", "");
 
     Constant.demo_viediostates = Integer.parseInt(Astatus);
-
-
-
-}catch (Exception e){}
+    }catch (Exception e){}
 
             Demo_video();
 
@@ -167,13 +164,18 @@ try {
         }
 
 
-         public void back(View view){
+         public void back(View view)
+         {
 
               Intent myIntent = new Intent(photography_pages.this, Profile.class);
-              photography_pages.this.startActivity(myIntent);
+              photography_pages.this.startActivity(myIntent); }
+              public void help_video_url(View view){
+
+        Intent myIntent = new Intent(photography_pages.this, video_view_url.class);
+        photography_pages.this.startActivity(myIntent);
 
 
-          }
+    }
 
 
 

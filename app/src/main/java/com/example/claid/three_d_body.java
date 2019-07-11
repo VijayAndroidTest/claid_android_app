@@ -20,7 +20,7 @@ public class three_d_body extends AppCompatActivity {
         webView=findViewById(R.id.webview);
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("https://p3d.in/dFa5W");
+        webView.loadUrl("https://ozosmatrix.com/3d-modeling/");
         webView.setHorizontalScrollBarEnabled(false);
 
     }
