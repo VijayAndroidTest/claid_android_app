@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MyAdapter  extends PagerAdapter {
-    private String image_resources=(Constant.img_path_1);
+    private String image_resources=(Constant.img_path_front);
 
 
     @Override

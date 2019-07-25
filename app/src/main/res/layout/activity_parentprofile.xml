@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_bg"
+    tools:context=".Parentprofile">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="616dp"/>
+
+        <ScrollView
+
+
+            android:id="@+id/scool"
+
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarStyle="insideInset"
+            tools:ignore="NotSibling">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+
+                    android:gravity="bottom"
+                    android:isScrollContainer="true"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:orientation="horizontal">
+
+                            <Button
+
+                                android:id="@+id/button18"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:background="@drawable/back_icon"
+                                android:text=""
+                                android:onClick="back"
+
+
+                                tools:ignore="OnClick" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="@dimen/_130sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_60sdp"
+                                android:background="@drawable/ess_bg"
+                                android:paddingTop="@dimen/_15sdp"
+                                android:text="Essential information"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorwhite"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+
+
+                            <EditText
+
+
+
+                                android:id="@+id/editText_name"
+                                android:drawableLeft="@drawable/drname"
+                                android:paddingLeft="@dimen/_15sdp"
+                                android:layout_marginLeft="@dimen/_20sdp"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                android:drawablePadding="@dimen/_15sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_marginTop="@dimen/_25sdp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/edit_text_normal_bg"
+                                android:ems="10"
+                                android:elevation="@dimen/_16sdp"
+                                android:shadowColor="#ffff"
+                                android:hint="名稱"
+                                android:text=""
+                                android:textColor="@color/colorwhite"
+                                android:textColorHint="@color/hintcolor"
+
+
+                                >
+
+                                <requestFocus/>
+                            </EditText>
+
+
+
+
+                            <EditText
+                                android:drawableLeft="@drawable/drage"
+                                android:paddingLeft="@dimen/_15sdp"
+                                android:id="@+id/editText_age"
+                                android:layout_marginLeft="@dimen/_20sdp"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:drawablePadding="@dimen/_15sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/edit_text_normal_bg"
+                                android:hint="年齡"
+                                android:inputType="number"
+                                android:text=""
+                                android:textColor="@color/colorwhite"
+                                android:textColorHint="@color/hintcolor"
+                                android:maxLength="2"
+
+                                />
+
+                            <EditText
+                                android:background="@drawable/edit_text_normal_bg"
+                                android:drawableLeft="@drawable/drhight"
+                                android:layout_width="match_parent"
+                                android:id="@+id/editText_height"
+                                android:layout_marginLeft="@dimen/_20sdp"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:paddingLeft="@dimen/_15sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:drawablePadding="@dimen/_22sdp"
+                                android:layout_gravity="center"
+                                android:ems="10"
+                                android:hint="高度"
+                                android:inputType="numberDecimal"
+
+                                android:text=""
+                                android:textColor="@color/colorwhite"
+                                android:textColorHint="@color/hintcolor"
+                                android:maxLength="3"
+                                />
+
+                            <EditText
+                                android:id="@+id/editText_weight"
+                                android:drawableLeft="@drawable/drweight"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_20sdp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                android:background="@drawable/edit_text_normal_bg"
+                                android:drawablePadding="@dimen/_15sdp"
+                                android:ems="10"
+                                android:hint="重量"
+                                android:inputType="numberDecimal"
+                                android:maxLength="3"
+                                android:paddingLeft="@dimen/_15sdp"
+                                android:text=""
+                                android:textColor="@color/colorwhite"
+                                android:textColorHint="@color/hintcolor" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

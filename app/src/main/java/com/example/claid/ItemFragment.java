@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,11 +31,13 @@ public class ItemFragment extends Fragment {
     private int screenHeight;
     List<Bitmap> month = new ArrayList<Bitmap>();
     private ArrayList<Game> games;
-    private int[] imageArray =  {R.drawable.front_bose, R.drawable.back_up,
-            R.drawable.left_side, R.drawable.left_side_up,R.drawable.back,
-            R.drawable.rght_side, R.drawable.rght_side_up, R.drawable.front_bose_up};
-    private String[] imageArray2={"/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png","/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png","/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png","/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png","/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png","/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png","/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png","/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png"};
-    private String[]bose={"FRONT POSE","BACK POSE","LEFT SIDE POSE","LEFT SIDE UP POSE","BAKE POSE","Right SIDE POSE","RIGHT SIDE UP POSE","FRONT POSE UP"};
+    private int[] imageArray =  {R.drawable.left_side_up, R.drawable.front_bose,
+            R.drawable.back, R.drawable.back_up,R.drawable.rght_side_up,R.drawable.left_side,
+            R.drawable.rght_side, R.drawable.front};
+    private String[] imageArray2={Constant.img_path_neck_front,Constant.img_path_back,Constant.img_path_neck_left,Constant.img_path_left,
+    Constant.img_path_croauch,Constant.img_path_neck_right,Constant.img_path_right,Constant.img_path_front};
+    private String[] new_image;
+    private String[]bose={"LEFT SIDE","FRONT POSE","BACK POSE","CROATCH","RIGHT SIDE","NECK LEFT ","NECK RIGHT","NECK FRONT",};
     public static Fragment newInstance(photography_pages context, int pos, float scale) {
         Bundle b = new Bundle();
         b.putInt(POSITON, pos);
@@ -64,26 +68,34 @@ public class ItemFragment extends Fragment {
         CarouselLinearLayout root = (CarouselLinearLayout) linearLayout.findViewById(R.id.root_container);
         ImageView imageView = (ImageView) linearLayout.findViewById(R.id.pagerImg);
         textView.setText("" + bose[postion]);
+        Constant.pose_name=bose[postion];
         imageView.setLayoutParams(layoutParams);
         imageView.setImageResource(imageArray[postion]);
-        //imageView.setImageURI(Uri.parse(imageArray2[postion]));
+        Constant.pose_no=postion;
+
+
+        //imageView.setImageURI(Uri.parse(String.valueOf(imageArray[postion])));
+
+      //  imageView.setImageURI(Uri.parse(String.valueOf(games.get(postion))));
        // imageView.setImageURI(Uri.parse("/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg"));
         if (Constant.pos_1==1)
            {
 
-           // File imgFile = new  File(""+Constant.img_path_1);
-          //  Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-          //  imageView.setImageBitmap(bitmap);
-       //    games.add(new Game(bitmap, "Right "));
-          //  month.add(bitmap);
+               try{
+            File imgFile = new  File(""+Constant.img_path_neck_front);
+            Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            imageView.setImageBitmap(bitmap);
+            games.add(new Game(bitmap, "Right"));
+            month.add(bitmap);
+
+            Constant.pos_1=0;
 
             }
-        else {
-           // Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side_up);
-//            games.add(new Game(bitmap_bk, "Right "));
+           catch (Exception e){}}
 
-        //    imageView.setImageBitmap(bitmap_bk);
-          ////  month.add(bitmap_bk);
+        else {
+
+
 
         }
 
@@ -95,9 +107,16 @@ public class ItemFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), zoso_cam_2.class);
-               // intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
+                Constant.pos_1=1;
+                Log.d( "Width", "Width:" +bose[postion]);
+                Constant.pose_name=bose[postion];
+                Constant.pose_no=postion;
+
+                Intent intent = new Intent(getActivity(), zoso_cam3.class);
+                intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
                 startActivity(intent);
+
+
             }
         });
 

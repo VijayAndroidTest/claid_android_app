@@ -1,11 +1,15 @@
 package com.example.claid;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -17,6 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -26,12 +34,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class chilid_history extends AppCompatActivity {
+public class chilid_history extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 
     private String[] name,age,sex,height,weight,fronturl,sideurl,id,date;
     private int json_val;
-    ListView listView;
+    SwipeMenuListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,7 @@ public class chilid_history extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         setContentView(R.layout.activity_chilid_history);
         listView=findViewById(R.id.listview);
+        listView.setOnItemClickListener(this);
 
         details();
     }
@@ -129,6 +138,78 @@ public class chilid_history extends AppCompatActivity {
         AppointmentAdapter2 adapter2=new AppointmentAdapter2();
         listView.setAdapter(adapter2);
 
+
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "open" item
+            /*    SwipeMenuItem openItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                openItem.setBackground(new ColorDrawable(Color.rgb(0x00, 0x66,
+                        0xff)));
+                // set item width
+                openItem.setWidth(170);
+                // set item title
+                openItem.setTitle("Open");
+                // set item title fontsize
+                openItem.setTitleSize(18);
+                // set item title font color
+                openItem.setTitleColor(Color.WHITE);
+                // add to menu
+                menu.addMenuItem(openItem);*/
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+
+                // set item width
+                deleteItem.setWidth(170);
+
+                // set a icon
+                deleteItem.setIcon(R.drawable.binn);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+
+        listView.setMenuCreator(creator);
+
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                       String sid=id[position];
+                       delete_child(sid);
+
+                       // Toast.makeText(chilid_history.this, "id"+sid, Toast.LENGTH_SHORT).show();
+                       // Log.d(TAG, "onMenuItemClick: clicked item " + index+"p"+position);
+                        break;
+                    case 1:
+                       // Toast.makeText(chilid_history.this, ""+index+"p"+position, Toast.LENGTH_SHORT).show();
+                       // Log.d(TAG, "onMenuItemClick: clicked item " + index+"p"+position);
+                        break;
+                }
+                // false : close the menu; true : not close the menu
+                return false;
+            }
+        });
+    }
+
+
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent myIntent = new Intent(chilid_history.this, measurement.class);
+        chilid_history.this.startActivity(myIntent);
+        Constant.mchild_id=id[i];
+        //Toast.makeText(this, "id"+id[i], Toast.LENGTH_SHORT).show();
 
     }
 
@@ -222,4 +303,55 @@ public class chilid_history extends AppCompatActivity {
         Intent myIntent = new Intent(chilid_history.this, Profile.class);
         chilid_history.this.startActivity(myIntent);
     }
+
+
+
+
+    void delete_child (final String cid) {
+
+        //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.delete_child, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                details();
+                 //Toast.makeText (chilid_history.this, ""+response, Toast.LENGTH_LONG ).show ( );
+
+                try {
+                    details_json( response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                // Toast.makeText(MainActivity.this, "無效的用戶名或密碼", Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", " Bearer "+Constant.lgg_api);
+                return headers;
+            }
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("child_id",cid );
+
+                return params;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+
+    }
+
 }

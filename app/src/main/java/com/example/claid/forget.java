@@ -53,7 +53,7 @@ EditText editText_phone;
     @Override
     public void onClick(View v) {
 
-        editText_phone.setBackgroundResource(R.drawable.inp_cir_hover);
+       // editText_phone.setBackgroundResource(R.drawable.inp_cir_hover);
 
     }
 }

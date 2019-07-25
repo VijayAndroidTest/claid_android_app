@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.claid.adapter.CoverFlowAdapter3d;
 
@@ -43,24 +44,24 @@ public class model_3d extends AppCompatActivity {
         }catch (Exception e){}
         gamess = new ArrayList<>();
 
-        if (Constant.pos_1==1)
+        if (Constant.img_path_neck_right.length()!=1)
         {
-            File imgFile = new  File(""+Constant.img_path_1);
+            File imgFile = new  File(""+Constant.img_path_left);
 
             Bitmap bitmap= BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "Right "));
         }
         else {
             Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.slider_img);
             gamess.add(new Game3d(bitmap_bk, "Righr"));
         }
-        if (Constant.pos_2==1)
+        if (Constant.img_path_right.length()!=1)
         {
-            File imgFile = new  File(""+Constant.img_path_2);
+            File imgFile = new  File(""+Constant.img_path_front);
 
             Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "Right Pose Up "));
         }
         else {
@@ -69,13 +70,14 @@ public class model_3d extends AppCompatActivity {
         }
 
 
-        if (Constant.pos_3==1)
+        if (Constant.img_path_front.length()!=0)
         {
 
-            File imgFile = new  File(""+Constant.img_path_3);
+            File imgFile = new  File(""+Constant.img_path_back);
 
             Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "FRONT POSE1"));
         }
         else {
@@ -84,12 +86,12 @@ public class model_3d extends AppCompatActivity {
         }
 
 
-        if (Constant.pos_4==1)
+        if (Constant.img_path_front.length()!=1)
         {
-            File imgFile = new  File(""+Constant.img_path_4);
+            File imgFile = new  File(""+Constant.img_path_croauch);
 
             Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "Hand Up"));
         }
         else {
@@ -98,13 +100,13 @@ public class model_3d extends AppCompatActivity {
         }
 
 
-        if (Constant.pos_5==1)
+        if (Constant.img_path_neck_left.length()!=1)
         {
 
-            File imgFile = new  File(""+Constant.img_path_5);
+            File imgFile = new  File(""+Constant.img_path_right);
 
             Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "Left Pose"));
         }
         else {
@@ -112,12 +114,12 @@ public class model_3d extends AppCompatActivity {
             gamess.add(new Game3d(bitmap_bk, "Left Pose"));
         }
 
-        if (Constant.pos_6==1)
+        if (Constant.img_path_left.length()!=1)
         {
-            File imgFile = new  File(""+Constant.img_path_6);
+            File imgFile = new  File(""+Constant.img_path_neck_left);
 
             Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "Left Pose Up"));
         }
         else {
@@ -126,24 +128,24 @@ public class model_3d extends AppCompatActivity {
         }
 
 
-        if (Constant.pos_7==1)
+        if (Constant.img_path_back.length()!=1)
         {
-            File imgFile = new  File(""+Constant.img_path_7);
+            File imgFile = new  File(""+Constant.img_path_neck_right);
 
             Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "bake Pose "));
         }
         else {
             Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.slider_img);
             gamess.add(new Game3d(bitmap_bk, "Back Pose"));
         }
-        if (Constant.pos_8==1)
+        if (Constant.img_path_croauch.length()!=1)
         {
-            File imgFile = new  File(""+Constant.img_path_8);
+            File imgFile = new  File(""+Constant.img_path_neck_front);
 
             Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+            Toast.makeText(this, "101", Toast.LENGTH_SHORT).show();
             gamess.add(new Game3d(bitmap, "bake Pose Up "));
         }
         else {

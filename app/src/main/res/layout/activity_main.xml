@@ -26,12 +26,13 @@
 
 
         <LinearLayout
+
             android:id="@+id/linearlayout"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/_15sdp"
+
 
             >
 
@@ -45,6 +46,7 @@
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+android:layout_marginBottom="@dimen/_1sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -64,10 +66,10 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         android:layout_weight="1"
                         android:background="@drawable/flash_btn"
-                        android:hint="account"
-                        android:text="9443976954"
+                        android:hint="user name"
+                        android:text="robo"
                         android:textAlignment="center"
-                        android:textSize="@dimen/_9sdp" />
+                        android:textSize="@dimen/_8sdp" />
 
                     <EditText
                         android:textColor="@color/colorwhite"
@@ -79,7 +81,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/flash_btn"
                         android:hint="*********"
-                        android:text="Kannan@123"
+                        android:text="123456789"
                         android:textAlignment="center"
                         android:textSize="@dimen/_9sdp" />
                 </LinearLayout>

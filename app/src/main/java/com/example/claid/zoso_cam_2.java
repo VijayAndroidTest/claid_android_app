@@ -129,7 +129,7 @@ public class zoso_cam_2 extends AppCompatActivity implements SensorEventListener
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
         seekBar.setMax(180);
-       seekBar2.setMax(180);
+        seekBar2.setMax(180);
 
         textureView = (TextureView)findViewById(R.id.textureView);
         //From Java 1.4 , you can use keyword 'assert' to check expression true or false
@@ -410,7 +410,7 @@ public class zoso_cam_2 extends AppCompatActivity implements SensorEventListener
 
             for(int i=0;i<av_ang.size();i++){
                 // sum = Float.parseFloat(av_ang.get(i)) + sum;
-                Toast.makeText(this, "ss"+av_ang.get(i), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "ss"+av_ang.get(i), Toast.LENGTH_SHORT).show();
             }
 
             //   res = sum/av_ang.size();

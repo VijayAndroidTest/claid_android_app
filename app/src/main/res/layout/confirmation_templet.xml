@@ -70,7 +70,7 @@
                     android:paddingTop="@dimen/_10sdp"
 
                     android:paddingRight="@dimen/_15sdp"
-                    app:srcCompat="@drawable/back" />
+                    app:srcCompat="@drawable/front_bose" />
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -84,7 +84,7 @@
                     android:background="@drawable/frame"
                     android:paddingLeft="@dimen/_15sdp"
                     android:paddingRight="@dimen/_15sdp"
-                    app:srcCompat="@drawable/back" />
+                    app:srcCompat="@drawable/back_up" />
             </LinearLayout>
 
         </LinearLayout>

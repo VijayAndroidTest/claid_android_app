@@ -94,19 +94,19 @@ public class ozos_cam extends AppCompatActivity {
         Log.d("path","path:"+pathToFile);
         if (mimg_no == 1) {
             Constant.pos_1 = 1;
-            Constant.img_path_1= path;
+           // Constant.img_path_1= path;
 
         }
         if (mimg_no == 2) {
             Constant.pos_2 = 1;
-            Constant.img_path_2 = path;
+           // Constant.img_path_2 = path;
 
         }
         if (mimg_no == 3) {
 
             Toast.makeText(this, "img-3", Toast.LENGTH_SHORT).show();
             Constant.pos_3 = 1;
-            Constant.img_path_3 = path;
+           // Constant.img_path_3 = path;
 
 
         }
@@ -114,12 +114,12 @@ public class ozos_cam extends AppCompatActivity {
 
         if (mimg_no == 4) {
             Constant.pos_4 = 1;
-            Constant.img_path_4= path;
+           // Constant.img_path_4= path;
 
         }
         if (mimg_no == 5) {
             Constant.pos_5 = 1;
-            Constant.img_path_5 = path;
+          //  Constant.img_path_5 = path;
 
 
         }
@@ -127,7 +127,7 @@ public class ozos_cam extends AppCompatActivity {
 
             Toast.makeText(this, "img-3", Toast.LENGTH_SHORT).show();
             Constant.pos_6 = 1;
-            Constant.img_path_6 = path;
+           // Constant.img_path_6 = path;
 
 
         }
@@ -135,13 +135,13 @@ public class ozos_cam extends AppCompatActivity {
 
         if (mimg_no == 7) {
             Constant.pos_7 = 1;
-            Constant.img_path_7= path;
+           // Constant.img_path_7= path;
 
 
         }
         if (mimg_no == 8) {
             Constant.pos_8 = 1;
-            Constant.img_path_8 = path;
+           // Constant.img_path_8 = path;
 
         }
 

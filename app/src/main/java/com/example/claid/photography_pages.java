@@ -70,6 +70,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     public ViewPager pager;
     public static int count = 8; //ViewPager items size
     public static int FIRST_PAGE = 8;
+    private Bitmap bitmap;
 
 
     @Override
@@ -89,7 +90,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         cpaadapter.notifyDataSetChanged();
         pager.addOnPageChangeListener(cpaadapter);
         pager.setCurrentItem(FIRST_PAGE);
-        pager.setOffscreenPageLimit(2);
+        pager.setOffscreenPageLimit(3);
         EnableRuntimePermission();
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         videoView=findViewById(R.id.videoView3);
@@ -171,8 +172,8 @@ try {
               photography_pages.this.startActivity(myIntent); }
               public void help_video_url(View view){
 
-        Intent myIntent = new Intent(photography_pages.this, video_view_url.class);
-        photography_pages.this.startActivity(myIntent);
+                Intent myIntent = new Intent(photography_pages.this, video_view_url.class);
+                photography_pages.this.startActivity(myIntent);
 
 
     }
@@ -185,7 +186,8 @@ try {
                 @Override
                 public void onScrolledToPosition(int position) {
                     img_no=position+1;
-            //       Toast.makeText(photography_pages.this, "spos"+img_no, Toast.LENGTH_SHORT).show();
+                    //Constant.pose_no=position;
+                  Toast.makeText(photography_pages.this, "pos_no"+position, Toast.LENGTH_SHORT).show();
                     Log.v("MainActiivty", "position: " + position);
 
 
@@ -213,6 +215,31 @@ try {
                     Manifest.permission.CAMERA}, RequestPermissionCode);
 
         }
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(photography_pages.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        {
+
+            Toast.makeText(photography_pages.this,"CAMERA permission allows us to Access CAMERA app", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            ActivityCompat.requestPermissions(photography_pages.this,new String[]{
+                    Manifest.permission.CAMERA}, RequestPermissionCode);
+
+        }
+        if (ActivityCompat.shouldShowRequestPermissionRationale(photography_pages.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE))
+        {
+
+            Toast.makeText(photography_pages.this,"CAMERA permission allows us to Access CAMERA app", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            ActivityCompat.requestPermissions(photography_pages.this,new String[]{
+                    Manifest.permission.CAMERA}, RequestPermissionCode);
+
+        }
     }
 
         private void settingDummyData() {
@@ -223,103 +250,103 @@ try {
 }catch (Exception e){}
             games = new ArrayList<>();
 
-            if (Constant.pos_1==1)
+            if (Constant.img_path_neck_right.length()!=0)
             {
-                File imgFile = new  File(""+Constant.img_path_1);
+                File imgFile = new  File(""+Constant.img_path_left);
 
                 Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 games.add(new Game(bitmap, "Right "));
             }
             else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
-                games.add(new Game(bitmap_bk, "Righr"));
+               // Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
+                //games.add(new Game(bitmap_bk, "Righr"));
             }
-            if (Constant.pos_2==1)
+            if (Constant.img_path_right.length()!=0)
             {
-                File imgFile = new  File(""+Constant.img_path_2);
+                File imgFile = new  File(""+Constant.img_path_front);
 
                 Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 games.add(new Game(bitmap, "Right Pose Up "));
             }
             else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side_up);
-                games.add(new Game(bitmap_bk, "Righr Pose up"));
+               // Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side_up);
+               // games.add(new Game(bitmap_bk, "Righr Pose up"));
             }
 
 
-            if (Constant.pos_3==1)
+            if (Constant.img_path_neck_left.length()!=0)
             {
 
-                File imgFile = new  File(""+Constant.img_path_3);
+                File imgFile = new  File(""+Constant.img_path_back);
 
                 Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 games.add(new Game(bitmap, "FRONT POSE1"));
             }
             else {
-                Bitmap bitmap_fr = BitmapFactory.decodeResource(getResources(),R.drawable.front_bose);
+                Bitmap bitmap_fr = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
                 games.add(new Game(bitmap_fr, "FRONT POSE"));
             }
 
 
-            if (Constant.pos_4==1)
+            if (Constant.img_path_front.length()!=0)
             {
-                File imgFile = new  File(""+Constant.img_path_4);
+                File imgFile = new  File(""+Constant.img_path_croauch);
 
                 Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 games.add(new Game(bitmap, "Hand Up"));
             }
             else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.hand_up);
+                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
                 games.add(new Game(bitmap_bk, "Hand Up"));
             }
 
 
-            if (Constant.pos_5==1)
+            if (Constant.img_path_neck_left.length()!=0)
             {
-                File imgFile = new  File(""+Constant.img_path_5);
+                File imgFile = new  File(""+Constant.img_path_right);
 
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                Bitmap bitmap= BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 games.add(new Game(bitmap, "Left Pose"));
             }
             else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.left_side);
+                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
                 games.add(new Game(bitmap_bk, "Left Pose"));
             }
 
-            if (Constant.pos_6==1)
+            if (Constant.img_path_neck_left.length()!=0)
             {
-                File imgFile = new  File(""+Constant.img_path_6);
+                File imgFile = new  File(""+Constant.img_path_neck_left);
 
                 Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 games.add(new Game(bitmap, "Left Pose Up"));
             }
             else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.left_side);
+                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
                 games.add(new Game(bitmap_bk, "Left Pose Up"));
             }
 
 
-            if (Constant.pos_7==1)
+            if (Constant.img_path_neck_right.length()!=0)
             {
-                File imgFile = new  File(""+Constant.img_path_7);
+                File imgFile = new  File(""+Constant.img_path_neck_right);
 
                 Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 games.add(new Game(bitmap, "bake Pose "));
             }
             else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.back);
-                games.add(new Game(bitmap_bk, "Back Pose"));
+                //Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.back);
+               // games.add(new Game(bitmap_bk, "Back Pose"));
             }
-            if (Constant.pos_8==1)
+            if (Constant.img_path_neck_front.length()!=0)
             {
-                File imgFile = new  File(""+Constant.img_path_8);
+                File imgFile = new  File(""+Constant.img_path_neck_front);
 
                 Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
@@ -347,7 +374,7 @@ try {
        // img_no=position+1;
      //   Toast.makeText(this, "pos"+position, Toast.LENGTH_SHORT).show();
 
-      Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+      /*Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
 
         File photo_file=null;
@@ -364,10 +391,10 @@ try {
 
 
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,Pathtouri);
-           startActivityForResult(cameraIntent, CAMERA_REQUEST);
+          startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
         }
-
+*/
 
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -376,7 +403,7 @@ try {
 
 
 
-            image_path_in_constant(img_no,pathToFile);
+          //  image_path_in_constant(img_no,pathToFile);
 
         }
     }
@@ -453,7 +480,7 @@ try {
        Log.d("path","path:"+pathToFile);
        if (mimg_no == 1) {
            Constant.pos_1 = 1;
-           Constant.img_path_1= path;
+           Constant.img_path_left= path;
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
@@ -473,7 +500,7 @@ try {
        }
        if (mimg_no == 2) {
            Constant.pos_2 = 1;
-           Constant.img_path_2 = path;
+           Constant.img_path_front = path;
 
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
@@ -495,7 +522,7 @@ try {
 
            Toast.makeText(this, "img-3", Toast.LENGTH_SHORT).show();
            Constant.pos_3 = 1;
-           Constant.img_path_3 = path;
+           Constant.img_path_back = path;
 
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
@@ -517,7 +544,7 @@ try {
 
        if (mimg_no == 4) {
            Constant.pos_4 = 1;
-           Constant.img_path_4= path;
+           Constant.img_path_croauch= path;
 
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
@@ -537,7 +564,7 @@ try {
        }
        if (mimg_no == 5) {
            Constant.pos_5 = 1;
-           Constant.img_path_5 = path;
+           Constant.img_path_right = path;
 
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
@@ -559,7 +586,7 @@ try {
 
            Toast.makeText(this, "img-3", Toast.LENGTH_SHORT).show();
            Constant.pos_6 = 1;
-           Constant.img_path_6 = path;
+           Constant.img_path_neck_left = path;
 
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
@@ -581,7 +608,7 @@ try {
 
        if (mimg_no == 7) {
            Constant.pos_7 = 1;
-           Constant.img_path_7= path;
+           Constant.img_path_neck_right= path;
 
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
@@ -601,7 +628,7 @@ try {
        }
        if (mimg_no == 8) {
            Constant.pos_8 = 1;
-           Constant.img_path_8 = path;
+           Constant.img_path_neck_front = path;
            try {
                // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
@@ -623,7 +650,7 @@ try {
    }
 
    public void  okk(View view){
-        if(Constant.img_path_1.length()==0){}
+        if(Constant.img_path_front.length()==0){}
 
      next_act();
    }

@@ -56,7 +56,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_profile);
         Button button_back=findViewById(R.id.button8);
-         button_save=findViewById(R.id.button_save);
+        button_save=findViewById(R.id.button_save);
         button_cam=findViewById(R.id.button_camara);
         button_female=findViewById(R.id.button_female);
         button_male=findViewById(R.id.button_male);
@@ -328,6 +328,14 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
     }
 
+    public void profile_inf(View view){
+        Intent myIntent = new Intent(Profile.this, Parentprofile.class);
+
+        Profile.this.startActivity(myIntent);
+
+    }
+
+
     void details () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
@@ -438,7 +446,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.crear_child, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               // Toast.makeText(Profile.this, "child"+response, Toast.LENGTH_SHORT).show();
+               Toast.makeText(Profile.this, "child"+response, Toast.LENGTH_SHORT).show();
                 try {
                     details_json2("["+response+"]");
                 } catch (JSONException e) {

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         videoBG = (VideoView) findViewById(R.id.videoView);
-       linearLayout=findViewById(R.id.linearlayout);
+        linearLayout=findViewById(R.id.linearlayout);
         linearLayout.setGravity(Gravity.CENTER );
         editText_password= findViewById(R.id.editText_pass);
         editText_username=findViewById(R.id.editText_user);

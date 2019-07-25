@@ -135,7 +135,9 @@
                                android:layout_marginLeft="@dimen/_10sdp"
                                 android:layout_marginRight="@dimen/_50sdp"
                                 android:background="@drawable/head_icon"
-                                android:text="" />
+                                android:onClick="profile_inf"
+                                android:text=""
+                                tools:ignore="OnClick" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -165,7 +167,7 @@
                                 android:elevation="@dimen/_16sdp"
                                 android:shadowColor="#ffff"
                                 android:hint="名稱"
-                                android:text=""
+                                android:text="test"
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/hintcolor"
 
@@ -192,7 +194,7 @@
                                 android:background="@drawable/edit_text_normal_bg"
                                 android:hint="年齡"
                                 android:inputType="number"
-                                android:text=""
+                                android:text="32"
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/hintcolor"
                                 android:maxLength="2"
@@ -215,7 +217,7 @@
                                 android:hint="高度"
                                 android:inputType="numberDecimal"
 
-                                android:text=""
+                                android:text="7.3"
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/hintcolor"
                                 android:maxLength="3"
@@ -237,7 +239,7 @@
                                 android:inputType="numberDecimal"
                                 android:maxLength="3"
                                 android:paddingLeft="@dimen/_15sdp"
-                                android:text=""
+                                android:text="73"
                                 android:textColor="@color/colorwhite"
                                 android:textColorHint="@color/hintcolor" />
 
@@ -257,9 +259,9 @@
                                     <Button
                                         android:id="@+id/button_male"
                                         android:layout_width="@dimen/_45sdp"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="@dimen/_45sdp"
                                         android:layout_marginLeft="@dimen/_30sdp"
-                                        android:background="@drawable/drman"
+                                        android:background="@drawable/ic_male"
                                         android:onClick="male_click"
                                         android:text=""
                                         tools:ignore="OnClick" />

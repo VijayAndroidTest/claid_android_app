@@ -34,7 +34,7 @@ public class measurement extends AppCompatActivity {
     ListView listView;
     LinearLayout linearLayout_ll3d;
     private int json_val;
-    private String[] mname,ename,mvalues,url_path;
+    private String[] name,ename,mvalues,url_path;
     Button button_3d,button_measurement;
 
     @Override
@@ -99,7 +99,7 @@ public class measurement extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("order_id","8" );
+                params.put("cid",Constant.child_id);
 
                 return params;
             }
@@ -112,22 +112,18 @@ public class measurement extends AppCompatActivity {
     private void details_json(String json) throws JSONException {
 
         JSONArray jsonArray = new JSONArray(json);
-        mname = new String[jsonArray.length()];
+        name = new String[jsonArray.length()];
         ename= new String[jsonArray.length()];
         mvalues= new String[jsonArray.length()];
         url_path= new String[jsonArray.length()];
 
-
-
-
-
         for (int i = 0; i < jsonArray.length(); i++)
         {
             JSONObject obj = jsonArray.getJSONObject(i);
-            mname[i] = obj.getString("mname");
+            name[i] = obj.getString("name");
 
             mvalues[i] = obj.getString("mvalues");
-            url_path[i]=obj.getString("path");
+            url_path[i]=obj.getString("url_path");
         }
 json_val=jsonArray.length();
 
@@ -214,7 +210,7 @@ json_val=jsonArray.length();
                 TextView part_body=convertView.findViewById(R.id.part_body);
                 TextView measure=convertView.findViewById(R.id.measurents);
                 ImageView img = convertView.findViewById(R.id.imageView5);
-                part_body.setText(mname[position]);
+                part_body.setText(name[position]);
                 measure.setText(mvalues[position]);
                Picasso.with ( measurement.this ).load ( url_path[position] ).into ( img);
 

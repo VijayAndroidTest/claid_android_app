@@ -16,14 +16,14 @@ public class  confirmation_screen extends AppCompatActivity {
   private confirmation_Adapter adapter;
      private  String[] imagess={
 
-             Constant.img_path_3,Constant.img_path_5,Constant.img_path_7, Constant.img_path_1
+             Constant.img_path_neck_front,Constant.img_path_croauch,Constant.img_path_neck_left, Constant.img_path_neck_right
      };
     private  String[] pose={
 
             "FRONT POSE"," BACK POSE ","LEFT POSE","RIGHT POSE"
     };
     private  String[] imagess2={
-            Constant.img_path_4,Constant.img_path_6,Constant.img_path_8, Constant.img_path_2
+            Constant.img_path_front,Constant.img_path_back,Constant.img_path_left, Constant.img_path_right
     };
     private  String[] pose2={
 

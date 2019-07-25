@@ -3,7 +3,7 @@ package com.example.claid;
 public class Constant {
 
     public static String img_1;
-    public static int pos_1=1;
+    public static int pos_1=0;
     public static int pos_2=0;
     public static int pos_3=0;
     public static int pos_4=1;
@@ -22,30 +22,35 @@ public class Constant {
     public static   String user_id="";
     public  static  String pemail="";
     public  static  String pname="";
+    public  static  String mchild_id="";
+    public  static  String pose_name="";
+    public  static int pose_no;
+    public  static int pose_height=0;
 
 
 
 
 
-    public  static String img_path_1="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
-    public  static String img_path_2="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
-    public  static String img_path_3="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
-    public  static String img_path_4="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
-    public  static String img_path_5="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
-    public  static String img_path_6="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
-    public  static String img_path_7="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
-    public  static String img_path_8="/storage/emulated/0/Pictures/Screenshots/Screenshot_20190626-154446.png";
+
+    public  static String img_path_left="";
+    public  static String img_path_front="";
+    public  static String img_path_back="";
+    public  static String img_path_croauch="";
+    public  static String img_path_right="";
+    public  static String img_path_neck_right="";
+    public  static String img_path_neck_left="";
+    public  static String img_path_neck_front="";
 
    public static   String[] imagess={
 
-            Constant.img_path_3,Constant.img_path_5,Constant.img_path_7, Constant.img_path_1
+            Constant.img_path_front,Constant.img_path_back,Constant.img_path_neck_left, Constant.img_path_neck_right
     };
     public static String[] pose={
 
             "FRONT POSE"," BACK POSE ","LEFT POSE","RIGHT POSE"
     };
     public static  String[] imagess2={
-            Constant.img_path_4,Constant.img_path_6,Constant.img_path_8, Constant.img_path_2
+            Constant.img_path_neck_front,Constant.img_path_croauch,Constant.img_path_left ,Constant.img_path_right
     };
     public static String[] pose2={
 
