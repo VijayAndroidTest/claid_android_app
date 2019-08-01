@@ -17,10 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.claid.Constant;
 import com.example.claid.Previewscreen;
 import com.example.claid.R;
 import com.example.claid.confirmation_screen;
 import com.example.claid.photography_pages;
+import com.squareup.picasso.Picasso;
 
 public class confirmation_Adapter extends PagerAdapter {
 
@@ -76,8 +78,11 @@ public class confirmation_Adapter extends PagerAdapter {
         textView_pose_right=(TextView)itemView.findViewById(R.id.textView_pose_right) ;
       //  image.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-            image.setImageURI(Uri.parse(images[position]));
-            image2.setImageURI(Uri.parse(images2[position]));
+        Picasso.with ( container.getContext() ).load (images[position]).into (image);
+        Picasso.with ( container.getContext() ).load (images2[position]).into (image2);
+
+          //  image.setImageURI(Uri.parse(images[position]));
+           // image2.setImageURI(Uri.parse(images2[position]));
             textView_pose_left.setText(mpose[position]);
             textView_pose_right.setText(mpose2[position]);
 ;

@@ -24,10 +24,19 @@ public class Constant {
     public  static  String pname="";
     public  static  String mchild_id="";
     public  static  String pose_name="";
-    public  static int pose_no;
-    public  static int pose_height=0;
+    public  static int pose_no = 3;
+    public  static int pose_height =0 ;
+    public static String []cro_pose;
+    public static String d []= {
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/leftpose.png",
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckleft.png",
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/backside.png",
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/croatch.png",
 
-
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/rightpose.png",
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckright.png",
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/frontpose.png",
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckfront.png"};
 
 
 
@@ -43,24 +52,25 @@ public class Constant {
 
    public static   String[] imagess={
 
-            Constant.img_path_front,Constant.img_path_back,Constant.img_path_neck_left, Constant.img_path_neck_right
+           "https://ozosmatrix.com/claid_revamp/v2/public/photopose/leftpose.png","https://ozosmatrix.com/claid_revamp/v2/public/photopose/backside.png","https://ozosmatrix.com/claid_revamp/v2/public/photopose/rightpose.png", "https://ozosmatrix.com/claid_revamp/v2/public/photopose/frontpose.png"
     };
     public static String[] pose={
 
-            "FRONT POSE"," BACK POSE ","LEFT POSE","RIGHT POSE"
+            "RIGHT "," BACK POSE ","LEFT POSE","RIGHT POSE"
     };
     public static  String[] imagess2={
-            Constant.img_path_neck_front,Constant.img_path_croauch,Constant.img_path_left ,Constant.img_path_right
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckleft.png","https://ozosmatrix.com/claid_revamp/v2/public/photopose/croatch.png","https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckright.png" , "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckfront.png"
     };
     public static String[] pose2={
 
-            "FRONT UP","BACK UP","LEFT UP", "RIGHT UP"
+            "RIGHT UP","BACK UP","LEFT UP","FRONT UP"
     };
 
 
 
     public static  int viediostates=0;
     public static  int demo_viediostates=0;
+    public static  int vid_cam=0;
 
 
 }

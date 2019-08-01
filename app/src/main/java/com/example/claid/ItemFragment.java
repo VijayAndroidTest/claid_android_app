@@ -1,6 +1,7 @@
 package com.example.claid;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,30 +19,44 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ItemFragment extends Fragment {
 
     private static final String POSITON = "position";
     private static final String SCALE = "scale";
     private static final String DRAWABLE_RESOURE = "resource";
+    private static Object photography_pages;
     private int screenWidth;
     private int screenHeight;
     List<Bitmap> month = new ArrayList<Bitmap>();
     private ArrayList<Game> games;
-    private int[] imageArray =  {R.drawable.left_side_up, R.drawable.front_bose,
-            R.drawable.back, R.drawable.back_up,R.drawable.rght_side_up,R.drawable.left_side,
-            R.drawable.rght_side, R.drawable.front};
-    private String[] imageArray2={Constant.img_path_neck_front,Constant.img_path_back,Constant.img_path_neck_left,Constant.img_path_left,
-    Constant.img_path_croauch,Constant.img_path_neck_right,Constant.img_path_right,Constant.img_path_front};
-    private String[] new_image;
-    private String[]bose={"LEFT SIDE","FRONT POSE","BACK POSE","CROATCH","RIGHT SIDE","NECK LEFT ","NECK RIGHT","NECK FRONT",};
+
+
+    private String[]bose={"LEFT SIDE","NECK LEFT","BACK POSE","CROATCH","RIGHT SIDE","NECK RIGHT ","FRONT POSE","NECK FRONT",};
+
+
     public static Fragment newInstance(photography_pages context, int pos, float scale) {
+
         Bundle b = new Bundle();
         b.putInt(POSITON, pos);
         b.putFloat(SCALE, scale);
+
 
         return Fragment.instantiate(context, ItemFragment.class.getName(), b);
     }
@@ -70,34 +85,19 @@ public class ItemFragment extends Fragment {
         textView.setText("" + bose[postion]);
         Constant.pose_name=bose[postion];
         imageView.setLayoutParams(layoutParams);
-        imageView.setImageResource(imageArray[postion]);
-        Constant.pose_no=postion;
+//          Toast.makeText(container.getContext(), "cc"+Constant.cro_pose[postion]+ "pos  :"+postion, Toast.LENGTH_SHORT).show();
+        // imageView.setImageURI(Uri.parse(String.valueOf(Constant.cro_pose[postion])));
+        Picasso.with ( container.getContext() ).load (Constant.cro_pose[postion]).into (imageView);
+        //imageView.setImageResource(Constant.cro_pose[postion]);
+        Constant.pose_no = postion;
+       // Toast.makeText(container.getContext(), "cc"+postion, Toast.LENGTH_SHORT).show();
+
 
 
         //imageView.setImageURI(Uri.parse(String.valueOf(imageArray[postion])));
-
-      //  imageView.setImageURI(Uri.parse(String.valueOf(games.get(postion))));
+        //  imageView.setImageURI(Uri.parse(String.valueOf(games.get(postion))));
        // imageView.setImageURI(Uri.parse("/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg"));
-        if (Constant.pos_1==1)
-           {
 
-               try{
-            File imgFile = new  File(""+Constant.img_path_neck_front);
-            Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            imageView.setImageBitmap(bitmap);
-            games.add(new Game(bitmap, "Right"));
-            month.add(bitmap);
-
-            Constant.pos_1=0;
-
-            }
-           catch (Exception e){}}
-
-        else {
-
-
-
-        }
 
        // imageView.setImageBitmap(month.get(0));
 
@@ -111,10 +111,11 @@ public class ItemFragment extends Fragment {
                 Log.d( "Width", "Width:" +bose[postion]);
                 Constant.pose_name=bose[postion];
                 Constant.pose_no=postion;
-
                 Intent intent = new Intent(getActivity(), zoso_cam3.class);
-                intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
+                //intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
                 startActivity(intent);
+
+
 
 
             }
@@ -134,4 +135,6 @@ public class ItemFragment extends Fragment {
         screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
     }
+
+
 }

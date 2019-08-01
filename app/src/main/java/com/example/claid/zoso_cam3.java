@@ -7,7 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.media.ExifInterface;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
@@ -19,15 +19,14 @@ import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
+import android.util.Base64;
 import android.util.Log;
 import android.util.SizeF;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -39,6 +38,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -47,7 +47,9 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -55,6 +57,13 @@ import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
@@ -83,16 +92,18 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
     public static Bitmap bitmap;
     public String response_pixel = "";
     public String session="";
+    String infoData;
     public int pic_height=0;
     public String res_str[];
     public static final String MyPREFERENCES = "session" ;
     String imageName = "Left Side Bose";
     public Integer count=0;
     public String userid="";
+    private Bitmap bitmap1;
     private String output_file_name;
-    private int[] imageArray =  {R.drawable.left_side_up, R.drawable.front_bose,
-            R.drawable.back, R.drawable.back_up,R.drawable.rght_side_up,R.drawable.left_side,
-            R.drawable.rght_side, R.drawable.front};
+    private int[] imageArray =  {R.drawable.left_side_up, R.drawable.left_side,
+            R.drawable.back, R.drawable.back_up,R.drawable.rght_side_up,R.drawable.rght_sidec,
+            R.drawable.front_bose, R.drawable.front};
     private String[]bose={"FRONT POSE","BACK POSE","LEFT SIDE POSE","LEFT SIDE UP POSE","CROAUCH POSE","Right SIDE POSE","RIGHT SIDE UP POSE","FRONT POSE UP"};
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -104,34 +115,11 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
         sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
         output_file_name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + Constant.pose_name + ".jpeg";
 
+
         imageView=findViewById(R.id.imageView7);
         imageView.setImageResource(imageArray[Constant.pose_no]);
 
 
-        if(Constant.pose_name == bose[0]) {
-            Constant.img_path_neck_front = output_file_name;
-        }
-        else if(Constant.pose_name == bose[1]) {
-            Constant.img_path_back = output_file_name;
-        }
-        else if(Constant.pose_name == bose[2]) {
-            Constant.img_path_neck_left = output_file_name;
-        }
-        else if(Constant.pose_name == bose[3]) {
-            Constant.img_path_left = output_file_name;
-        }
-        else if(Constant.pose_name == bose[4]) {
-            Constant.img_path_croauch = output_file_name;
-        }
-        else if(Constant.pose_name == bose[5]) {
-            Constant.img_path_neck_right = output_file_name;
-        }
-        else if(Constant.pose_name == bose[6]) {
-            Constant.img_path_right = output_file_name;
-        }
-        else if(Constant.pose_name == bose[7]) {
-            Constant.img_path_front = output_file_name;
-        }
 
 
         session=randomString(30);
@@ -483,7 +471,7 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
             public void onPictureTaken(byte[] data, Camera camera) {
 
                 String timeStamp = new SimpleDateFormat( "yyyyMMdd_HHmmss").format( new Date( ));
-              //  output_file_name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + Constant.pose_name + ".jpeg";
+               //output_file_name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + Constant.pose_name + ".jpeg";
 
                 File pictureFile = new File(output_file_name);
                 if (
@@ -518,8 +506,11 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                     FileOutputStream fo = new FileOutputStream(pictureFile);
                     fo.write( bytes.toByteArray() );
                     fo.close();
-                    uploadFileHttpsPost(output_file_name,Constant.pose_name,Constant.lgg_api,Constant.child_id);
+
+                   // up_image(output_file_name,Constant.pose_name,Constant.lgg_api,Constant.child_id);
+                   uploadFileHttpsPost(output_file_name,Constant.pose_name,Constant.lgg_api,Constant.child_id);
                     //  ((ImageView) findViewById(R.id.imageview)).setImageBitmap(realImage);
+
 
 
 
@@ -549,25 +540,24 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
 
 
 
-
-
-
-
-
-    public String uploadFileHttpsPost(String sourceFileUri, String imageName, String token, String userid) {
-
-
+    public String uploadFileHttpsPost(String sourceFileUri,String imageName,String token,String userid) {
 
         Log.d( TAG, "sourceFileUri: "+sourceFileUri );
         Log.d( TAG, "imageName: "+imageName );
         Log.d( TAG, "token: "+token );
         Log.d( TAG, "userid: "+userid );
-        upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/api/upload";
+        //upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/api/upload";
+        // upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/api/uploadtest";
+        //upLoadServerHttpsUri="https://www.ozosmatrix.com/resolution/upload.php";
+        //upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/orientation.php";
+        //upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/mobileupload.php";
+        //upLoadServerHttpsUri = "https://ozosmatrix.com/claid_revamp/api/upload";
+        upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/v2/api/upload";
         Boolean result;
 
         // Get Preference value
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        String sesssionvalue=userid;
+        String sesssionvalue=sharedpreferences.getString("sess",null);
         HttpsURLConnection conn = null;
         DataOutputStream dos = null;
         String lineEnd = "\r\n";
@@ -633,13 +623,13 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
 
                 String width_dim =separated[0]; // this will contain "Fruit"
                 String height_dim=separated[1];
-                // userid="1";
-               // String infoData=parameters.getFocalLength()+"#"+parameters.getHorizontalViewAngle()+"#"+parameters.getVerticalViewAngle()+"#"+width_dim+"#"+height_dim+"#"+Build.MODEL+"#"+Constant.pose_no+"#"+sesssionvalue+"#"+Constant.pose_no+"#"+userid;
-
-                String infoData=parameters.getFocalLength()+"#"+parameters.getHorizontalViewAngle()+"#"+parameters.getVerticalViewAngle()+"#"+width_dim+"#"+height_dim+"#"+Build.MODEL+"#"+Constant.pose_no+"#"+sesssionvalue+"#"+Constant.pose_height+"#"+userid;
+                // userid="100";
+                //sesssionvalue="100";
+                String infoData=parameters.getFocalLength()+"#"+parameters.getHorizontalViewAngle()+"#"+parameters.getVerticalViewAngle()+"#"+width_dim+"#"+height_dim+"#"+Build.MODEL+"#"+""+Constant.pose_no+"#"+Constant.child_id+"#"+Constant.pose_height+"#"+Constant.child_id;
                 httpRequestBodyWriter.write(infoData);
 
-
+                Log.i("info", "Data : "
+                        + infoData);
 
 
 
@@ -689,9 +679,7 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                 String serverResponseMessage = conn.getResponseMessage();
                 Log.i("uploadFile", "HTTP Response is : "
                         + serverResponseMessage + ": " + serverResponseCode);
-               // Toast.makeText(myContext, "e"+serverResponseCode + "pos :"+Constant.pose_height, Toast.LENGTH_SHORT).show();
 
-                if(serverResponseCode == 500){}
                 if(serverResponseCode == 200){
                     //showToast("File Upload Complete.");
                     Log.i("Response", "Response : "
@@ -706,10 +694,13 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                     while ((inputLine = in.readLine()) != null) {
                         response.append(inputLine);
                     }
-                    Log.d( TAG, "Response all: " +response.toString().length());
+                    Log.d( TAG, "Response Length: " +response.toString().length());
+                    Log.d( TAG, "Response Result: " +response.toString());
+
+
+
 
                     response_pixel=response.toString();
-                    Toast.makeText(myContext, "res"+response.toString()+"  pos no "+Constant.pose_height, Toast.LENGTH_SHORT).show();
 
                     JSONObject myResponse = new JSONObject(response.toString());
 
@@ -720,18 +711,16 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
 
                     res_str=myResponse.getString("result").split("#");
                     showresultView(myResponse.getString("result"));
-                    Constant.pose_height =Integer.valueOf( res_str[1] );
-                    Log.d( TAG, "pic_height: " +pic_height);
-
-                   // Intent myIntent =new Intent(zoso_cam3.this, photography_pages.class);
-                  //  zoso_cam3.this.startActivity(myIntent);
-                    finish();
-
-
-                   /* res_str=myResponse.getString("result").split("#");
-                    showresultView(myResponse.getString("result"));
                     pic_height=Integer.valueOf( res_str[1] );
+                    Constant.pose_height = pic_height;
 
+
+ /*
+
+                    res_str=response_pixel.split("#");
+                    showresultView(response_pixel);
+                    pic_height=Integer.valueOf( res_str[1] );
+*/
                     String cmp_res=res_str[0].trim();
                     Log.d( TAG, "pic_height: " +Integer.valueOf( res_str[1] ));
                     Log.d( TAG, "cmp_res: " +cmp_res);
@@ -744,37 +733,47 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                             System.out.println("file not Deleted :" + sourceFileUri);
                         }
                     }
-                    if(cmp_res.equals("1")){
-                        ShowImageNameView("Front Pose")  ;
-                        showAlert("Left Pose uploading done" );
-                    }else if(cmp_res.equals("2")){
-                        ShowImageNameView("Back Side Pose")  ;
-                        showAlert("Front Pose uploading done" );
-                    }else if(cmp_res.equals("3")){
-                        ShowImageNameView("Croauch Pose")  ;
-                        showAlert("Back Side uploading done" );
-                    }else if(cmp_res.equals("4")){
-                        ShowImageNameView("Right Side Pose")  ;
-                        showAlert("Croauch Pose uploading done" );
-                    }else if(cmp_res.equals("5")){
-                        ShowImageNameView("Neck left Pose ")  ;
-                        showAlert("Right Side Pose uploading done" );
-                    }else if(cmp_res.equals("6")){
-                        ShowImageNameView("Neck right Pose ")  ;
-                        showAlert("Neck left Pose uploading done" );
-                    }else if(cmp_res.equals("7")){
-                        ShowImageNameView("Neck Front Pose ")  ;
-                        showAlert("Neck Right Pose uploading done" );
-                    }else if(cmp_res.equals("8")){
+
+
+
+
+
+
+                   /* if(cmp_res.equals("1")){
+                        ShowImageNameView("Neck Front Pose")  ;
                         showAlert("Neck Front Pose uploading done" );
+                    }else if(cmp_res.equals("2")){
+                        ShowImageNameView("Left Side Pose")  ;
+                        showAlert("Left Side Pose uploading done" );
+                    }else if(cmp_res.equals("3")){
+                        ShowImageNameView("Neck Left Side Pose")  ;
+                        showAlert("Neck Left Side Pose uploading done" );
+                    }else if(cmp_res.equals("4")){
+                        ShowImageNameView("Back Side Pose")  ;
+                        showAlert("Back Side Pose uploading done" );
+                    }else if(cmp_res.equals("5")){
+                        ShowImageNameView("Croatch Pose")  ;
+                        showAlert("Croatch Pose uploading done" );
+                    }else if(cmp_res.equals("6")){
+                        ShowImageNameView("Right Side Pose ")  ;
+                        showAlert("Right Side Pose uploading done" );
+                    }else if(cmp_res.equals("7")){
+                        ShowImageNameView("Neck Right Side Pose")  ;
+                        showAlert("Neck Right Side Pose uploading done" );
+                    }else if(cmp_res.equals("8")){
+                        showAlert("All Pose uploading done" );
                         ShowImageNameView("All are Done");
 
                     }else{
+                        showAlert("All Pose uploading done" );
                         ShowImageNameView("All are Done");
 
                     }*/
 
+Constant.vid_cam=1;
+                    Intent myIntent = new Intent(zoso_cam3.this, photography_pages.class);
 
+                    zoso_cam3.this.startActivity(myIntent);
 
 
                     result=true;
@@ -783,6 +782,7 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                     progressBar.setVisibility(View.GONE);*/
                 }else{
                     //_loginButton.setEnabled(true);
+
                     result=false;
                 }
                 //close the streams //
@@ -794,10 +794,11 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                 ex.printStackTrace();
                 //showToast("MalformedURLException.");
                 Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+
                 result=false;
             } catch (Exception e) {
                 e.printStackTrace();
-                //showToast("Upload file to server Exception.");
+
                 result=false;
             }
             return "1";
@@ -807,7 +808,12 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
 
 
 
-   
+
+
+
+
+
+
     private void showAlert(final String text) {
         Log.e("showAlert", "showAlert: " + text);
         //final Dialog dialog = new Dialog(context);
@@ -903,4 +909,59 @@ capture.setEnabled(true);
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
+
+
+    void up_image(String sourceFileUri, final String imageName, String token, String userid) throws FileNotFoundException {
+
+        InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(sourceFileUri));
+       final Bitmap bitmap1=BitmapFactory.decodeStream(inputStream);
+
+        StringRequest stringRequest=new StringRequest(StringRequest.Method.POST, "https://ozosmatrix.com/claid_revamp/v2/api/upload", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(zoso_cam3.this, "res   :   "+response, Toast.LENGTH_SHORT).show();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String>params=new HashMap<>();
+                params.put("uploaded_file", image_to_string(bitmap1));
+                params.put("imagename", imageName);
+                params.put("information", "3.57#66.0365#51.9687#4.656#3.504#Nokia 6.1 Plus#0#320#0#320");
+                // params.put("name", constant.complient_id);
+                //  params.put("c_id", constant.complient_id);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", Constant.lgg_api);
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue= Volley.newRequestQueue(zoso_cam3.this);
+        requestQueue.add(stringRequest);
+        //Mysingleton.getmInstance(complaind_act.this).addtoRequestQue(request);
+        // Volley.newRequestQueue(this).add(request);
+
+    }
+
+    private String image_to_string( Bitmap bitmap1){
+
+        ByteArrayOutputStream byteArrayOutputStream= new ByteArrayOutputStream();
+        bitmap1.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        byte[] imageBytes=byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imageBytes,Base64.DEFAULT);
+    }
+
 }

@@ -36,6 +36,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.claid.adapter.CoverFlowAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +75,9 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     public static int count = 8; //ViewPager items size
     public static int FIRST_PAGE = 8;
     private Bitmap bitmap;
-
+    String[] error,imagedate,pos_name,file;
+    DisplayMetrics metrics = new DisplayMetrics();
+    int pageMargin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +87,12 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_photography_pagess);
         pager=(ViewPager)findViewById(R.id.myviewpager) ;
-        DisplayMetrics metrics = new DisplayMetrics();
+
+        log();
+
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int pageMargin = ((metrics.widthPixels / 4) * 2);
+      //  Toast.makeText(this, "sss", Toast.LENGTH_SHORT).show();
         pager.setPageMargin(-pageMargin);
         cpaadapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
         pager.setAdapter(cpaadapter);
@@ -103,15 +112,51 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         button_play.setVisibility(View.VISIBLE);
         button_help=findViewById(R.id.help3);
         button_help.setVisibility(View.VISIBLE);
-//      coverFlow.setVisibility(View.GONE);
-        videoView.setVisibility(View.GONE);
         button_cam=findViewById(R.id.button_camara);
         button_video=findViewById(R.id.button_video);
+//      coverFlow.setVisibility(View.GONE);
+
+
+
+
+
+
+
+
+        if(Constant.vid_cam == 0){
+        videoView.setVisibility(View.GONE);
+
         button_video.setBackgroundResource(R.drawable.video_on_onclick);
         button_video.getBackground().setAlpha(250);
         button_cam.getBackground().setAlpha(100);
-        pager.setVisibility(View.GONE);
-        settingDummyData();
+        pager.setVisibility(View.GONE);}
+        else {
+
+
+            pager.setPageMargin(-pageMargin);
+            cpaadapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
+            pager.setAdapter(cpaadapter);
+            cpaadapter.notifyDataSetChanged();
+            pager.addOnPageChangeListener(cpaadapter);
+            pager.setCurrentItem(FIRST_PAGE);
+            pager.setOffscreenPageLimit(3);
+
+
+
+                linearLayout.setVisibility(View.GONE);
+                button_play.setVisibility(View.GONE);
+                linearLayout.setVisibility(View.GONE);
+                videoView.setVisibility(View.GONE);
+                button_help.setVisibility(View.INVISIBLE);
+                pager.setVisibility(View.VISIBLE);
+                button_video.setBackgroundResource(R.drawable.video_onclick);
+                button_video.getBackground().setAlpha(175);
+                button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
+                button_cam.getBackground().setAlpha(250);
+
+        }
+
+       // log();
            // adapter = new CoverFlowAdapter(this, games);
            // coverFlow.setAdapter(adapter);
            // coverFlow.setOnScrollPositionListener(onScrollListener());
@@ -242,126 +287,7 @@ try {
         }
     }
 
-        private void settingDummyData() {
-            //Toast.makeText(this, "ddd", Toast.LENGTH_SHORT).show();
 
-try {
-    games.clear();
-}catch (Exception e){}
-            games = new ArrayList<>();
-
-            if (Constant.img_path_neck_right.length()!=0)
-            {
-                File imgFile = new  File(""+Constant.img_path_left);
-
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "Right "));
-            }
-            else {
-               // Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
-                //games.add(new Game(bitmap_bk, "Righr"));
-            }
-            if (Constant.img_path_right.length()!=0)
-            {
-                File imgFile = new  File(""+Constant.img_path_front);
-
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "Right Pose Up "));
-            }
-            else {
-               // Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side_up);
-               // games.add(new Game(bitmap_bk, "Righr Pose up"));
-            }
-
-
-            if (Constant.img_path_neck_left.length()!=0)
-            {
-
-                File imgFile = new  File(""+Constant.img_path_back);
-
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "FRONT POSE1"));
-            }
-            else {
-                Bitmap bitmap_fr = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
-                games.add(new Game(bitmap_fr, "FRONT POSE"));
-            }
-
-
-            if (Constant.img_path_front.length()!=0)
-            {
-                File imgFile = new  File(""+Constant.img_path_croauch);
-
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "Hand Up"));
-            }
-            else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
-                games.add(new Game(bitmap_bk, "Hand Up"));
-            }
-
-
-            if (Constant.img_path_neck_left.length()!=0)
-            {
-                File imgFile = new  File(""+Constant.img_path_right);
-
-                Bitmap bitmap= BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "Left Pose"));
-            }
-            else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
-                games.add(new Game(bitmap_bk, "Left Pose"));
-            }
-
-            if (Constant.img_path_neck_left.length()!=0)
-            {
-                File imgFile = new  File(""+Constant.img_path_neck_left);
-
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "Left Pose Up"));
-            }
-            else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.rght_side);
-                games.add(new Game(bitmap_bk, "Left Pose Up"));
-            }
-
-
-            if (Constant.img_path_neck_right.length()!=0)
-            {
-                File imgFile = new  File(""+Constant.img_path_neck_right);
-
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "bake Pose "));
-            }
-            else {
-                //Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.back);
-               // games.add(new Game(bitmap_bk, "Back Pose"));
-            }
-            if (Constant.img_path_neck_front.length()!=0)
-            {
-                File imgFile = new  File(""+Constant.img_path_neck_front);
-
-                Bitmap bitmap=BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                games.add(new Game(bitmap, "bake Pose Up "));
-            }
-            else {
-                Bitmap bitmap_bk = BitmapFactory.decodeResource(getResources(),R.drawable.back_up);
-                games.add(new Game(bitmap_bk, "Back Pose Up"));
-            }
-
-
-
-
-
-        }
 
 
 
@@ -408,246 +334,12 @@ try {
         }
     }
 
-    void upload (final Bitmap bitmaps) {
-
-        //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.upload, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText (photography_pages.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
 
 
 
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                // Toast.makeText(MainActivity.this, "無效的用戶名或密碼", Toast.LENGTH_SHORT).show();
-
-            }
-        }) {
 
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", " Bearer "+Constant.lgg_api);
-                return headers;
-            }
-
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-
-                params.put("title", Constant.user_id);
-                params.put("file", image_to_string(bitmaps));
-                params.put("imagename", "x");
-
-
-
-                return params;
-            }
-        };
-        Volley.newRequestQueue(this).add(request);
-
-    }
-
-    private String image_to_string( Bitmap bitmap1){
-
-        ByteArrayOutputStream byteArrayOutputStream= new ByteArrayOutputStream();
-        bitmap1.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream);
-        byte[] imageBytes=byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imageBytes,Base64.DEFAULT);
-    }
-
-
-    private File createphotofile(){
-        String name =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File storageDir= getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File image=null;
-        try {
-            image=File.createTempFile(name,".jpg",storageDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
-
-    }
-   public void image_path_in_constant(int mimg_no,String path) {
-       Log.d("path","path:"+pathToFile);
-       if (mimg_no == 1) {
-           Constant.pos_1 = 1;
-           Constant.img_path_left= path;
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-
-           games.clear();
-           settingDummyData();
-
-           adapter = new CoverFlowAdapter(this, games);
-         //  coverFlow.setAdapter(adapter);
-       }
-       if (mimg_no == 2) {
-           Constant.pos_2 = 1;
-           Constant.img_path_front = path;
-
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           games.clear();
-           settingDummyData();
-
-           adapter = new CoverFlowAdapter(this, games);
-          // coverFlow.setAdapter(adapter);
-       }
-       if (mimg_no == 3) {
-
-           Toast.makeText(this, "img-3", Toast.LENGTH_SHORT).show();
-           Constant.pos_3 = 1;
-           Constant.img_path_back = path;
-
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           games.clear();
-           settingDummyData();
-
-           adapter = new CoverFlowAdapter(this, games);
-          // coverFlow.setAdapter(adapter);
-       }
-
-
-       if (mimg_no == 4) {
-           Constant.pos_4 = 1;
-           Constant.img_path_croauch= path;
-
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           games.clear();
-           settingDummyData();
-
-           //adapter = new CoverFlowAdapter(this, games);
-          // coverFlow.setAdapter(adapter);
-       }
-       if (mimg_no == 5) {
-           Constant.pos_5 = 1;
-           Constant.img_path_right = path;
-
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           games.clear();
-           settingDummyData();
-
-           adapter = new CoverFlowAdapter(this, games);
-          // coverFlow.setAdapter(adapter);
-       }
-       if (mimg_no == 6) {
-
-           Toast.makeText(this, "img-3", Toast.LENGTH_SHORT).show();
-           Constant.pos_6 = 1;
-           Constant.img_path_neck_left = path;
-
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           games.clear();
-           settingDummyData();
-
-           adapter = new CoverFlowAdapter(this, games);
-          // coverFlow.setAdapter(adapter);
-       }
-
-
-       if (mimg_no == 7) {
-           Constant.pos_7 = 1;
-           Constant.img_path_neck_right= path;
-
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           games.clear();
-           settingDummyData();
-
-           adapter = new CoverFlowAdapter(this, games);
-          // coverFlow.setAdapter(adapter);
-       }
-       if (mimg_no == 8) {
-           Constant.pos_8 = 1;
-           Constant.img_path_neck_front = path;
-           try {
-               // bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-               InputStream inputStream = (InputStream) getContentResolver().openInputStream(Uri.parse(path));
-               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
-               upload(bitmap);
-
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           games.clear();
-           settingDummyData();
-
-           adapter = new CoverFlowAdapter(this, games);
-          // coverFlow.setAdapter(adapter);
-       }
-
-
-   }
 
    public void  okk(View view){
         if(Constant.img_path_front.length()==0){}
@@ -684,6 +376,10 @@ try {
     public void click_camara(View view)
 
     {
+      //  Toast.makeText(this, "pos"+Constant.cro_pose, Toast.LENGTH_SHORT).show();
+        log();
+
+
 
         linearLayout.setVisibility(View.GONE);
         button_play.setVisibility(View.GONE);
@@ -701,7 +397,6 @@ try {
 
     public  void  play(View view){
         Intent myIntent = new Intent(photography_pages.this, ozos_vidcam.class);
-
         photography_pages.this.startActivity(myIntent);
         videoView.setVisibility(View.VISIBLE);
         button_play.setVisibility(View.GONE);
@@ -717,6 +412,86 @@ try {
         videoView.setVideoPath(String.valueOf(vid_uri));
         videoView.start();
         return false;
+    }
+
+
+    void log () {
+
+        //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
+        Toast.makeText(this, "c", Toast.LENGTH_SHORT).show();
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.getcarousel, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+               //  Toast.makeText (photography_pages.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
+
+                try {
+                    log_json(response);
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(photography_pages.this, "無效的用戶名或密碼", Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("session", Constant.child_id);
+
+                return params;
+            }
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", " Bearer "+Constant.lgg_api);
+                return headers;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+
+    }
+
+
+    private void log_json(String json) throws JSONException
+    {
+
+                JSONArray jsonArray = new JSONArray(json);
+                error = new String[jsonArray.length()];
+                pos_name = new String[jsonArray.length()];
+                Constant.cro_pose = new String[jsonArray.length()];
+                file = new String[jsonArray.length()];
+                String[] date = new String[jsonArray.length()];
+
+        for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject obj = jsonArray.getJSONObject(i);
+
+                Constant.cro_pose[i] = null;
+                pos_name[i] = obj.getString("name");
+                file[i]=obj.getString("file");
+                Constant.cro_pose[i]=obj.getString("file");
+
+                Log.d( "cor", ":" + obj.getString("file") );
+               // Toast.makeText(this, "x"+file[i], Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+
+
     }
 }
 

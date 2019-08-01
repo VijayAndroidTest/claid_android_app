@@ -1,5 +1,6 @@
 package com.example.claid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 public class Previewscreen extends AppCompatActivity {
     ImageView imageView_preview;
@@ -25,16 +28,24 @@ public class Previewscreen extends AppCompatActivity {
         int ref = mIntent.getIntExtra("ref", 0);
         imageView_preview=findViewById(R.id.imageView4);
         textView_poss=findViewById(R.id.textView9);
-
-
+        Picasso.with (Previewscreen.this ).load (Constant.d[intValue]).into (imageView_preview);
+        Toast.makeText(this, "ref"+intValue, Toast.LENGTH_SHORT).show();
         if(ref==1){
-            imageView_preview.setImageURI(Uri.parse(Constant.imagess[intValue]));
+            Toast.makeText(this, "ref-1"+intValue, Toast.LENGTH_SHORT).show();
+
+            Picasso.with (Previewscreen.this ).load (Constant.imagess[intValue]).into (imageView_preview);
+
+
+          ////  imageView_preview.setImageURI(Uri.parse(Constant.cro_pose[intValue]));
             textView_poss.setText(Constant.pose[intValue]);
 
         }
         if(ref==2){
-            imageView_preview.setImageURI(Uri.parse(Constant.imagess2[intValue]));
-            textView_poss.setText(Constant.pose2[intValue]);
+            Toast.makeText(this, "ref-2"+intValue, Toast.LENGTH_SHORT).show();
+            Picasso.with (Previewscreen.this ).load (Constant.imagess2[intValue]).into (imageView_preview);
+
+            // imageView_preview.setImageURI(Uri.parse(Constant.imagess2[intValue]));
+           textView_poss.setText(Constant.pose2[intValue]);
 
         }
 

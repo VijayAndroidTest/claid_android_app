@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.claid.adapter.confirmation_Adapter;
 
@@ -16,19 +17,13 @@ public class  confirmation_screen extends AppCompatActivity {
   private confirmation_Adapter adapter;
      private  String[] imagess={
 
-             Constant.img_path_neck_front,Constant.img_path_croauch,Constant.img_path_neck_left, Constant.img_path_neck_right
+             Constant.cro_pose[0], Constant.cro_pose[2], Constant.cro_pose[4], Constant.cro_pose[6]
      };
-    private  String[] pose={
 
-            "FRONT POSE"," BACK POSE ","LEFT POSE","RIGHT POSE"
-    };
     private  String[] imagess2={
-            Constant.img_path_front,Constant.img_path_back,Constant.img_path_left, Constant.img_path_right
+            Constant.cro_pose[1], Constant.cro_pose[3], Constant.cro_pose[5],  Constant.cro_pose[7]
     };
-    private  String[] pose2={
 
-            "FRONT UP","BACK UP","LEFT UP", "RIGHT UP"
-    };
 
 
     @Override
@@ -42,14 +37,22 @@ public class  confirmation_screen extends AppCompatActivity {
         textView_weight=findViewById(R.id.textView_weight);
         textView_weight.setText(""+Constant.weight);
         textView_hight.setText(""+Constant.height);
-        adapter=new confirmation_Adapter(confirmation_screen.this,imagess,imagess2,pose,pose2);
+        adapter=new confirmation_Adapter(confirmation_screen.this,imagess,imagess2,Constant.pose,Constant.pose2);
         viewPager.setAdapter(adapter);
+        Toast.makeText(this, "5"+Constant.cro_pose[5], Toast.LENGTH_SHORT).show();
 
     }
 
 
     public  void okk(View view){
         Intent myIntent = new Intent(confirmation_screen.this, measurement.class);
+
+        confirmation_screen.this.startActivity(myIntent);
+
+    }
+
+    public  void back(View view){
+        Intent myIntent = new Intent(confirmation_screen.this, photography_pages.class);
 
         confirmation_screen.this.startActivity(myIntent);
 
