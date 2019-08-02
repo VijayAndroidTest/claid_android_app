@@ -27,6 +27,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -122,8 +123,9 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         imageView=findViewById(R.id.imageView7);
         imageView.setImageResource(imageArray[Constant.pose_no]);
 
-
-
+        final ProgressBar progressBar;
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         session=randomString(30);
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -181,9 +183,8 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
             @Override
             public void onClick(View v) {
               //  capture.getBackground().setAlpha(0);
-                /*ProgressBar progressBar;
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.VISIBLE);*/
+
+
                 Toast.makeText(myContext, "Please Wait Photo Uploading....", Toast.LENGTH_SHORT).show();
 
                 TextView tv = (TextView) findViewById( R.id.textView );
@@ -515,6 +516,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         Camera.PictureCallback picture = new Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
+
 
                 String timeStamp = new SimpleDateFormat( "yyyyMMdd_HHmmss").format( new Date( ));
                //output_file_name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + Constant.pose_name + ".jpeg";
@@ -916,7 +918,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         float z = event.values[2];
         double angle = (Math.atan2(y, Math.sqrt(x*x+z*z))/ (Math.PI / 180));
         // av_ang.add(String.valueOf(roundTwoDecimals(angle)));
-        Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
         //ok((int) roundTwoDecimals(x));
         capture.setText("");
         capture.getBackground().setAlpha(0);
@@ -935,7 +937,7 @@ mAttitudeIndicator.setVisibility(View.VISIBLE);
           //  capture.setText("-"+roundTwoDecimals(angle));
             capture.setEnabled(false);
            // capture.setTextColor(R.color.colorwhite);
-           Toast.makeText(this, "sen x"+x +"  z"+z, Toast.LENGTH_SHORT).show();
+          // Toast.makeText(this, "sen x"+x +"  z"+z, Toast.LENGTH_SHORT).show();
 
         }
         else if(z>=0){
@@ -943,7 +945,7 @@ mAttitudeIndicator.setVisibility(View.VISIBLE);
           //  capture.setText(""+roundTwoDecimals(angle));
            capture.setEnabled(false);
             // capture.setTextColor(R.color.colorwhite);
-           Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
+          // Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
 
 
         }
@@ -959,7 +961,7 @@ mAttitudeIndicator.setVisibility(View.VISIBLE);
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-        Toast.makeText(myContext, "ss"+i, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(myContext, "ss"+i, Toast.LENGTH_SHORT).show();
 
     }
 
