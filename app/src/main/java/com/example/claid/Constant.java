@@ -49,6 +49,7 @@ public class Constant {
     public  static String img_path_neck_right="";
     public  static String img_path_neck_left="";
     public  static String img_path_neck_front="";
+    public  static float[] angle;
 
    public static   String[] imagess={
 

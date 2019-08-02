@@ -85,7 +85,7 @@ public class ItemFragment extends Fragment {
         textView.setText("" + bose[postion]);
         Constant.pose_name=bose[postion];
         imageView.setLayoutParams(layoutParams);
-//          Toast.makeText(container.getContext(), "cc"+Constant.cro_pose[postion]+ "pos  :"+postion, Toast.LENGTH_SHORT).show();
+//       Toast.makeText(container.getContext(), "cc"+Constant.cro_pose[postion]+ "pos  :"+postion, Toast.LENGTH_SHORT).show();
         // imageView.setImageURI(Uri.parse(String.valueOf(Constant.cro_pose[postion])));
         Picasso.with ( container.getContext() ).load (Constant.cro_pose[postion]).into (imageView);
         //imageView.setImageResource(Constant.cro_pose[postion]);

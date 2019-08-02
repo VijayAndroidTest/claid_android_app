@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-
+        Constant.vid_cam=0;
 requestStoragePermission();
 
         videoBG = (VideoView) findViewById(R.id.videoView);
@@ -204,7 +204,7 @@ requestStoragePermission();
             Constant.lgg_api = api_key[0];
             Constant.user_id=user_id[0];
           if(error[0].equals("0")){
-Constant.vid_cam=0;             // Toast.makeText(this, "登陸成功", Toast.LENGTH_SHORT).show();
+             // Toast.makeText(this, "登陸成功", Toast.LENGTH_SHORT).show();
               Intent myIntent = new Intent(MainActivity.this, Profile.class);
 
               MainActivity.this.startActivity(myIntent);

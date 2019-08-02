@@ -70,7 +70,7 @@ import org.json.JSONObject;
 import javax.net.ssl.HttpsURLConnection;
 //import javax.net.ssl.HttpsURLConnection;
 
-public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListener {
+public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener, Orientation.Listener{
     final String uploadFilePath = "";
     final String uploadFileName = "";
     private static final String TAG = "Test Camera";
@@ -101,6 +101,8 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
     public String userid="";
     private Bitmap bitmap1;
     private String output_file_name;
+    private Orientation mOrientation;
+    private AttitudeIndicator mAttitudeIndicator;
     private int[] imageArray =  {R.drawable.left_side_up, R.drawable.left_side,
             R.drawable.back, R.drawable.back_up,R.drawable.rght_side_up,R.drawable.rght_sidec,
             R.drawable.front_bose, R.drawable.front};
@@ -115,7 +117,8 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
         sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
         output_file_name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + Constant.pose_name + ".jpeg";
 
-
+       mOrientation = new Orientation(this);
+        mAttitudeIndicator = (AttitudeIndicator) findViewById(R.id.attitude_indicator);
         imageView=findViewById(R.id.imageView7);
         imageView.setImageResource(imageArray[Constant.pose_no]);
 
@@ -220,6 +223,49 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
 
 
         mCamera.startPreview();
+
+
+    }
+
+
+    public void ok(View view)
+    {
+
+
+        Toast.makeText(myContext, "Please Wait Photo Uploading....", Toast.LENGTH_SHORT).show();
+
+        TextView tv = (TextView) findViewById( R.id.textView );
+
+
+
+        if(count.equals(0)){
+            tv.setText( "Left Side Bose uploading..." );
+        }else if(count.equals(1)){
+            tv.setText( "Front Bose uploading..." );
+        }else if(count.equals(2)){
+            tv.setText( "Back Side Bose uploading..." );
+        }else if(count.equals(3)){
+            tv.setText( "Croauch Bose uploading..." );
+        }else if(count.equals(4)){
+            tv.setText( "Ride Side Bose uploading..." );
+        }
+
+
+        int camerasNumber = Camera.getNumberOfCameras();
+        if (camerasNumber > 1) {
+            //release the old camera instance
+            //switch camera, from the front and the back and vice versa
+
+            releaseCamera();
+            chooseCamera();
+        } else {
+
+        }
+
+
+        mCamera.takePicture( null, null, mPicture );
+
+        //dispatchTakePictureIntent();
 
 
     }
@@ -502,7 +548,7 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                     }*/
 
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    realImage.compress(Bitmap.CompressFormat.JPEG, 25, bytes);
+                    realImage.compress(Bitmap.CompressFormat.JPEG, 20, bytes);
                     FileOutputStream fo = new FileOutputStream(pictureFile);
                     fo.write( bytes.toByteArray() );
                     fo.close();
@@ -714,7 +760,14 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
                     pic_height=Integer.valueOf( res_str[1] );
                     Constant.pose_height = pic_height;
 
+                    Constant.vid_cam=1;
+                    mOrientation.stopListening();
 
+                    sensorManager.unregisterListener(this);
+                    Intent myIntent = new Intent(zoso_cam3.this, photography_pages.class);
+
+                    zoso_cam3.this.startActivity(myIntent);
+                    finish();
  /*
 
                     res_str=response_pixel.split("#");
@@ -770,10 +823,6 @@ public class zoso_cam3 extends AppCompatActivity  implements  SensorEventListene
 
                     }*/
 
-Constant.vid_cam=1;
-                    Intent myIntent = new Intent(zoso_cam3.this, photography_pages.class);
-
-                    zoso_cam3.this.startActivity(myIntent);
 
 
                     result=true;
@@ -856,7 +905,7 @@ Constant.vid_cam=1;
         return (Camera.PictureCallback) this;}
 
     @SuppressLint("ResourceAsColor")
-    @Override
+   @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType() != Sensor.TYPE_ACCELEROMETER){
             return;
@@ -867,31 +916,34 @@ Constant.vid_cam=1;
         float z = event.values[2];
         double angle = (Math.atan2(y, Math.sqrt(x*x+z*z))/ (Math.PI / 180));
         // av_ang.add(String.valueOf(roundTwoDecimals(angle)));
-        // Toast.makeText(this, "sen x"+x, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
         //ok((int) roundTwoDecimals(x));
-        capture.setText(""+roundTwoDecimals(angle));
-
+        capture.setText("");
+        capture.getBackground().setAlpha(0);
+mAttitudeIndicator.setVisibility(View.VISIBLE);
 
         if(roundTwoDecimals(angle) >=88){
-capture.setEnabled(true);
+            mAttitudeIndicator.setVisibility(View.INVISIBLE);
+            capture.setEnabled(true);
             capture.getBackground().setAlpha(250);
+            ;
             // capture.setText(""+roundTwoDecimals(angle));
             capture.setText("OK");
         }
         else if(z<=0) {
-            capture.getBackground().setAlpha(75);
-            capture.setText("-"+roundTwoDecimals(angle));
-          //  capture.setEnabled(false);
+            capture.getBackground().setAlpha(0);
+          //  capture.setText("-"+roundTwoDecimals(angle));
+            capture.setEnabled(false);
            // capture.setTextColor(R.color.colorwhite);
-         //   Toast.makeText(this, "sen x"+x +"  z"+z, Toast.LENGTH_SHORT).show();
+           Toast.makeText(this, "sen x"+x +"  z"+z, Toast.LENGTH_SHORT).show();
 
         }
         else if(z>=0){
-            capture.getBackground().setAlpha(100);
-            capture.setText(""+roundTwoDecimals(angle));
-          //  capture.setEnabled(false);
+            capture.getBackground().setAlpha(0);
+          //  capture.setText(""+roundTwoDecimals(angle));
+           capture.setEnabled(false);
             // capture.setTextColor(R.color.colorwhite);
-           // Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
+           Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
 
 
         }
@@ -907,6 +959,7 @@ capture.setEnabled(true);
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
+        Toast.makeText(myContext, "ss"+i, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -964,4 +1017,23 @@ capture.setEnabled(true);
         return Base64.encodeToString(imageBytes,Base64.DEFAULT);
     }
 
+    @Override
+    public void onOrientationChanged(float pitch, float roll) {
+        mAttitudeIndicator.setAttitude(pitch, roll);
+        Toast.makeText(myContext, "or"+Constant.angle+"  :"+roll, Toast.LENGTH_SHORT).show();
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mOrientation.startListening(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mOrientation.stopListening();
+    }
 }

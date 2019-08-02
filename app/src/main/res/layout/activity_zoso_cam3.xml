@@ -8,12 +8,29 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.claid.AttitudeIndicator
+            android:id="@+id/attitude_indicator"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_gravity="center"
+android:layout_marginBottom="@dimen/_5sdp"
+            android:onClick="ok" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_80sdp"
         android:orientation="vertical">
 
         <LinearLayout
+
             android:id="@+id/cPreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -43,17 +60,18 @@
             />
 
         <Button
-            android:textColor="@color/colorwhite"
+
+            android:textColor="#000000"
 
             android:id="@+id/btnCam"
 
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
             android:layout_gravity="center"
 
 
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@drawable/button_icon"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@drawable/ic_camera_btn"
 
 
             />
