@@ -140,7 +140,7 @@ public class ozos_cam extends AppCompatActivity {
 
         }
         if (mimg_no == 8) {
-            Constant.pos_8 = 1;
+           // Constant.pos_8 = 1;
            // Constant.img_path_8 = path;
 
         }

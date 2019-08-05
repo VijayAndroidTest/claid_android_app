@@ -55,24 +55,32 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
         details();
     }
 
-    void details () {
+    void details ()
+    {
 
-        //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
+
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.get_child_profile, new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
-               //  Toast.makeText (chilid_history.this, ""+response, Toast.LENGTH_LONG ).show ( );
+            public void onResponse(String response)
+            {
 
-                try {
+                 Log.e("res",response);
+
+                try
+                {
                     details_json( response);
-                } catch (JSONException e) {
+                }
+                catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
 
             }
-        }, new Response.ErrorListener() {
+        }, new Response.ErrorListener()
+        {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
 
                 // Toast.makeText(MainActivity.this, "無效的用戶名或密碼", Toast.LENGTH_SHORT).show();
 
@@ -81,7 +89,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Authorization", " Bearer "+Constant.lgg_api);
                 return headers;
@@ -89,7 +98,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("order_id","8" );
@@ -102,12 +112,11 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
     }
 
 
-    private void details_json(String json) throws JSONException {
+    private void details_json(String json) throws JSONException
+    {
 
         JSONObject jsonObj = new JSONObject(json);
         JSONArray jsonArray = jsonObj.getJSONArray("userdata");
-
-       // Toast.makeText(this, "img"+jsonArray, Toast.LENGTH_SHORT).show();
         name=new String[jsonArray.length()];
         age=new String[jsonArray.length()];
         sex=new String[jsonArray.length()];
@@ -130,7 +139,7 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
             id[i]=obj.getString("userid");
             date[i]=obj.getString("date");
 
-            // Toast.makeText(this, "vv", Toast.LENGTH_SHORT).show();
+
 
         }
         json_val=jsonArray.length();
@@ -144,24 +153,7 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
             @Override
             public void create(SwipeMenu menu) {
-                // create "open" item
-            /*    SwipeMenuItem openItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0x00, 0x66,
-                        0xff)));
-                // set item width
-                openItem.setWidth(170);
-                // set item title
-                openItem.setTitle("Open");
-                // set item title fontsize
-                openItem.setTitleSize(18);
-                // set item title font color
-                openItem.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(openItem);*/
 
-                // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
                         getApplicationContext());
                 // set item background
@@ -182,17 +174,16 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                switch (index) {
+                switch (index)
+                {
                     case 0:
                        String sid=id[position];
                        delete_child(sid);
 
-                       // Toast.makeText(chilid_history.this, "id"+sid, Toast.LENGTH_SHORT).show();
-                       // Log.d(TAG, "onMenuItemClick: clicked item " + index+"p"+position);
+
                         break;
                     case 1:
-                       // Toast.makeText(chilid_history.this, ""+index+"p"+position, Toast.LENGTH_SHORT).show();
-                       // Log.d(TAG, "onMenuItemClick: clicked item " + index+"p"+position);
+
                         break;
                 }
                 // false : close the menu; true : not close the menu
@@ -205,7 +196,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+    {
         Intent myIntent = new Intent(chilid_history.this, measurement.class);
         chilid_history.this.startActivity(myIntent);
         Constant.mchild_id=id[i];
@@ -241,7 +233,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
         @Override
-        public View getView(final int position, View convertView, final ViewGroup parent) {
+        public View getView(final int position, View convertView, final ViewGroup parent)
+        {
 
             convertView = null;
 
@@ -264,30 +257,6 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
 
-
-
-            /* convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ViewGroup vg=(ViewGroup) view;
-                        RatingBar   mrating =vg.findViewById(R.id.ratingBar);
-                        mrating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                            public void onRatingChanged(RatingBar ratingBar, float rating,
-                                                        boolean fromUser) {
-
-
-                            }
-                        });
-
-
-
-
-
-                    // RatingBar   mrating =vg.findViewById(R.id.ratingBar);
-                        Toast.makeText(Star_rating.this, "Rat"+mrating.getRating(), Toast.LENGTH_SHORT).show();
-                    }
-                });*/
-
             }
 
             return convertView;
@@ -298,7 +267,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
     }
-    public  void back(View view){
+    public  void back(View view)
+    {
 
         Intent myIntent = new Intent(chilid_history.this, Profile.class);
         chilid_history.this.startActivity(myIntent);
@@ -307,10 +277,12 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
 
-    void delete_child (final String cid) {
+    void delete_child (final String cid)
+    {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.delete_child, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.delete_child, new Response.Listener<String>()
+        {
             @Override
             public void onResponse(String response) {
                 details();
@@ -323,9 +295,11 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
                 }
 
             }
-        }, new Response.ErrorListener() {
+        }, new Response.ErrorListener()
+        {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
 
                 // Toast.makeText(MainActivity.this, "無效的用戶名或密碼", Toast.LENGTH_SHORT).show();
 
@@ -334,7 +308,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Authorization", " Bearer "+Constant.lgg_api);
                 return headers;
@@ -342,7 +317,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
 
 
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("child_id",cid );

@@ -40,6 +40,8 @@
                         android:textColor="@color/colorwhite"
                         android:background="@drawable/bose_bg"
                         android:id="@+id/button7"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_width="@dimen/_180sdp"
                         android:layout_marginRight="@dimen/_5sdp"
                         android:layout_marginLeft="@dimen/_15sdp"
@@ -48,6 +50,7 @@
                         />
 
                     <Button
+                        android:visibility="gone"
                         android:layout_marginRight="@dimen/_15sdp"
                         android:id="@+id/button4"
                         android:layout_width="@dimen/_50sdp"

@@ -12,11 +12,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
     <application
-
         android:largeHeap="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -30,7 +29,9 @@
         <activity android:name=".three_d_body" />
         <activity android:name=".zoso_cam_2" />
         <activity android:name=".ozos_cam" />
-        <activity android:name=".video_view_url" />
+        <activity android:name=".video_view_url" >
+
+         </activity>
         <activity android:name=".signup" />
         <activity android:name=".model_3d" />
         <activity android:name=".Messages" />
@@ -48,6 +49,10 @@
             android:name=".MainActivity"
             android:isScrollContainer="true"
             android:windowSoftInputMode="adjustResize|stateHidden">
+            settings.setAllowContentAccess(true);
+            settings.setDomStorageEnabled(true);
+            android:hardwareAccelerated="true"
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

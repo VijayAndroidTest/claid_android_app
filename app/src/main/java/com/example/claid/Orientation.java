@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -72,6 +73,7 @@ public class Orientation implements SensorEventListener {
     }
     if (event.sensor == mRotationSensor) {
       Constant.angle=event.values;
+      //Log.e("sen", String.valueOf(event.values));
       updateOrientation(event.values);
     }
   }
@@ -118,7 +120,8 @@ public class Orientation implements SensorEventListener {
     // Convert radians to degrees
     float pitch = orientation[1] * -57;
     float roll = orientation[2] * -57;
-
+   // Log.e("o1:", String.valueOf(orientation[1] * -57));
+  //  Log.e("02:", String.valueOf(orientation[2] * -57));
     mListener.onOrientationChanged(pitch, roll);
   }
 }

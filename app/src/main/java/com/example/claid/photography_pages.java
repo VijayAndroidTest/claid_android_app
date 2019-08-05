@@ -24,7 +24,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.VideoView;
@@ -54,7 +56,7 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class photography_pages extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnTouchListener {
+public class photography_pages extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnTouchListener, CompoundButton.OnCheckedChangeListener {
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapter adapter;
     private ArrayList<Game> games;
@@ -64,7 +66,8 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     private static final int CAMERA_REQUEST = 1888;
     private String pathToFile;
     VideoView videoView;
-    Button button_play,button_cam,button_video,button_help;
+    Button button_play,button_cam,button_video,button_help,button_next;
+    Switch switch_tc;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String Name = "nameKey";
@@ -115,7 +118,20 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         button_help=findViewById(R.id.help3);
         button_help.setVisibility(View.VISIBLE);
         button_cam=findViewById(R.id.button_camara);
+        button_next=findViewById(R.id.button9);
+        button_next.setTextColor(R.color.hintcolor);
         button_video=findViewById(R.id.button_video);
+        switch_tc=findViewById(R.id.switch1);
+        switch_tc.setOnCheckedChangeListener(this);
+
+        try {
+            sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            String Astatus = sharedpreferences.getString("name", "");
+
+            Constant.demo_viediostates = Integer.parseInt(Astatus);
+
+        }catch (Exception e){}
+        Demo_video();
 //      coverFlow.setVisibility(View.GONE);
        // log();
 
@@ -131,30 +147,12 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         button_video.setBackgroundResource(R.drawable.video_on_onclick);
         button_video.getBackground().setAlpha(250);
         button_cam.getBackground().setAlpha(100);
+        button_next.getBackground().setAlpha(100);
+        button_next.setEnabled(false);
         pager.setVisibility(View.GONE);}
         else {
 log();
 
-           /* pager.setPageMargin(-pageMargin);
-            cpaadapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
-            pager.setAdapter(cpaadapter);
-            cpaadapter.notifyDataSetChanged();
-            pager.addOnPageChangeListener(cpaadapter);
-            pager.setCurrentItem(FIRST_PAGE);
-            pager.setOffscreenPageLimit(3);
-
-
-
-                linearLayout.setVisibility(View.GONE);
-                button_play.setVisibility(View.GONE);
-                linearLayout.setVisibility(View.GONE);
-                videoView.setVisibility(View.GONE);
-                button_help.setVisibility(View.INVISIBLE);
-                pager.setVisibility(View.VISIBLE);
-                button_video.setBackgroundResource(R.drawable.video_onclick);
-                button_video.getBackground().setAlpha(175);
-                button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
-                button_cam.getBackground().setAlpha(250);*/
 
         }
 
@@ -162,14 +160,9 @@ log();
 
             videoView.setOnTouchListener(this);
 
-try {
-    sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-    String Astatus = sharedpreferences.getString("name", "");
 
-    Constant.demo_viediostates = Integer.parseInt(Astatus);
-    }catch (Exception e){}
 
-            Demo_video();
+
 
 
 
@@ -213,14 +206,18 @@ try {
          {
 
               Intent myIntent = new Intent(photography_pages.this, Profile.class);
-              photography_pages.this.startActivity(myIntent); }
-              public void help_video_url(View view){
+              photography_pages.this.startActivity(myIntent);
+         }
+              public void help_video_url(View view)
+              {
 
                 Intent myIntent = new Intent(photography_pages.this, video_view_url.class);
                 photography_pages.this.startActivity(myIntent);
 
 
-    }
+                }
+
+
 
 
 
@@ -417,7 +414,7 @@ try {
     void log () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        Toast.makeText(this, "c", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, "c", Toast.LENGTH_SHORT).show();
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.getcarousel, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -514,6 +511,36 @@ if(Constant.vid_cam == 1) {
 
 }
 
+    }
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+if(switch_tc.isChecked()){
+
+
+    if(Constant.pos_0 == 1 && Constant.pos_1 ==1 && Constant.pos_2 == 1 && Constant.pos_3 ==1 && Constant.pos_4 == 1 && Constant.pos_5 ==1
+    && Constant.pos_6 == 1 && Constant.pos_7 ==1)
+    {
+        button_next.getBackground().setAlpha(250);
+        button_next.setEnabled(true);
+
+    }
+    else {
+        Toast.makeText(this, "All Pose's Are Mandatory", Toast.LENGTH_SHORT).show();
+        switch_tc.setChecked(false);
+       }
+
+
+
+
+}else {
+    button_next.getBackground().setAlpha(100);
+    button_next.setEnabled(false);
+    button_next.setTextColor(R.color.hintcolor);
+
+
+}
     }
 }
 

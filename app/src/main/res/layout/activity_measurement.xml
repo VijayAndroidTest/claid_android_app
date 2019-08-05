@@ -28,6 +28,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:onClick="back"
                         android:id="@+id/button10"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"

@@ -101,8 +101,10 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
     public Integer count=0;
     public String userid="";
     private Bitmap bitmap1;
+    ProgressBar progressBar;
     private String output_file_name;
     private Orientation mOrientation;
+
     private AttitudeIndicator mAttitudeIndicator;
     private int[] imageArray =  {R.drawable.left_side_up, R.drawable.left_side,
             R.drawable.back, R.drawable.back_up,R.drawable.rght_side_up,R.drawable.rght_sidec,
@@ -118,14 +120,13 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
         output_file_name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + Constant.pose_name + ".jpeg";
 
-       mOrientation = new Orientation(this);
+         mOrientation = new Orientation(this);
         mAttitudeIndicator = (AttitudeIndicator) findViewById(R.id.attitude_indicator);
         imageView=findViewById(R.id.imageView7);
         imageView.setImageResource(imageArray[Constant.pose_no]);
 
-        final ProgressBar progressBar;
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar = findViewById(R.id.progressBar);
+       // progressBar.setVisibility(View.VISIBLE);
 
         session=randomString(30);
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -140,7 +141,6 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         }
         getWindow().addFlags( WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON );
         myContext = this;
-
         mCamera = Camera.open();
         mCamera.setDisplayOrientation( 90 );
 
@@ -177,13 +177,12 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         cameraPreview = (LinearLayout) findViewById( R.id.cPreview );
         mPreview = new CameraPreview( myContext, mCamera );
         cameraPreview.addView( mPreview );
-
         capture = (Button) findViewById( R.id.btnCam );
         capture.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               //  capture.getBackground().setAlpha(0);
-
+         progressBar.setVisibility(View.VISIBLE);
 
                 Toast.makeText(myContext, "Please Wait Photo Uploading....", Toast.LENGTH_SHORT).show();
 
@@ -232,6 +231,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
     public void ok(View view)
     {
 
+        progressBar.setVisibility(View.VISIBLE);
 
         Toast.makeText(myContext, "Please Wait Photo Uploading....", Toast.LENGTH_SHORT).show();
 
@@ -254,9 +254,6 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
         int camerasNumber = Camera.getNumberOfCameras();
         if (camerasNumber > 1) {
-            //release the old camera instance
-            //switch camera, from the front and the back and vice versa
-
             releaseCamera();
             chooseCamera();
         } else {
@@ -266,7 +263,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
         mCamera.takePicture( null, null, mPicture );
 
-        //dispatchTakePictureIntent();
+
 
 
     }
@@ -423,21 +420,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                 Log.d( "Height", "Height:" + h );
                 parameters.setPictureSize( w, h );
-                // int customZoom=-90;
-                //parameters.setZoom( parameters.getMaxZoom() );
 
-                //Set Rotation
-               /* if(Build.MODEL.compareTo("Moto G (5S)")!=0 && Build.MODEL.compareTo("Nokia 7.1")!=0 && Build.MODEL.compareTo("ASUS_X00TD")!=0)
-                {
-                    parameters.setRotation( 90 );
-                }
-                else
-                {
-                    parameters.setRotation(180 );
-                }
-                */
-                //parameters.setJpegQuality( 90 );
-                //Set Rotation
                 Log.d( "Max Zoom", "Max Zoom:" + parameters.getMaxZoom() );
                 mCamera.setParameters( parameters );
                 /////////////////////////////////////////////
@@ -449,9 +432,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         } else {
             int cameraId = findBackFacingCamera();
             if (cameraId >= 0) {
-                //open the backFacingCamera
-                //set a picture callback
-                //refresh the preview
+
                 mCamera = Camera.open( cameraId );
                 ///////////////////////////////////////////////
                 Camera.Parameters parameters = mCamera.getParameters();
@@ -469,20 +450,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                 Log.d( "Height", "Height:" + h );
                 parameters.setPictureSize( w, h );
-                // int customZoom=-90;
-                //parameters.setZoom( parameters.getMaxZoom() );
 
-                //Set Rotation
-               /* if(Build.MODEL.compareTo("Moto G (5S)")!=0 && Build.MODEL.compareTo("Nokia 7.1")!=0 && Build.MODEL.compareTo("ASUS_X00TD")!=0)
-                {
-                    parameters.setRotation( 90 );
-                }
-                else
-                {
-                    parameters.setRotation(180);
-                }*/
-                //parameters.setJpegQuality( 90 );
-                //Set Rotation
                 Log.d( "Max Zoom", "Max Zoom:" + parameters.getMaxZoom() );
                 mCamera.setParameters( parameters );
                 /////////////////////////////////////////////////
@@ -498,7 +466,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
     @Override
     protected void onPause() {
         super.onPause();
-        //when on Pause, release camera in order to be used from other applications
+
         releaseCamera();
     }
 
@@ -647,14 +615,14 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                 BufferedWriter httpRequestBodyWriter =
                         new BufferedWriter(new OutputStreamWriter(outputStreamToRequestBody));
 
-// Include value from the Image text  in the post data
+
                 httpRequestBodyWriter.write("\n\n--" + boundaryString + "\n");
                 httpRequestBodyWriter.write("Content-Disposition: form-data; name=\"imagename\"");
                 httpRequestBodyWriter.write("\n\n");
                 httpRequestBodyWriter.write(imageName);
 
 
-// Include value from the Image text  in the post data
+
                 httpRequestBodyWriter.write("\n\n--" + boundaryString + "\n");
                 httpRequestBodyWriter.write("Content-Disposition: form-data; name=\"information\"");
                 httpRequestBodyWriter.write("\n\n");
@@ -681,7 +649,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
 
 
-// Include the section to describe the file
+
                 httpRequestBodyWriter.write("\n--" + boundaryString + "\n");
                 httpRequestBodyWriter.write("Content-Disposition: form-data;"
                         + "name=\"uploaded_file\";"
@@ -689,7 +657,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                         + "\nContent-Type: text/plain\n\n");
                 httpRequestBodyWriter.flush();
 
-// Write the actual file contents
+
                 FileInputStream inputStreamToLogFile = new FileInputStream(sourceFileUri);
 
 
@@ -700,7 +668,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                 outputStreamToRequestBody.flush();
 
-// Mark the end of the multipart http request
+
                 httpRequestBodyWriter.write("\n--" + boundaryString + "--\n");
                 httpRequestBodyWriter.flush();
 
@@ -729,6 +697,8 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                         + serverResponseMessage + ": " + serverResponseCode);
 
                 if(serverResponseCode == 200){
+
+
                     //showToast("File Upload Complete.");
                     Log.i("Response", "Response : "
                             + conn);
@@ -770,12 +740,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                     zoso_cam3.this.startActivity(myIntent);
                     finish();
- /*
 
-                    res_str=response_pixel.split("#");
-                    showresultView(response_pixel);
-                    pic_height=Integer.valueOf( res_str[1] );
-*/
                     String cmp_res=res_str[0].trim();
                     Log.d( TAG, "pic_height: " +Integer.valueOf( res_str[1] ));
                     Log.d( TAG, "cmp_res: " +cmp_res);
@@ -829,11 +794,22 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                     result=true;
                     /*ProgressBar progressBar;
-                    progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                    progressBar.setVisibility(View.GONE);*/
-                }else{
-                    //_loginButton.setEnabled(true);
+                    progressBar = (ProgressBar) findViewById(R.id.progressBar);*/
 
+                    progressBar.setVisibility(View.GONE);
+                }else{
+                    Constant.vid_cam = 1;
+
+                    Toast.makeText(getApplicationContext(),"Retake Photo !!",Toast.LENGTH_SHORT).show();
+
+                    Intent myIntent = new Intent(zoso_cam3.this, photography_pages.class);
+
+                    zoso_cam3.this.startActivity(myIntent);
+                    finish();
+                    //_loginButton.setEnabled(true);
+                    ProgressBar progressBar;
+                    progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                    progressBar.setVisibility(View.GONE);
                     result=false;
                 }
                 //close the streams //
@@ -881,6 +857,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         Log.e("showresultView", "showresultView: " + text);
         TextView tv2 = (TextView) findViewById(R.id.ResultView);
         tv2.setText(text);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
 
@@ -922,7 +899,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         //ok((int) roundTwoDecimals(x));
         capture.setText("");
         capture.getBackground().setAlpha(0);
-mAttitudeIndicator.setVisibility(View.VISIBLE);
+        mAttitudeIndicator.setVisibility(View.VISIBLE);
 
         if(roundTwoDecimals(angle) >=88){
             mAttitudeIndicator.setVisibility(View.INVISIBLE);
@@ -930,7 +907,7 @@ mAttitudeIndicator.setVisibility(View.VISIBLE);
             capture.getBackground().setAlpha(250);
             ;
             // capture.setText(""+roundTwoDecimals(angle));
-            capture.setText("OK");
+          //  capture.setText("OK");
         }
         else if(z<=0) {
             capture.getBackground().setAlpha(0);
@@ -1022,7 +999,7 @@ mAttitudeIndicator.setVisibility(View.VISIBLE);
     @Override
     public void onOrientationChanged(float pitch, float roll) {
         mAttitudeIndicator.setAttitude(pitch, roll);
-        Toast.makeText(myContext, "or"+Constant.angle+"  :"+roll, Toast.LENGTH_SHORT).show();
+
 
     }
 

@@ -41,18 +41,13 @@ public class measurement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-      //  getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-              //  WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_measurement);
-
         listView=findViewById(R.id.listview);
         button_3d=findViewById(R.id.button4);
         button_measurement=findViewById(R.id.button6);
         linearLayout_ll3d=findViewById(R.id.ll3d);
         details();
-
         button_3d.setBackgroundColor(getResources().getColor(R.color.button_shado));
-
         button_measurement.getBackground().setAlpha(250);
         button_3d.getBackground().setAlpha(150);
         button_3d.setTextColor(getResources().getColor(R.color.button_shado));
@@ -135,7 +130,14 @@ json_val=jsonArray.length();
 
 
 
+    public  void back(View view){
 
+
+
+        Intent myIntent = new Intent(measurement.this, confirmation_screen.class);
+
+        measurement.this.startActivity(myIntent);
+    }
 
 
     public  void chat(View view){
@@ -143,6 +145,14 @@ json_val=jsonArray.length();
 
 
         Intent myIntent = new Intent(measurement.this, Messages.class);
+
+        measurement.this.startActivity(myIntent);
+    }
+    public  void confirm(View view){
+
+
+
+        Intent myIntent = new Intent(measurement.this, MainActivity.class);
 
         measurement.this.startActivity(myIntent);
     }
@@ -214,31 +224,6 @@ json_val=jsonArray.length();
                 measure.setText(mvalues[position]);
                Picasso.with ( measurement.this ).load ( url_path[position] ).into ( img);
 
-
-
-
-
-               /* convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ViewGroup vg=(ViewGroup) view;
-                        RatingBar   mrating =vg.findViewById(R.id.ratingBar);
-                        mrating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                            public void onRatingChanged(RatingBar ratingBar, float rating,
-                                                        boolean fromUser) {
-
-
-                            }
-                        });
-
-
-
-
-
-                    // RatingBar   mrating =vg.findViewById(R.id.ratingBar);
-                        Toast.makeText(Star_rating.this, "Rat"+mrating.getRating(), Toast.LENGTH_SHORT).show();
-                    }
-                });*/
 
             }
 

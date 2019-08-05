@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     Button button_save,button_cam,button_female,button_male;
     TextView textView_male,textView_female;
     String sex="male";
-
+ProgressBar progressBar;
 
 
     @Override
@@ -55,6 +56,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_profile);
+
         Button button_back=findViewById(R.id.button8);
         button_save=findViewById(R.id.button_save);
         button_cam=findViewById(R.id.button_camara);
@@ -67,6 +69,9 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         button_save.setTextColor(Color.parseColor("#8A8687"));
         textView_female.setTextColor(Color.parseColor("#8A8687"));
         button_female.getBackground().setAlpha(100);
+        button_save.setEnabled(true);
+        progressBar=findViewById(R.id.progressBar3);
+        progressBar.setVisibility(View.GONE);
 
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
         final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
@@ -78,7 +83,6 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         editText_height=findViewById(R.id.editText_height);
         editText_weight=findViewById(R.id.editText_weight);
         editText_name.setOnClickListener(this);
-
         editText_name.addTextChangedListener(new TextWatcher() {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -102,11 +106,11 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
         if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
 
-
-
             button_save.getBackground().setAlpha(250);
             button_save.setTextColor(Color.parseColor("#ffffff"));
             button_save.setEnabled(true);
+
+
         }
         else {
             button_save.getBackground().setAlpha(50);
@@ -137,6 +141,13 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
             editText_weight.setBackgroundResource(edit_text_normal_bg);
             editText_height.setBackgroundResource(edit_text_normal_bg);
             editText_age.setBackgroundResource(edit_text_focuses_bg);
+            try{
+                if(100 >= Integer.parseInt(editText_age.getText().toString())){}
+                else {
+                    editText_age.setText("");
+                    Toast.makeText(Profile.this, "Max age 100", Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){ }
 
 
             if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
@@ -179,7 +190,13 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
             editText_age.setBackgroundResource(edit_text_normal_bg);
             editText_weight.setBackgroundResource(edit_text_normal_bg);
             editText_height.setBackgroundResource(edit_text_focuses_bg);
-
+          try{
+            if(198 >= Integer.parseInt(editText_height.getText().toString())){}
+            else {
+                editText_height.setText("");
+                Toast.makeText(Profile.this, "Max height 198 Cm", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){ }
 
             if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
 
@@ -221,7 +238,13 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
                 editText_age.setBackgroundResource(edit_text_normal_bg);
                 editText_height.setBackgroundResource(edit_text_normal_bg);
                 editText_weight.setBackgroundResource(edit_text_focuses_bg);
-
+                try{
+                if(150 >= Integer.parseInt(editText_weight.getText().toString())){}
+                else {
+                    editText_weight.setText("");
+                    Toast.makeText(Profile.this, "Max weight 150 Kg", Toast.LENGTH_SHORT).show();
+                }
+                }catch (Exception e){ }
 
                 if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
 
@@ -446,7 +469,8 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.crear_child, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               Toast.makeText(Profile.this, "child"+response, Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+             //  Toast.makeText(Profile.this, "child"+response, Toast.LENGTH_SHORT).show();
                 try {
                     details_json2("["+response+"]");
                 } catch (JSONException e) {
@@ -456,6 +480,11 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
                 button_cam.setEnabled(true);
                 button_save.setTextColor(Color.parseColor("#00ffde"));
                 button_save.setText("Save");
+                editText_age.setEnabled(false);
+                editText_height.setEnabled(false);
+                editText_name.setEnabled(false);
+                editText_weight.setEnabled(false);
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -512,16 +541,18 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     }
 
     public void save(View view){
+        progressBar.setVisibility(View.VISIBLE);
 
         Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blinking_animation);
         button_save.startAnimation(startAnimation);
         updat();
+        button_save.setEnabled(false);
     }
 
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "22", Toast.LENGTH_SHORT).show();
+
 
     }
 

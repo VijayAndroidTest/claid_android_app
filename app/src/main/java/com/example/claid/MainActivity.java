@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int STORAGE_PERMISSION_CODE = 2342;
     Button button_go;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
       getSupportActionBar().hide();
@@ -58,15 +59,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Constant.vid_cam=0;
-requestStoragePermission();
+        requestStoragePermission();
 
         videoBG = (VideoView) findViewById(R.id.videoView);
         linearLayout=findViewById(R.id.linearlayout);
         linearLayout.setGravity(Gravity.CENTER );
         editText_password= findViewById(R.id.editText_pass);
         editText_username=findViewById(R.id.editText_user);
+
         progressBar=findViewById(R.id.progressBar2);
         button_go=findViewById(R.id.button_go);
+        progressBar.setVisibility(View.GONE);
 
         Uri uri = Uri.parse("android.resource://" // First start with this,
                 + getPackageName()
@@ -120,6 +123,7 @@ requestStoragePermission();
     public void ok(View view)
 
     {
+        progressBar.setVisibility(View.VISIBLE);
         button_go.animate().rotation(button_go.getRotation()+180).start();
         log();
 
@@ -152,7 +156,8 @@ requestStoragePermission();
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               // Toast.makeText (MainActivity.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
+                progressBar.setVisibility(View.GONE);
+               //Toast.makeText (MainActivity.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
 
                 try {
                     log_json("["+response+"]");
@@ -186,24 +191,31 @@ requestStoragePermission();
     }
 
 
-    private void log_json(String json) throws JSONException {
+    private void log_json(String json) throws JSONException
+    {
 
         JSONArray jsonArray = new JSONArray(json);
         error = new String[jsonArray.length()];
         api_key = new String[jsonArray.length()];
         user_id = new String[jsonArray.length()];
         String[] date = new String[jsonArray.length()];
-        for (int i = 0; i < jsonArray.length(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
             JSONObject obj = jsonArray.getJSONObject(i);
             error[i] = obj.getString("error");
             api_key[i] = obj.getString("access_token");
+            try
+            {
             user_id[i]=obj.getString("user_id");
+            }
+            catch (Exception e){}
         }
         try {
             Constant.lgg_api = api_key[0];
             Constant.lgg_api = api_key[0];
             Constant.user_id=user_id[0];
-          if(error[0].equals("0")){
+          if(error[0].equals("0"))
+          {
              // Toast.makeText(this, "登陸成功", Toast.LENGTH_SHORT).show();
               Intent myIntent = new Intent(MainActivity.this, Profile.class);
 
@@ -211,15 +223,17 @@ requestStoragePermission();
 
 
           }
-          else {
-              Toast.makeText(this, "登陸成功", Toast.LENGTH_SHORT).show();
-          }
-            // Toast.makeText ( this, "vv"+constant.sms_states, Toast.LENGTH_SHORT ).show ( );
+              else
+                  {
+                  Toast.makeText(this, "登陸成功", Toast.LENGTH_SHORT).show();
+                  }
+                // Toast.makeText ( this, "vv"+constant.sms_states, Toast.LENGTH_SHORT ).show ( );
 
-        }catch (Exception e){
-
-           Toast.makeText(this, "Error Code : Msg-201 ", Toast.LENGTH_SHORT).show();
         }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "Error Code : Msg-201 ", Toast.LENGTH_SHORT).show();
+            }
 
 
     }
@@ -230,20 +244,16 @@ requestStoragePermission();
             return;
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            //If the user has denied the permission previously your code will come to this block
-            //Here you can explain why you need this permission
-            //Explain here why you need this permission
+
         }
-        //And finally ask for the permission
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return;
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            //If the user has denied the permission previously your code will come to this block
-            //Here you can explain why you need this permission
-            //Explain here why you need this permission
+
         }
         //And finally ask for the permission
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
@@ -252,16 +262,20 @@ requestStoragePermission();
 
     //This method will be called when the user will tap on allow or deny
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
 
         //Checking the request code of our request
-        if (requestCode == STORAGE_PERMISSION_CODE) {
+        if (requestCode == STORAGE_PERMISSION_CODE)
+        {
 
             //If permission is granted
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
                 //Displaying a toast
                 Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
-            } else {
+            } else
+                {
                 //Displaying another toast if permission is not granted
                 Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
             }

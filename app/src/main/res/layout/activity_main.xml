@@ -37,7 +37,7 @@
             >
 
             <ProgressBar
-                android:visibility="gone"
+
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_200sdp"
                 android:id="@+id/progressBar2"

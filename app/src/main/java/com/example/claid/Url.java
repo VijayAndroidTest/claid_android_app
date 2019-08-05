@@ -16,7 +16,7 @@ public class Url {
     public static final String get_child_profile=COMMON+"getchildprofile";
     public static final String delete_child=COMMON+"deletechildprofile";
     public static final String getcarousel="https://ozosmatrix.com/claid_revamp/v2/api/getcarousel";
-    public static final String demo_video=COMMON+"http://ozosmatrix.com/claidweb/public/videos/t_video6280277492913668182.mp4";
+    public static final String demo_video=COMMON+"https://ozosmatrix.com/claid_revamp/v2/public/videos/t_video6280277492913668182.mp4";
 
 
 

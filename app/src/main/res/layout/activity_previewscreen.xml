@@ -70,6 +70,7 @@ android:textSize="@dimen/_18sdp"
             app:srcCompat="@mipmap/back" />
 
         <Button
+            android:visibility="gone"
             android:background="@drawable/btn"
             android:id="@+id/button19"
             android:layout_width="@dimen/_175sdp"

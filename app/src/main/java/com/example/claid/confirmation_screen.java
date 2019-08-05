@@ -27,7 +27,10 @@ public class  confirmation_screen extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
+
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -39,12 +42,13 @@ public class  confirmation_screen extends AppCompatActivity {
         textView_hight.setText(""+Constant.height);
         adapter=new confirmation_Adapter(confirmation_screen.this,imagess,imagess2,Constant.pose,Constant.pose2);
         viewPager.setAdapter(adapter);
-        Toast.makeText(this, "5"+Constant.cro_pose[5], Toast.LENGTH_SHORT).show();
+
 
     }
 
 
-    public  void okk(View view){
+    public  void okk(View view)
+    {
         Intent myIntent = new Intent(confirmation_screen.this, measurement.class);
 
         confirmation_screen.this.startActivity(myIntent);

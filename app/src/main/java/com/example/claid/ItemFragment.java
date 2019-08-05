@@ -69,7 +69,7 @@ public class ItemFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         if (container == null) {
             return null;
         }
@@ -90,36 +90,40 @@ public class ItemFragment extends Fragment {
         Picasso.with ( container.getContext() ).load (Constant.cro_pose[postion]).into (imageView);
         //imageView.setImageResource(Constant.cro_pose[postion]);
         Constant.pose_no = postion;
-       // Toast.makeText(container.getContext(), "cc"+postion, Toast.LENGTH_SHORT).show();
 
 
 
-        //imageView.setImageURI(Uri.parse(String.valueOf(imageArray[postion])));
-        //  imageView.setImageURI(Uri.parse(String.valueOf(games.get(postion))));
-       // imageView.setImageURI(Uri.parse("/storage/emulated/0/Pictures/20190422_1630101538136172347905772.jpg"));
 
 
-       // imageView.setImageBitmap(month.get(0));
-
-        //imageView.setImageDrawable(getResources().getDrawable(imageArray[postion]));
-
-        //handling click event
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Constant.pos_1=1;
-                Log.d( "Width", "Width:" +bose[postion]);
-                Constant.pose_name=bose[postion];
-                Constant.pose_no=postion;
-                Intent intent = new Intent(getActivity(), zoso_cam3.class);
-                //intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
-                startActivity(intent);
+
+
+                pose_val(postion);
+
+                if(Constant.pos_0 == 1) {
+
+
+                    Log.d("Width", "Width:" + bose[postion]);
+                    Constant.pose_name = bose[postion];
+                    Constant.pose_no = postion;
+                    Intent intent = new Intent(getActivity(), zoso_cam3.class);
+                    //intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
+                    startActivity(intent);}
+                     else {
+
+                        Toast.makeText(container.getContext(), "First You Take Left Side Poses Mandatory", Toast.LENGTH_SHORT).show();
+
+
+                    }
 
 
 
 
             }
         });
+
 
         root.setScaleBoth(scale);
 
@@ -134,6 +138,65 @@ public class ItemFragment extends Fragment {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
+    }
+
+
+    void pose_val(int mimg_no){
+
+
+        if (mimg_no == 0) {
+            Constant.pos_0 = 1;
+            // Constant.img_path_1= path;
+
+        }
+        if (mimg_no == 1) {
+            Constant.pos_1 = 1;
+            // Constant.img_path_2 = path;
+
+        }
+        if (mimg_no == 2) {
+
+
+            Constant.pos_2 = 1;
+            // Constant.img_path_3 = path;
+
+
+        }
+
+
+        if (mimg_no == 3) {
+            Constant.pos_3 = 1;
+            // Constant.img_path_4= path;
+
+        }
+        if (mimg_no == 4) {
+            Constant.pos_4 = 1;
+            //  Constant.img_path_5 = path;
+
+
+        }
+        if (mimg_no == 5) {
+
+
+            Constant.pos_5 = 1;
+            // Constant.img_path_6 = path;
+
+
+        }
+
+
+        if (mimg_no == 6) {
+            Constant.pos_6 = 1;
+            // Constant.img_path_7= path;
+
+
+        }
+        if (mimg_no == 7) {
+            Constant.pos_7 = 1;
+            // Constant.img_path_8 = path;
+
+        }
+
     }
 
 

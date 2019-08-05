@@ -29,23 +29,19 @@ public class Previewscreen extends AppCompatActivity {
         imageView_preview=findViewById(R.id.imageView4);
         textView_poss=findViewById(R.id.textView9);
         Picasso.with (Previewscreen.this ).load (Constant.d[intValue]).into (imageView_preview);
-        Toast.makeText(this, "ref"+intValue, Toast.LENGTH_SHORT).show();
-        if(ref==1){
-            Toast.makeText(this, "ref-1"+intValue, Toast.LENGTH_SHORT).show();
+
+        if(ref==1)
+        {
 
             Picasso.with (Previewscreen.this ).load (Constant.imagess[intValue]).into (imageView_preview);
-
-
-          ////  imageView_preview.setImageURI(Uri.parse(Constant.cro_pose[intValue]));
             textView_poss.setText(Constant.pose[intValue]);
 
         }
-        if(ref==2){
+        if(ref==2)
+        {
             Toast.makeText(this, "ref-2"+intValue, Toast.LENGTH_SHORT).show();
             Picasso.with (Previewscreen.this ).load (Constant.imagess2[intValue]).into (imageView_preview);
-
-            // imageView_preview.setImageURI(Uri.parse(Constant.imagess2[intValue]));
-           textView_poss.setText(Constant.pose2[intValue]);
+            textView_poss.setText(Constant.pose2[intValue]);
 
         }
 

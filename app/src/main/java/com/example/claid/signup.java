@@ -49,7 +49,7 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
     private final long DELAY = 1000; // in ms
     Spinner spinner_state;
     Button button_go;
-    String[] name,st_id;
+    String[] name,st_id,error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +109,13 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
 
                 if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
                     button_go.getBackground().setAlpha(250);
-                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
                     button_go.getBackground().setAlpha(50);
                     button_go.setEnabled(true);
-                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -130,13 +130,13 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
                 // user is typing: reset already started timer (if existing)
                 if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
                     button_go.getBackground().setAlpha(250);
-                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
                     button_go.getBackground().setAlpha(50);
                     button_go.setEnabled(true);
-                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -161,13 +161,13 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
 
                 if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
                     button_go.getBackground().setAlpha(250);
-                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
                     button_go.getBackground().setAlpha(50);
                     button_go.setEnabled(true);
-                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -208,13 +208,13 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
 
                 if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
                     button_go.getBackground().setAlpha(250);
-                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
                     button_go.getBackground().setAlpha(50);
                     button_go.setEnabled(true);
-                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -254,13 +254,13 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
 
                 if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
                     button_go.getBackground().setAlpha(250);
-                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
                     button_go.getBackground().setAlpha(50);
                     button_go.setEnabled(true);
-                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -301,13 +301,13 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
 
                 if (editText_cpass.getText().toString().length()>=1 && editText_phonenumber.getText().toString().length()>=1 && editText_name.getText().toString().length()>=1 && editText_pass.getText().toString().length()>=1) {
                     button_go.getBackground().setAlpha(250);
-                    Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
                     button_go.getBackground().setAlpha(50);
                     button_go.setEnabled(true);
-                    Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -417,9 +417,12 @@ void toast(){
         StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.register, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                 Toast.makeText (signup.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
+                // Toast.makeText (signup.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
 
+try {
+    log_json("["+response+"]");
 
+}catch (Exception e){}
 
 
             }
@@ -427,7 +430,7 @@ void toast(){
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText (signup.this, "re: ", Toast.LENGTH_LONG ).show ( );
+                Toast.makeText (signup.this, "Error: ", Toast.LENGTH_LONG ).show ( );
 
             }
         }) {
@@ -436,7 +439,7 @@ void toast(){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", editText_name.getText().toString());
+                params.put("username", editText_phonenumber.getText().toString());
                 params.put("password", editText_pass.getText().toString());
                 params.put("email", editText_email.getText().toString());
                 params.put("confirm_password", editText_cpass.getText().toString());
@@ -517,7 +520,7 @@ void toast(){
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        Toast.makeText(this, "id"+st_id[position], Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, "id"+st_id[position], Toast.LENGTH_SHORT).show();
 
     }
 
@@ -606,6 +609,41 @@ void toast(){
 
 
 
+
+
+    }
+
+
+    void log_json(String json) throws JSONException {
+
+        JSONArray jsonArray = new JSONArray(json);
+        error = new String[jsonArray.length()];
+
+        String[] date = new String[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            error[i] = obj.getString("error");
+
+        }
+        try {
+
+            if(error[0].equals("0")){
+                // Toast.makeText(this, "登陸成功", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(signup.this, MainActivity.class);
+
+                signup.this.startActivity(myIntent);
+
+
+            }
+            else {
+                //Toast.makeText(this, "登陸成功", Toast.LENGTH_SHORT).show();
+            }
+            // Toast.makeText ( this, "vv"+constant.sms_states, Toast.LENGTH_SHORT ).show ( );
+
+        }catch (Exception e){
+
+            //Toast.makeText(this, "Error Code : Msg-201 ", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
