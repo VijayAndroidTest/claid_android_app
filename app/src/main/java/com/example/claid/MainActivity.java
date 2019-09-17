@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.claid.adapter.ConnectivityReceiver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +35,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
     //dhilipan
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        checkConnection();
         Constant.vid_cam=0;
         requestStoragePermission();
 
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
 
         videoBG.start();
     }
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(View.GONE);
-               //Toast.makeText (MainActivity.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
+               Toast.makeText (MainActivity.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
 
                 try {
                     log_json("["+response+"]");
@@ -280,6 +282,28 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        showSnack(isConnected);
+    }
+
+    private void showSnack(boolean isConnected) {
+        if (isConnected) {
+            setContentView(R.layout.activity_main);
+
+        } else {
+            setContentView(R.layout.internet_screen);
+    }
+    }
+
+
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
     }
 
 }

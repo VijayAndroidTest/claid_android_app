@@ -470,7 +470,7 @@ ProgressBar progressBar;
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(View.GONE);
-             //  Toast.makeText(Profile.this, "child"+response, Toast.LENGTH_SHORT).show();
+              Toast.makeText(Profile.this, "child"+response, Toast.LENGTH_SHORT).show();
                 try {
                     details_json2("["+response+"]");
                 } catch (JSONException e) {
@@ -513,7 +513,7 @@ ProgressBar progressBar;
                 params.put("weight", editText_weight.getText().toString());
                 params.put("height", editText_height.getText().toString());
                 params.put("sex", ""+sex);
-
+                params.put("platform", "android");
 
 
                 return params;

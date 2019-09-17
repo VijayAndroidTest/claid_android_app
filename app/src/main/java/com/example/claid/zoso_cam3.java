@@ -84,6 +84,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
     private Camera.PictureCallback mPicture;
 
     private Button capture;
+    TextView textView_y,textView_x;
     private ImageView imageView;
     private SensorManager sensorManager;
     private Sensor accelerometerSensor;
@@ -103,6 +104,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
     private Bitmap bitmap1;
     ProgressBar progressBar;
     private String output_file_name;
+
     private Orientation mOrientation;
 
     private AttitudeIndicator mAttitudeIndicator;
@@ -188,19 +190,9 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                 TextView tv = (TextView) findViewById( R.id.textView );
 
+                tv.setText( " uploading..." );
 
 
-                if(count.equals(0)){
-                    tv.setText( "Left Side Bose uploading..." );
-                }else if(count.equals(1)){
-                    tv.setText( "Front Bose uploading..." );
-                }else if(count.equals(2)){
-                    tv.setText( "Back Side Bose uploading..." );
-                }else if(count.equals(3)){
-                    tv.setText( "Croauch Bose uploading..." );
-                }else if(count.equals(4)){
-                    tv.setText( "Ride Side Bose uploading..." );
-                }
 
 
                 int camerasNumber = Camera.getNumberOfCameras();
@@ -504,21 +496,10 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                     File wallpaperDirectory = new File(
                             Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY );
-                   // ExifInterface exif=new ExifInterface(pictureFile.toString());
 
-                   // Log.d("EXIF value", exif.getAttribute(ExifInterface.TAG_ORIENTATION));
-                   /* if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("6")){
-                        realImage= rotate(realImage, 90);
-                    } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("8")){
-                        realImage= rotate(realImage, 270);
-                    } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("3")){
-                        realImage= rotate(realImage, 180);
-                    } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("0")){
-                        realImage= rotate(realImage, 90);
-                    }*/
 
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    realImage.compress(Bitmap.CompressFormat.JPEG, 20, bytes);
+                    realImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                     FileOutputStream fo = new FileOutputStream(pictureFile);
                     fo.write( bytes.toByteArray() );
                     fo.close();
@@ -562,12 +543,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         Log.d( TAG, "imageName: "+imageName );
         Log.d( TAG, "token: "+token );
         Log.d( TAG, "userid: "+userid );
-        //upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/api/upload";
-        // upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/api/uploadtest";
-        //upLoadServerHttpsUri="https://www.ozosmatrix.com/resolution/upload.php";
-        //upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/orientation.php";
-        //upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/mobileupload.php";
-        //upLoadServerHttpsUri = "https://ozosmatrix.com/claid_revamp/api/upload";
+
         upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/v2/api/upload";
         Boolean result;
 
@@ -687,10 +663,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
                 }
 
-                // send multipart form data necesssary after file data...
-                // dos.writeBytes(lineEnd);
-                // dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-                // Responses from the server (code and message)
+
                 serverResponseCode = conn.getResponseCode();
                 String serverResponseMessage = conn.getResponseMessage();
                 Log.i("uploadFile", "HTTP Response is : "
@@ -726,7 +699,10 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                     System.out.println("Error- "+myResponse.getString("error"));
                     System.out.println("Message- "+myResponse.getString("message"));
                     System.out.println("Result- "+myResponse.getString("result"));
+if("1" == myResponse.getString("error")){
 
+    Toast.makeText(myContext, "Retake Photo", Toast.LENGTH_SHORT).show();
+}
                     res_str=myResponse.getString("result").split("#");
                     showresultView(myResponse.getString("result"));
                     pic_height=Integer.valueOf( res_str[1] );
@@ -759,36 +735,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
 
 
-                   /* if(cmp_res.equals("1")){
-                        ShowImageNameView("Neck Front Pose")  ;
-                        showAlert("Neck Front Pose uploading done" );
-                    }else if(cmp_res.equals("2")){
-                        ShowImageNameView("Left Side Pose")  ;
-                        showAlert("Left Side Pose uploading done" );
-                    }else if(cmp_res.equals("3")){
-                        ShowImageNameView("Neck Left Side Pose")  ;
-                        showAlert("Neck Left Side Pose uploading done" );
-                    }else if(cmp_res.equals("4")){
-                        ShowImageNameView("Back Side Pose")  ;
-                        showAlert("Back Side Pose uploading done" );
-                    }else if(cmp_res.equals("5")){
-                        ShowImageNameView("Croatch Pose")  ;
-                        showAlert("Croatch Pose uploading done" );
-                    }else if(cmp_res.equals("6")){
-                        ShowImageNameView("Right Side Pose ")  ;
-                        showAlert("Right Side Pose uploading done" );
-                    }else if(cmp_res.equals("7")){
-                        ShowImageNameView("Neck Right Side Pose")  ;
-                        showAlert("Neck Right Side Pose uploading done" );
-                    }else if(cmp_res.equals("8")){
-                        showAlert("All Pose uploading done" );
-                        ShowImageNameView("All are Done");
 
-                    }else{
-                        showAlert("All Pose uploading done" );
-                        ShowImageNameView("All are Done");
-
-                    }*/
 
 
 
@@ -843,11 +790,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
     private void showAlert(final String text) {
         Log.e("showAlert", "showAlert: " + text);
-        //final Dialog dialog = new Dialog(context);
-        // dialog.setContentView(R.layout.activity_main);
-        // dialog.dismiss();
-        //Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT).show();
-        //dialog.show();
+
         TextView tv = (TextView) findViewById(R.id.textView);
         tv.setText(text);
 
@@ -863,11 +806,6 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
     private void ShowImageNameView(final String text) {
         Log.e("ShowImageNameView", "ShowImageNameView: " + text);
-        //final Dialog dialog = new Dialog(context);
-        // dialog.setContentView(R.layout.activity_main);
-        // dialog.dismiss();
-        //Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT).show();
-        //dialog.show();
         TextView tv1 = (TextView) findViewById(R.id.ImageNameView);
         tv1.setText(text);
         imageName=text;
@@ -894,35 +832,55 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         float y = event.values[1];
         float z = event.values[2];
         double angle = (Math.atan2(y, Math.sqrt(x*x+z*z))/ (Math.PI / 180));
-        // av_ang.add(String.valueOf(roundTwoDecimals(angle)));
-       // Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
-        //ok((int) roundTwoDecimals(x));
+
         capture.setText("");
         capture.getBackground().setAlpha(0);
         mAttitudeIndicator.setVisibility(View.VISIBLE);
-
-        if(roundTwoDecimals(angle) >=88){
+        textView_y=findViewById(R.id.textView18);
+        textView_x=findViewById(R.id.textView19);
+        if(roundTwoDecimals(angle) >=89){
             mAttitudeIndicator.setVisibility(View.INVISIBLE);
             capture.setEnabled(true);
             capture.getBackground().setAlpha(250);
+            textView_y.setText(""+roundTwoDecimals(angle));
             ;
+            //robo@1234
             // capture.setText(""+roundTwoDecimals(angle));
           //  capture.setText("OK");
         }
         else if(z<=0) {
             capture.getBackground().setAlpha(0);
-          //  capture.setText("-"+roundTwoDecimals(angle));
+           // capture.setText("-"+roundTwoDecimals(angle));
+            textView_y.setText("-"+roundTwoDecimals(angle));
             capture.setEnabled(false);
-           // capture.setTextColor(R.color.colorwhite);
-          // Toast.makeText(this, "sen x"+x +"  z"+z, Toast.LENGTH_SHORT).show();
+
 
         }
         else if(z>=0){
             capture.getBackground().setAlpha(0);
-          //  capture.setText(""+roundTwoDecimals(angle));
+         //  capture.setText(""+roundTwoDecimals(angle));
+            textView_y.setText(""+roundTwoDecimals(angle));
            capture.setEnabled(false);
+
+
+
+        }
+        if(x<=0) {
+           // capture.getBackground().setAlpha(0);
+            // capture.setText("-"+roundTwoDecimals(angle));
+            textView_x.setText(""+roundTwoDecimals(angle));
+           // capture.setEnabled(false);
             // capture.setTextColor(R.color.colorwhite);
-          // Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "sen x"+x +"  z"+z, Toast.LENGTH_SHORT).show();
+
+        }
+        else if(x>=0){
+           // capture.getBackground().setAlpha(0);
+            //  capture.setText(""+roundTwoDecimals(angle));
+            textView_x.setText("-"+roundTwoDecimals(angle));
+           // capture.setEnabled(false);
+            // capture.setTextColor(R.color.colorwhite);
+            // Toast.makeText(this, "sen x"+x + "  z"+z, Toast.LENGTH_SHORT).show();
 
 
         }
@@ -968,8 +926,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                 params.put("uploaded_file", image_to_string(bitmap1));
                 params.put("imagename", imageName);
                 params.put("information", "3.57#66.0365#51.9687#4.656#3.504#Nokia 6.1 Plus#0#320#0#320");
-                // params.put("name", constant.complient_id);
-                //  params.put("c_id", constant.complient_id);
+
                 return params;
             }
 
@@ -983,8 +940,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
         RequestQueue requestQueue= Volley.newRequestQueue(zoso_cam3.this);
         requestQueue.add(stringRequest);
-        //Mysingleton.getmInstance(complaind_act.this).addtoRequestQue(request);
-        // Volley.newRequestQueue(this).add(request);
+
 
     }
 

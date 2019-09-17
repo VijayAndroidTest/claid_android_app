@@ -64,17 +64,18 @@ android:layout_marginBottom="@dimen/_5sdp"
             android:id="@+id/btnCam"
 
             android:layout_width="@dimen/_70sdp"
-
             android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/_5sdp"
-
             android:background="@drawable/ic_camera_btn"
             android:onClick="ok"
-            android:textColor="#000000"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="#020202"
 
 
             />
+
+
 
     </LinearLayout>
 
@@ -118,17 +119,53 @@ android:layout_marginBottom="@dimen/_5sdp"
         android:textSize="18sp"
          />
 
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/ImageNameView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#f00"
-        android:textStyle="bold"
-        android:layout_marginLeft="160dp"
-        android:layout_marginBottom="60dp"
-        android:text="Left Side Bose"
-        android:layout_alignParentBottom="true"
-        />
+    <LinearLayout
+        android:gravity="bottom"
+       android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:drawableBottom="@drawable/left_right"
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="#ffffff"
+           android:textAlignment="center"
+            android:text="" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableRight="@drawable/up"
+            android:gravity="center"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/ImageNameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="160dp"
+            android:layout_marginBottom="60dp"
+            android:layout_weight="1"
+            android:text="Left Side Bose"
+            android:textColor="#f00"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
 </RelativeLayout>
