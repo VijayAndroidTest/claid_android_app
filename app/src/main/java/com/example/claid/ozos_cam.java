@@ -1,5 +1,6 @@
 package com.example.claid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -73,7 +74,7 @@ public class ozos_cam extends AppCompatActivity {
 
 
 
-    private File createphotofile(){
+    private File createphotofile() {
         String name =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File storageDir= getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image=null;
@@ -94,11 +95,13 @@ public class ozos_cam extends AppCompatActivity {
         Log.d("path","path:"+pathToFile);
         if (mimg_no == 1) {
             Constant.pos_1 = 1;
-           // Constant.img_path_1= path;
+         //  Constant.img_path_1= path;
+            Constant.img_1=path;
 
         }
         if (mimg_no == 2) {
             Constant.pos_2 = 1;
+
            // Constant.img_path_2 = path;
 
         }
@@ -146,17 +149,19 @@ public class ozos_cam extends AppCompatActivity {
         }
 
 
+
     }
 
 
 
-  /*  void upload (final Bitmap bitmaps) {
+   void upload (final Bitmap bitmaps) {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.upload, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+
+                Url.upload, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText (photography_pages.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
+             Toast.makeText (getApplicationContext(), "res: "+response, Toast.LENGTH_LONG ).show ( );
 
 
 
@@ -166,7 +171,7 @@ public class ozos_cam extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                // Toast.makeText(MainActivity.this, "無效的用戶名或密碼", Toast.LENGTH_SHORT).show();
+              Toast.makeText(getApplicationContext(), "無效的用戶名或密碼,error", Toast.LENGTH_SHORT).show();
 
             }
         }) {
@@ -184,9 +189,9 @@ public class ozos_cam extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("title", Constant.user_id);
-                params.put("file", image_to_string(bitmaps));
-                params.put("imagename", "x");
+//                params.put("title", Constant.user_id);
+//                params.put("file", image_to_string(bitmaps));
+//                params.put("imagename", "x");
 
 
 
@@ -195,7 +200,7 @@ public class ozos_cam extends AppCompatActivity {
         };
         Volley.newRequestQueue(this).add(request);
 
-    }*/
+    }
 
 
 }

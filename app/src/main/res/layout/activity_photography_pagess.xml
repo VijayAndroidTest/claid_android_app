@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,19 +9,17 @@
 
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">\
-
-
+<!--    <ScrollView-->
+<!--        android:layout_marginTop="@dimen/_10sdp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
 
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_marginTop="@dimen/_15sdp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -29,7 +28,6 @@
                 android:orientation="horizontal">
 
                 <Button
-
                     android:id="@+id/button18"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
@@ -37,7 +35,6 @@
                     android:background="@drawable/back_icon"
                     android:text=""
                     android:onClick="back"
-
                     tools:ignore="OnClick" />
 
             </LinearLayout>
@@ -52,7 +49,6 @@
                     android:id="@+id/button_video"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
-
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:background="@drawable/video_onclick"
                     android:onClick="click_video"
@@ -64,7 +60,6 @@
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginLeft="@dimen/_25sdp"
-
                     android:background="@drawable/camera_onclick"
                     android:onClick="click_camara"
                     android:text=""
@@ -77,9 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_340sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
 
-                android:orientation="vertical">>
+                android:orientation="vertical">
 
 
                 <android.support.v4.view.ViewPager
@@ -87,7 +81,7 @@
                     android:id="@+id/myviewpager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/_5sdp"
+
                    />
 
 
@@ -123,7 +117,6 @@
                         android:layout_height="@dimen/_450sdp"
                         android:layout_gravity="center"
                         android:paddingLeft="@dimen/_18sdp"
-
                         android:paddingTop="@dimen/_15sdp"
                         android:paddingRight="@dimen/_15sdp"
                         android:paddingBottom="@dimen/_15sdp"
@@ -133,58 +126,71 @@
             </LinearLayout>
 
             <LinearLayout
-android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/_5sdp"
-
-
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
-                    <Button
+<!--                    <Button-->
 
-                        android:id="@+id/help3"
+<!--                        android:id="@+id/help3"-->
 
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:layout_marginLeft="@dimen/_30sdp"
-                        android:background="@drawable/demo_btn"
-                        android:onClick="help_video_url"
-                        android:text=""
-                        tools:ignore="OnClick" />
+<!--                        android:layout_width="@dimen/_35sdp"-->
+<!--                        android:layout_height="@dimen/_35sdp"-->
+<!--                        android:layout_marginLeft="@dimen/_30sdp"-->
+<!--                        android:background="@drawable/demo_btn"-->
+<!--                        android:onClick="help_video_url"-->
+<!--                        android:text=""-->
+<!--                        tools:ignore="OnClick" />-->
 
+
+
+<!--                    <Switch-->
+<!--                        android:gravity="center"-->
+<!--                        android:id="@+id/switch1"-->
+<!--                        android:switchMinWidth="60dp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_marginStart="@dimen/_100sdp"-->
+<!--                        android:text="接受條件"-->
+<!--                        android:textColor="@color/colorwhite"-->
+<!--                        android:textOn="accept terms and conditions"-->
+<!--                       />-->
 
                     <Switch
-                        android:layout_marginLeft="@dimen/_120sdp"
+                       android:gravity="center"
                         android:id="@+id/switch1"
-                        android:layout_width="@dimen/_110sdp"
-                        android:layout_height="@dimen/_1sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_105sdp"
                         android:text="接受條件"
                         android:textColor="@color/colorwhite"
                         android:textOn="accept terms and conditions"
-                        android:thumb="@drawable/on_btn"
-                        android:track="@drawable/on_bg" />
+                        android:thumb="@drawable/on_btn_snew"
+                        android:track="@drawable/on_bgnew" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_150sdp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginLeft="@dimen/_150sdp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="vertical">-->
 
 
-                    </LinearLayout>
+
+
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -205,6 +211,7 @@ android:layout_marginTop="@dimen/_5sdp"
                         android:layout_gravity="center"
                         android:background="@drawable/btn"
                         android:text="next"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/_16sdp"
@@ -217,5 +224,5 @@ android:layout_marginTop="@dimen/_5sdp"
         </LinearLayout>
 
 
-    </ScrollView>
+<!--    </ScrollView>-->
 </android.support.constraint.ConstraintLayout>

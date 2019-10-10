@@ -12,23 +12,43 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <TextView
-            android:layout_marginTop="@dimen/_150sdp"
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textSize="@dimen/_16sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_130sdp"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:text="FORGOT PASSWORD?"
+            android:textAlignment="center"
+            android:textColor="@color/colorwhite" />
+
+        <TextView
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:text="@string/leorem"
             android:textAlignment="center"
-            android:textColor="@color/colorwhite"
-            android:text="Lorem lpsum,giving information on its origins,as well\n as a random Lipsum generator" />
+            android:textColor="#D6D2D2" />
 
         <EditText
             android:maxLength="11"
-            android:layout_marginTop="@dimen/_75sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:textColor="@color/colorwhite"
             android:background="@drawable/edit_text_normal_bg"
             android:id="@+id/editText_phone"
             android:paddingLeft="@dimen/_20sdp"
             android:paddingRight="@dimen/_20sdp"
+
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_width="@dimen/_275sdp"
@@ -36,7 +56,6 @@
             android:ems="10"
             android:hint="Enter mobile no"
             android:textAlignment="center"
-            android:paddingTop="@dimen/_5sdp"
             android:textColorHint="@color/colorwhite"
             android:inputType="phone"
             />
@@ -44,15 +63,15 @@
         <Button
             android:id="@+id/button20"
 
-            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_25sdp"
             android:layout_gravity="center"
             android:background="@drawable/go_btn"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_55sdp"
              />
 
         <LinearLayout
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_35sdp"
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_width="match_parent"

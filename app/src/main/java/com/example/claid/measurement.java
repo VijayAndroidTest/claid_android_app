@@ -42,6 +42,7 @@ public class measurement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_measurement);
+
         listView=findViewById(R.id.listview);
         button_3d=findViewById(R.id.button4);
         button_measurement=findViewById(R.id.button6);
@@ -60,7 +61,8 @@ public class measurement extends AppCompatActivity {
     void details () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.getmeasurements, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST,
+                ""+Url.getmeasurements, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                  // Toast.makeText (measurement.this, "measurement: "+response, Toast.LENGTH_LONG ).show ( );
@@ -120,7 +122,7 @@ public class measurement extends AppCompatActivity {
             mvalues[i] = obj.getString("mvalues");
             url_path[i]=obj.getString("url_path");
         }
-json_val=jsonArray.length();
+        json_val=jsonArray.length();
 
         AppointmentAdapter2 adapter2=new AppointmentAdapter2();
         listView.setAdapter(adapter2);
@@ -150,10 +152,7 @@ json_val=jsonArray.length();
     }
     public  void confirm(View view){
 
-
-
         Intent myIntent = new Intent(measurement.this, MainActivity.class);
-
         measurement.this.startActivity(myIntent);
     }
 

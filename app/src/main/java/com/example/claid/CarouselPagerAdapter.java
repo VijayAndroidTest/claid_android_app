@@ -10,7 +10,10 @@ import android.support.v4.view.ViewPager;
 public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
     public final static float BIG_SCALE = 1.0f;
-    public final static float SMALL_SCALE = 0.7f;
+    public final static float SMALL_SCALE_STATIC = 0.7f;
+
+    public final static float SMALL_SCALE = 0.5f;
+
     public final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
     private photography_pages context;
     private FragmentManager fragmentManager;
@@ -61,7 +64,9 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
                 cur.setScaleBoth(BIG_SCALE - DIFF_SCALE * positionOffset);
                 next.setScaleBoth(SMALL_SCALE + DIFF_SCALE * positionOffset);
             }
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -73,6 +78,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
 
     }
 

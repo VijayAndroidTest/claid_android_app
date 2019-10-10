@@ -1,17 +1,23 @@
 package com.example.claid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ActionMode;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,14 +46,16 @@ import static com.example.claid.R.drawable.edit_text_normal_bg;
 public class Profile extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     EditText editText_name,editText_age,editText_height,editText_weight;
 
-    String[] country = new String[]{ "Head","mid_neck","neck_base"," Front Shoulder","Shoulder",
+      String[] country = new String[]{ "Head","mid_neck","neck_base"," Front Shoulder","Shoulder",
             " chest","underbust","neck_base"," Front Shoulder","Shoulder"};
-    String[] age,id,weight,height,username,child_id;
-    Button button_save,button_cam,button_female,button_male;
-    TextView textView_male,textView_female;
-    String sex="male";
-ProgressBar progressBar;
+      String[] age,id,weight,height,username,child_id;
+      Button button_save,button_cam,button_video,button_female,button_male;
+      TextView textView_male,textView_female;
+      String sex="male";
+      ProgressBar progressBar;
+      String name,ages,weights,heights;
 
+      TextInputLayout nameInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +68,22 @@ ProgressBar progressBar;
         Button button_back=findViewById(R.id.button8);
         button_save=findViewById(R.id.button_save);
         button_cam=findViewById(R.id.button_camara);
+        button_video = findViewById(R.id.button_video);
         button_female=findViewById(R.id.button_female);
         button_male=findViewById(R.id.button_male);
-        textView_female=(findViewById(R.id.textView16));
-        textView_male=(findViewById(R.id.textView15));
+
+
+
+
+
+//        textView_female=(findViewById(R.id.textView16));
+//        textView_male=(findViewById(R.id.textView15));
+
         button_save.getBackground().setAlpha(50);
         button_cam.getBackground().setAlpha(50);
+        button_video.getBackground().setAlpha(50);
         button_save.setTextColor(Color.parseColor("#8A8687"));
-        textView_female.setTextColor(Color.parseColor("#8A8687"));
+//        textView_female.setTextColor(Color.parseColor("#8A8687"));
         button_female.getBackground().setAlpha(100);
         button_save.setEnabled(true);
         progressBar=findViewById(R.id.progressBar3);
@@ -80,12 +96,70 @@ ProgressBar progressBar;
         final Animation animTranslate4 = AnimationUtils.loadAnimation(this, R.anim.anim_translateeee);
         editText_age=findViewById(R.id.editText_age);
         editText_name=findViewById(R.id.editText_name);
+
         editText_height=findViewById(R.id.editText_height);
         editText_weight=findViewById(R.id.editText_weight);
         editText_name.setOnClickListener(this);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+
+      //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+
+        editText_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                editText_name.setCursorVisible(true);
+                editText_name.requestFocus();
+
+            }
+        });
+
+
+
+
+        editText_age.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                editText_age.setCursorVisible(true);
+
+                editText_age.requestFocus();
+            }
+        });
+
+        editText_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                editText_weight.setCursorVisible(true);
+                editText_weight.requestFocus();
+            }
+        });
+
+
+        editText_height.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                editText_height.setCursorVisible(true);
+                editText_height.requestFocus();
+            }
+        });
+
         editText_name.addTextChangedListener(new TextWatcher() {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
 
     }
 
@@ -97,18 +171,23 @@ ProgressBar progressBar;
     @Override
     public void afterTextChanged(Editable s) {
 
-
         editText_weight.setBackgroundResource(edit_text_normal_bg);
         editText_age.setBackgroundResource(edit_text_normal_bg);
         editText_height.setBackgroundResource(edit_text_normal_bg);
         editText_name.setBackgroundResource(edit_text_focuses_bg);
 
 
-        if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
+        if(editText_weight.getText().toString().length()>=1 &&
+                editText_height.getText().toString().length()>=1 &&
+                editText_age.getText().toString().length()>=1&&
+                editText_name.getText().toString().length()>=1) {
 
             button_save.getBackground().setAlpha(250);
             button_save.setTextColor(Color.parseColor("#ffffff"));
             button_save.setEnabled(true);
+
+
+
 
 
         }
@@ -152,21 +231,17 @@ ProgressBar progressBar;
 
             if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
 
-
-
                 button_save.getBackground().setAlpha(250);
                 button_save.setEnabled(true);
+
+
             }
             else {
                 button_save.getBackground().setAlpha(50);
                 button_save.setTextColor(Color.parseColor("#8A8687"));
                 button_save.setEnabled(false);
 
-
-
             }
-
-
         }
     });
 
@@ -201,7 +276,6 @@ ProgressBar progressBar;
             if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
 
 
-
                 button_save.getBackground().setAlpha(250);
                 button_save.setTextColor(Color.parseColor("#ffffff"));
                 button_save.setEnabled(true);
@@ -210,8 +284,6 @@ ProgressBar progressBar;
                 button_save.getBackground().setAlpha(50);
                 button_save.setTextColor(Color.parseColor("#8A8687"));
                 button_save.setEnabled(false);
-
-
 
             }
 
@@ -248,8 +320,6 @@ ProgressBar progressBar;
 
                 if(editText_weight.getText().toString().length()>=1 && editText_height.getText().toString().length()>=1 &&editText_age.getText().toString().length()>=1&&editText_name.getText().toString().length()>=1){
 
-
-
                     button_save.getBackground().setAlpha(250);
                     button_save.setTextColor(Color.parseColor("#ffffff"));
                     button_save.setEnabled(true);
@@ -258,8 +328,6 @@ ProgressBar progressBar;
                     button_save.getBackground().setAlpha(50);
                     button_save.setTextColor(Color.parseColor("#8A8687"));
                     button_save.setEnabled(false);
-
-
 
                 }
 
@@ -276,6 +344,12 @@ ProgressBar progressBar;
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        editText_name.clearFocus();
+    }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -318,6 +392,13 @@ ProgressBar progressBar;
                         Constant.age=editText_age.getText().toString();
                         Constant.height=editText_height.getText().toString();
                         Constant.weight=editText_weight.getText().toString();
+
+
+                        editText_height.clearFocus();
+                        editText_weight.clearFocus();
+                        editText_age.clearFocus();
+
+                        editText_name.clearFocus();
                         next_act();
 
                     }
@@ -329,7 +410,58 @@ ProgressBar progressBar;
         }
     }
 
-    void next_act(){
+
+    public void clickVideo (View view)
+
+    {
+        if(editText_name.getText().length()==0){
+            Toast.makeText(this, "User Name Field is Empty\n用户名字段为空", Toast.LENGTH_SHORT).show();
+            editText_name.requestFocus();
+        }
+
+        else {
+
+            if(editText_age.getText().length()==0){
+                Toast.makeText(this, "User age Field is  Empty\n用户年龄字段为空", Toast.LENGTH_SHORT).show();
+                editText_age.requestFocus();
+            }
+
+            else {
+                if(editText_height.getText().length()==0){
+                    Toast.makeText(this, "User Height Field is Empty\n用户高度字段为空", Toast.LENGTH_SHORT).show();
+                    editText_height.requestFocus();
+                }
+
+                else {
+                    if(editText_weight.getText().length()==0){
+                        Toast.makeText(this, "User Weight Field is Empty\n用户权重字段为空", Toast.LENGTH_SHORT).show();
+                        editText_weight.requestFocus();
+                    }
+
+                    else {
+                        Constant.mname=editText_name.getText().toString();
+                        Constant.age=editText_age.getText().toString();
+                        Constant.height=editText_height.getText().toString();
+                        Constant.weight=editText_weight.getText().toString();
+
+                        editText_height.clearFocus();
+                        editText_weight.clearFocus();
+                        editText_age.clearFocus();
+
+                        editText_name.clearFocus();
+                      //  next_act();
+
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+
+    void next_act() {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -396,9 +528,6 @@ ProgressBar progressBar;
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-
-
-
                 return params;
             }
         };
@@ -426,7 +555,6 @@ ProgressBar progressBar;
             height[i] = obj.getString("height");
             weight[i] = obj.getString("weight");
             username[i] = obj.getString("username");
-
 
 
         }
@@ -478,6 +606,10 @@ ProgressBar progressBar;
                 }
                 button_cam.getBackground().setAlpha(250);
                 button_cam.setEnabled(true);
+
+                button_video.getBackground().setAlpha(250);
+                button_video.setEnabled(true);
+
                 button_save.setTextColor(Color.parseColor("#00ffde"));
                 button_save.setText("Save");
                 editText_age.setEnabled(false);
@@ -557,9 +689,25 @@ ProgressBar progressBar;
     }
 
     public void female_click(View view){
+
+        editText_name.setBackgroundResource(edit_text_normal_bg);
+        editText_age.setBackgroundResource(edit_text_normal_bg);
+        editText_weight.setBackgroundResource(edit_text_normal_bg);
+        editText_height.setBackgroundResource(edit_text_normal_bg);
+
+        editText_name.setCursorVisible(false);
+        editText_weight.setCursorVisible(false);
+        editText_height.setCursorVisible(false);
+        editText_age.setCursorVisible(false);
+        editText_name.clearFocus();
+        editText_age.clearFocus();
+        editText_height.clearFocus();
+        editText_weight.clearFocus();
+
         sex="female";
-        textView_male.setTextColor(Color.parseColor("#8A8687"));
-        textView_female.setTextColor(Color.parseColor("#ffffff"));
+
+//        textView_male.setTextColor(Color.parseColor("#8A8687"));
+//        textView_female.setTextColor(Color.parseColor("#ffffff"));
 
 
         button_male.getBackground().setAlpha(100);
@@ -569,10 +717,28 @@ ProgressBar progressBar;
     }
 
 
-    public void male_click(View view){
-        sex="male";
-        textView_female.setTextColor(Color.parseColor("#8A8687"));
-        textView_male.setTextColor(Color.parseColor("#ffffff"));
+    public void male_click(View view) {
+
+
+        editText_name.setBackgroundResource(edit_text_normal_bg);
+        editText_age.setBackgroundResource(edit_text_normal_bg);
+        editText_weight.setBackgroundResource(edit_text_normal_bg);
+        editText_height.setBackgroundResource(edit_text_normal_bg);
+
+
+
+        editText_name.setCursorVisible(false);
+        editText_weight.setCursorVisible(false);
+        editText_height.setCursorVisible(false);
+        editText_age.setCursorVisible(false);
+        editText_name.clearFocus();
+        editText_age.clearFocus();
+        editText_height.clearFocus();
+        editText_weight.clearFocus();
+
+          sex="male";
+//        textView_female.setTextColor(Color.parseColor("#8A8687"));
+//        textView_male.setTextColor(Color.parseColor("#ffffff"));
 
 
         button_male.getBackground().setAlpha(250);
@@ -587,4 +753,6 @@ ProgressBar progressBar;
         Profile.this.startActivity(myIntent);
 
     }
+
+
 }

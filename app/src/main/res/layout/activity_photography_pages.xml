@@ -125,7 +125,7 @@
                     android:orientation="vertical">
 
                     <Button
-android:background="@drawable/video_btn"
+                        android:background="@drawable/video_btn"
                         android:id="@+id/button_play"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
@@ -142,7 +142,6 @@ android:background="@drawable/video_btn"
                         android:layout_height="@dimen/_450sdp"
                         android:layout_gravity="center"
                         android:paddingLeft="@dimen/_18sdp"
-
                         android:paddingTop="@dimen/_15sdp"
                         android:paddingRight="@dimen/_15sdp"
                         android:paddingBottom="@dimen/_15sdp"

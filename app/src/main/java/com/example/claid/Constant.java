@@ -26,7 +26,9 @@ public class Constant {
     public  static  String pose_name="";
     public  static int pose_no = 3;
     public  static int pose_height =0 ;
-    public static String []cro_pose;
+    public static String []cro_pose ;
+
+
     public static String d []= {
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/leftpose.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckleft.png",
@@ -37,8 +39,6 @@ public class Constant {
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckright.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/frontpose.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckfront.png"};
-
-
 
 
     public  static String img_path_left="";

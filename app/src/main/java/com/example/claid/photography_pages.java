@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
@@ -82,6 +83,8 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     DisplayMetrics metrics = new DisplayMetrics();
     int pageMargin;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,10 +93,11 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_photography_pagess);
 
+
+
+
         log();
         pager=(ViewPager)findViewById(R.id.myviewpager) ;
-
-
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pageMargin = ((metrics.widthPixels / 4) * 2);
@@ -110,16 +114,16 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         videoView=findViewById(R.id.videoView3);
         linearLayout=findViewById(R.id.vidlyout);
         coverFlow = (FeatureCoverFlow) findViewById(R.id.coverflow);
-        videoView.setVisibility(View.VISIBLE);
+        videoView.setVisibility(View.GONE);
         button_play=findViewById(R.id.button_play);
         button_play.setVisibility(View.GONE);
-        linearLayout.setVisibility(View.VISIBLE);
-        button_play.setVisibility(View.VISIBLE);
-        button_help=findViewById(R.id.help3);
-        button_help.setVisibility(View.VISIBLE);
+        linearLayout.setVisibility(View.GONE);
+        button_play.setVisibility(View.GONE);
+       //  button_help=findViewById(R.id.help3);
+       // button_help.setVisibility(View.VISIBLE);
         button_cam=findViewById(R.id.button_camara);
         button_next=findViewById(R.id.button9);
-        button_next.setTextColor(R.color.hintcolor);
+       // button_next.setTextColor(R.color.hintcolor);
         button_video=findViewById(R.id.button_video);
         switch_tc=findViewById(R.id.switch1);
         switch_tc.setOnCheckedChangeListener(this);
@@ -133,53 +137,66 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         }catch (Exception e){}
         Demo_video();
 //      coverFlow.setVisibility(View.GONE);
-       // log();
+        log();
 
 
+        if(Constant.vid_cam == 0) {
+         videoView.setVisibility(View.GONE);
+
+          //  log();
+
+            linearLayout.setVisibility(View.GONE);
+            button_play.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.GONE);
 
 
+          //  button_help.setVisibility(View.INVISIBLE);
 
 
+            /*New Code*/
+//            button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
+//            button_cam.getBackground().setAlpha(250);
+//            button_video.getBackground().setAlpha(100);
+//            button_next.getBackground().setAlpha(100);
+//            button_next.setEnabled(false);
 
-        if(Constant.vid_cam == 0){
-        videoView.setVisibility(View.GONE);
 
-        button_video.setBackgroundResource(R.drawable.video_on_onclick);
-        button_video.getBackground().setAlpha(250);
-        button_cam.getBackground().setAlpha(100);
-        button_next.getBackground().setAlpha(100);
-        button_next.setEnabled(false);
-        pager.setVisibility(View.GONE);}
-        else {
-log();
+            /*Previous Code*/
 
+      //button_video.setBackgroundResource(R.drawable.video_on_onclick);
+
+            button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
+            button_cam.getBackground().setAlpha(250);
+            button_video.getBackground().setAlpha(100);
+            button_next.getBackground().setAlpha(100);
+            button_next.setEnabled(false);
+            button_video.setBackgroundResource(R.drawable.video_onclick);
+            button_video.getBackground().setAlpha(175);
+            button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
+            button_cam.getBackground().setAlpha(250);
+            pager.setVisibility(View.GONE);
 
         }
+        else {
+        log();
 
-
+        }
 
             videoView.setOnTouchListener(this);
 
 
+            if(Constant.viediostates==1) {
 
-
-
-
-
-            if(Constant.viediostates==1){
-
-                linearLayout.setVisibility(View.VISIBLE);
+                linearLayout.setVisibility(View.GONE);
                // coverFlow.setVisibility(View.GONE);
                 button_play.setVisibility(View.GONE);
-                videoView.setVisibility(View.VISIBLE);
+                videoView.setVisibility(View.GONE);
                 Uri vid_uri= Uri.parse("/sdcard/myvideo.mp4");
                 videoView.setVideoPath(String.valueOf(vid_uri));
                 videoView.start();
 
             }
             else {
-
-
 
             }
 
@@ -189,7 +206,7 @@ log();
 
         void Demo_video(){
 
-        if(Constant.demo_viediostates==0){
+        if(Constant.demo_viediostates==0) {
             sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString("name","1");
@@ -198,9 +215,24 @@ log();
             photography_pages.this.startActivity(myIntent);
         }
 
-
         }
 
+/* For shown all phose images images  */
+
+    void next_activity() {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent myIntent = new Intent(photography_pages.this, photography_pages.class);
+
+                photography_pages.this.startActivity(myIntent);
+                finish();
+
+            }
+        }, 1);
+    }
 
          public void back(View view)
          {
@@ -216,10 +248,6 @@ log();
 
 
                 }
-
-
-
-
 
 
             private FeatureCoverFlow.OnScrollPositionListener onScrollListener() {
@@ -275,20 +303,14 @@ log();
 
             Toast.makeText(photography_pages.this,"CAMERA permission allows us to Access CAMERA app", Toast.LENGTH_LONG).show();
 
-        } else {
+        }
+        else {
 
             ActivityCompat.requestPermissions(photography_pages.this,new String[]{
                     Manifest.permission.CAMERA}, RequestPermissionCode);
 
         }
     }
-
-
-
-
-
-
-
 
 
     @Override
@@ -323,27 +345,18 @@ log();
 
         if (requestCode == CAMERA_REQUEST) {
 
-
-
-          //  image_path_in_constant(img_no,pathToFile);
+        //  image_path_in_constant(img_no,pathToFile);
 
         }
     }
 
-
-
-
-
-
-
-
-   public void  okk(View view){
+   public void  okk(View view) {
         if(Constant.img_path_front.length()==0){}
 
      next_act();
    }
 
-   void next_act(){
+   void next_act() {
        Intent myIntent = new Intent(photography_pages.this, confirmation_screen.class);
 
        photography_pages.this.startActivity(myIntent);
@@ -354,11 +367,11 @@ log();
 
    {
 
-       linearLayout.setVisibility(View.VISIBLE);
-       button_play.setVisibility(View.VISIBLE);
+       linearLayout.setVisibility(View.GONE);
+       button_play.setVisibility(View.GONE);
        pager.setVisibility(View.GONE);
 
-       button_help.setVisibility(View.VISIBLE);
+     //  button_help.setVisibility(View.VISIBLE);
        button_video.setBackgroundResource(R.drawable.video_on_onclick);
        button_video.getBackground().setAlpha(250);
        button_cam.setBackgroundResource(R.drawable.camera_onclick);
@@ -375,13 +388,13 @@ log();
       //  Toast.makeText(this, "pos"+Constant.cro_pose, Toast.LENGTH_SHORT).show();
        // log();
 
-
-
        linearLayout.setVisibility(View.GONE);
         button_play.setVisibility(View.GONE);
         linearLayout.setVisibility(View.GONE);
         videoView.setVisibility(View.GONE);
-        button_help.setVisibility(View.INVISIBLE);
+
+      //  button_help.setVisibility(View.INVISIBLE);
+
         pager.setVisibility(View.VISIBLE);
         button_video.setBackgroundResource(R.drawable.video_onclick);
         button_video.getBackground().setAlpha(175);
@@ -391,10 +404,13 @@ log();
 
     }
 
+
+
+
     public  void  play(View view){
         Intent myIntent = new Intent(photography_pages.this, ozos_vidcam.class);
         photography_pages.this.startActivity(myIntent);
-        videoView.setVisibility(View.VISIBLE);
+        videoView.setVisibility(View.GONE);
         button_play.setVisibility(View.GONE);
         Constant.viediostates=1;
 
@@ -415,13 +431,15 @@ log();
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
       //  Toast.makeText(this, "c", Toast.LENGTH_SHORT).show();
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.getcarousel, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""
+                +Url.getcarousel, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                //  Toast.makeText (photography_pages.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
 
                 try {
                     log_json(response);
+
                 } catch (JSONException e) {
 
                     e.printStackTrace();
@@ -470,56 +488,32 @@ log();
                 file = new String[jsonArray.length()];
                 String[] date = new String[jsonArray.length()];
 
-        for (int i = 0; i < jsonArray.length(); i++)
-            {
+        for (int i = 0; i < jsonArray.length(); i++) {
+
                 JSONObject obj = jsonArray.getJSONObject(i);
 
                 //Constant.cro_pose[i] = null;
                 pos_name[i] = obj.getString("name");
-                file[i]=obj.getString("file");
-                Constant.cro_pose[i]=obj.getString("file");
+                file[i] = obj.getString("file");
+                Constant.cro_pose[i] = obj.getString("file");
+                Log.d("cor", ":" + obj.getString("file"));
 
-                Log.d( "cor", ":" + obj.getString("file") );
-               // Toast.makeText(this, "x"+file[i], Toast.LENGTH_SHORT).show();
-            }
+               // pager.setVisibility(View.VISIBLE);
 
+        }
 
-
-
-if(Constant.vid_cam == 1) {
-    getWindowManager().getDefaultDisplay().getMetrics(metrics);
-    pageMargin = ((metrics.widthPixels / 4) * 2);
-    pager.setPageMargin(-pageMargin);
-    cpaadapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
-    pager.setAdapter(cpaadapter);
-    cpaadapter.notifyDataSetChanged();
-    pager.addOnPageChangeListener(cpaadapter);
-    pager.setCurrentItem(FIRST_PAGE);
-    pager.setOffscreenPageLimit(3);
-
-
-    linearLayout.setVisibility(View.GONE);
-    button_play.setVisibility(View.GONE);
-    linearLayout.setVisibility(View.GONE);
-    videoView.setVisibility(View.GONE);
-    button_help.setVisibility(View.INVISIBLE);
-    pager.setVisibility(View.VISIBLE);
-    button_video.setBackgroundResource(R.drawable.video_onclick);
-    button_video.getBackground().setAlpha(175);
-    button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
-    button_cam.getBackground().setAlpha(250);
-
-}
+        pager.setVisibility(View.VISIBLE);
 
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-if(switch_tc.isChecked()){
+    if(switch_tc.isChecked()) {
 
 
-    if(Constant.pos_0 == 1 && Constant.pos_1 ==1 && Constant.pos_2 == 1 && Constant.pos_3 ==1 && Constant.pos_4 == 1 && Constant.pos_5 ==1
+    if(Constant.pos_0 == 1 && Constant.pos_1 ==1 && Constant.pos_2 == 1 && Constant.pos_3 ==1 &&
+            Constant.pos_4 == 1 && Constant.pos_5 ==1
     && Constant.pos_6 == 1 && Constant.pos_7 ==1)
     {
         button_next.getBackground().setAlpha(250);

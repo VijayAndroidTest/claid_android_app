@@ -191,6 +191,7 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
             }
             
         });
+
         editText_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -414,7 +415,8 @@ void toast(){
     void log () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.register, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""
+                +Url.register, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 // Toast.makeText (signup.this, "res: "+response, Toast.LENGTH_LONG ).show ( );

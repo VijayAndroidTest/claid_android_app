@@ -76,8 +76,10 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
     final String uploadFileName = "";
     private static final String TAG = "Test Camera";
     //String upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/orientation.php";
-    String upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/upload.php";
+    //String upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/upload.php";
     //String upLoadServerHttpsUri = "https://www.ozosmatrix.com/resolution/mobileupload.php";
+
+    String upLoadServerHttpsUri="https://ozosmatrix.com/claid_revamp/v2/api/upload";
     private static final String IMAGE_DIRECTORY = "/CustomImage";
     private Camera mCamera;
     private CameraPreview mPreview;
@@ -193,8 +195,6 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                 tv.setText( " uploading..." );
 
 
-
-
                 int camerasNumber = Camera.getNumberOfCameras();
                 if (camerasNumber > 1) {
                     //release the old camera instance
@@ -233,7 +233,8 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
         if(count.equals(0)){
             tv.setText( "Left Side Bose uploading..." );
-        }else if(count.equals(1)){
+        }
+        else if(count.equals(1)){
             tv.setText( "Front Bose uploading..." );
         }else if(count.equals(2)){
             tv.setText( "Back Side Bose uploading..." );
@@ -485,18 +486,15 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                 if (
 
                         pictureFile.exists()) {
-                   pictureFile.delete();
+                        pictureFile.delete();
                 }
 
                 try {
 
-
                     Bitmap realImage = BitmapFactory.decodeByteArray(data, 0, data.length);
-
 
                     File wallpaperDirectory = new File(
                             Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY );
-
 
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     realImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -506,14 +504,14 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                    // up_image(output_file_name,Constant.pose_name,Constant.lgg_api,Constant.child_id);
                    uploadFileHttpsPost(output_file_name,Constant.pose_name,Constant.lgg_api,Constant.child_id);
-                    //  ((ImageView) findViewById(R.id.imageview)).setImageBitmap(realImage);
+                   // ((ImageView) findViewById(R.id.imageview)).setImageBitmap(realImage);
 
 
-
-
-                } catch (FileNotFoundException e) {
+                }
+                catch (FileNotFoundException e) {
                     Log.d("Info", "File not found: " + e.getMessage());
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     Log.d("TAG", "Error accessing file: " + e.getMessage());
                 }
             }
@@ -533,8 +531,6 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
 
             }
-
-
 
 
     public String uploadFileHttpsPost(String sourceFileUri,String imageName,String token,String userid) {
@@ -602,6 +598,7 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                 httpRequestBodyWriter.write("\n\n--" + boundaryString + "\n");
                 httpRequestBodyWriter.write("Content-Disposition: form-data; name=\"information\"");
                 httpRequestBodyWriter.write("\n\n");
+
                 Camera.Parameters parameters = mCamera.getParameters();
 
                 SizeF sf= null;
@@ -622,9 +619,6 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
                 Log.i("info", "Data : "
                         + infoData);
-
-
-
 
                 httpRequestBodyWriter.write("\n--" + boundaryString + "\n");
                 httpRequestBodyWriter.write("Content-Disposition: form-data;"
@@ -669,14 +663,11 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                 Log.i("uploadFile", "HTTP Response is : "
                         + serverResponseMessage + ": " + serverResponseCode);
 
-                if(serverResponseCode == 200){
-
+                if(serverResponseCode == 200) {
 
                     //showToast("File Upload Complete.");
                     Log.i("Response", "Response : "
                             + conn);
-
-
 
                     BufferedReader in = new BufferedReader(
                             new InputStreamReader(conn.getInputStream()));
@@ -689,8 +680,6 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                     Log.d( TAG, "Response Result: " +response.toString());
 
 
-
-
                     response_pixel=response.toString();
 
                     JSONObject myResponse = new JSONObject(response.toString());
@@ -699,9 +688,9 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
                     System.out.println("Error- "+myResponse.getString("error"));
                     System.out.println("Message- "+myResponse.getString("message"));
                     System.out.println("Result- "+myResponse.getString("result"));
-if("1" == myResponse.getString("error")){
+                    if("1" == myResponse.getString("error")){
 
-    Toast.makeText(myContext, "Retake Photo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(myContext, "Retake Photo", Toast.LENGTH_SHORT).show();
 }
                     res_str=myResponse.getString("result").split("#");
                     showresultView(myResponse.getString("result"));
@@ -731,20 +720,13 @@ if("1" == myResponse.getString("error")){
                     }
 
 
-
-
-
-
-
-
-
-
                     result=true;
                     /*ProgressBar progressBar;
                     progressBar = (ProgressBar) findViewById(R.id.progressBar);*/
 
                     progressBar.setVisibility(View.GONE);
-                }else{
+                }
+                else{
                     Constant.vid_cam = 1;
 
                     Toast.makeText(getApplicationContext(),"Retake Photo !!",Toast.LENGTH_SHORT).show();
@@ -782,12 +764,6 @@ if("1" == myResponse.getString("error")){
 
 
 
-
-
-
-
-
-
     private void showAlert(final String text) {
         Log.e("showAlert", "showAlert: " + text);
 
@@ -811,9 +787,6 @@ if("1" == myResponse.getString("error")){
         imageName=text;
 
     }
-
-
-
 
 
 

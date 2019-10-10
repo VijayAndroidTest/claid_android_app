@@ -3,8 +3,8 @@
 
     <item
         android:drawable="@drawable/female_icon"
-        android:width="@dimen/_45sdp"
-        android:height="@dimen/_45sdp"
+        android:width="@dimen/_30sdp"
+        android:height="@dimen/_30sdp"
         />
 
 </layer-list >

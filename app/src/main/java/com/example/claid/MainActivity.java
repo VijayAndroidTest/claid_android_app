@@ -3,6 +3,8 @@ package com.example.claid;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -10,6 +12,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -27,6 +32,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.claid.adapter.ConnectivityReceiver;
+import com.google.android.gms.dynamic.IFragmentWrapper;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +42,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
+import static com.example.claid.R.drawable.edit_text_focuses_bg;
+import static com.example.claid.R.drawable.edit_text_normal_bg;
+
+public class MainActivity extends AppCompatActivity implements
+        ConnectivityReceiver.ConnectivityReceiverListener{
 
     //dhilipan
 
@@ -49,15 +60,25 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
     String[] error,api_key,user_id;
     private static final int STORAGE_PERMISSION_CODE = 2342;
     Button button_go;
+    String tok;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
-      getSupportActionBar().hide();
+        getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        tok = FirebaseInstanceId.getInstance().getToken();
+
+        if (tok!=null)
+
+        // Log.v(":Tokes",token.getText().toString());
+        Log.i(":Tokes", tok);
+
+
         checkConnection();
         Constant.vid_cam=0;
         requestStoragePermission();
@@ -68,8 +89,96 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         editText_password= findViewById(R.id.editText_pass);
         editText_username=findViewById(R.id.editText_user);
 
+       STname = editText_username.getText().toString();
+       STpass = editText_password.getText().toString();
+       // button_go.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+
         progressBar=findViewById(R.id.progressBar2);
         button_go=findViewById(R.id.button_go);
+        button_go.getBackground().setAlpha(100);
+
+
+        editText_username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable arg0) {
+
+
+                if (editText_password.getText().toString().length()>=1 ) {
+                    button_go.getBackground().setAlpha(250);
+                    //  Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    // Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // nothing to do here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // user is typing: reset already started timer (if existing)
+                if (editText_password.getText().toString().length()>=1 ) {
+                    button_go.getBackground().setAlpha(250);
+                    //  Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    //  Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
+
+        editText_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (editText_password.getText().toString().length()>=1 ) {
+                    button_go.getBackground().setAlpha(250);
+                    // Toast.makeText(signup.this, " name "+"1", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    button_go.getBackground().setAlpha(50);
+                    button_go.setEnabled(true);
+                    //  Toast.makeText(signup.this, " name "+"0", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+//                editText_name.setBackgroundResource(edit_text_normal_bg);
+//                editText_phonenumber.setBackgroundResource(edit_text_normal_bg);
+//                editText_cpass.setBackgroundResource(edit_text_normal_bg);
+//                editText_pass.setBackgroundResource(edit_text_focuses_bg);
+
+
+
+            }
+
+        });
+
         progressBar.setVisibility(View.GONE);
 
         Uri uri = Uri.parse("android.resource://" // First start with this,
@@ -96,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
             }
         });
     }
+
 
 
 
@@ -127,7 +237,17 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
     {
         progressBar.setVisibility(View.VISIBLE);
         button_go.animate().rotation(button_go.getRotation()+180).start();
+
+        // Service Call
         log();
+
+
+        //Firebase
+
+
+        tok = FirebaseInstanceId.getInstance().getToken();
+        // Log.v(":Tokes",token.getText().toString());
+        Log.i(":Tokes", tok);
 
 
     }
@@ -155,11 +275,12 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         STpass = editText_password.getText().toString();
         STname = editText_username.getText().toString();
       //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.LOGIN, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""
+                +Url.LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(View.GONE);
-               Toast.makeText (MainActivity.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
+             //  Toast.makeText (MainActivity.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
 
                 try {
                     log_json("["+response+"]");
@@ -185,6 +306,8 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
                 Map<String, String> params = new HashMap<>();
                 params.put("username", STname);
                 params.put("password", STpass);
+                params.put("fcm_token", tok);
+                params.put("os", "1");
                 return params;
             }
         };

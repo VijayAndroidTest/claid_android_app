@@ -19,10 +19,6 @@ public class Url {
     public static final String demo_video=COMMON+"https://ozosmatrix.com/claid_revamp/v2/public/videos/t_video6280277492913668182.mp4";
 
 
-
-
-
-
 }
 
 
