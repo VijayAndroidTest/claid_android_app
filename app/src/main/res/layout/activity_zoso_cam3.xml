@@ -19,7 +19,7 @@
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
-android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
              />
     </LinearLayout>
 
@@ -127,13 +127,12 @@ android:layout_marginBottom="@dimen/_5sdp"
         android:orientation="horizontal">
 
         <TextView
-            android:drawableBottom="@drawable/left_right"
+            android:drawableBottom="@drawable/small_left_right"
             android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textColor="#ffffff"
-           android:textAlignment="center"
+            android:textAlignment="center"
             android:text="" />
 
     </LinearLayout>
@@ -150,7 +149,7 @@ android:layout_marginBottom="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_150sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:drawableRight="@drawable/up"
+            android:drawableRight="@drawable/small_up"
             android:gravity="center"
             android:text=""
             android:textAlignment="center"

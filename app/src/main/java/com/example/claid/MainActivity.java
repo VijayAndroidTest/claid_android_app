@@ -46,7 +46,7 @@ import static com.example.claid.R.drawable.edit_text_focuses_bg;
 import static com.example.claid.R.drawable.edit_text_normal_bg;
 
 public class MainActivity extends AppCompatActivity implements
-        ConnectivityReceiver.ConnectivityReceiverListener{
+        ConnectivityReceiver.ConnectivityReceiverListener {
 
     //dhilipan
 
@@ -213,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onPause() {
         super.onPause();
 
-        mCurrentVideoPosition = mMediaPlayer.getCurrentPosition();
+
+      //mCurrentVideoPosition = mMediaPlayer.getCurrentPosition();
         videoBG.pause();
     }
 
@@ -285,7 +286,6 @@ public class MainActivity extends AppCompatActivity implements
                 try {
                     log_json("["+response+"]");
                 } catch (JSONException e) {
-
                     e.printStackTrace();
                 }
 

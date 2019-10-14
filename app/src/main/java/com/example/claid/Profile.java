@@ -43,7 +43,8 @@ import java.util.Map;
 import static com.example.claid.R.drawable.edit_text_focuses_bg;
 import static com.example.claid.R.drawable.edit_text_normal_bg;
 
-public class Profile extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class Profile extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener, View.OnClickListener {
     EditText editText_name,editText_age,editText_height,editText_weight;
 
       String[] country = new String[]{ "Head","mid_neck","neck_base"," Front Shoulder","Shoulder",
@@ -63,6 +64,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_profile);
 
         Button button_back=findViewById(R.id.button8);
@@ -71,9 +73,6 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         button_video = findViewById(R.id.button_video);
         button_female=findViewById(R.id.button_female);
         button_male=findViewById(R.id.button_male);
-
-
-
 
 
 //        textView_female=(findViewById(R.id.textView16));
@@ -99,7 +98,8 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
         editText_height=findViewById(R.id.editText_height);
         editText_weight=findViewById(R.id.editText_weight);
-        editText_name.setOnClickListener(this);
+
+        editText_name.setHint(R.string.uNameChinese);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -259,7 +259,6 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
         @Override
         public void afterTextChanged(Editable s) {
-
 
             editText_name.setBackgroundResource(edit_text_normal_bg);
             editText_age.setBackgroundResource(edit_text_normal_bg);
@@ -449,7 +448,7 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
                         editText_age.clearFocus();
 
                         editText_name.clearFocus();
-                      //  next_act();
+                       photoTwo();
 
                     }
 
@@ -476,6 +475,21 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
         }, 1);
     }
 
+    void photoTwo(){
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent myIntent = new Intent(Profile.this, PhotographTwo.class);
+
+                Profile.this.startActivity(myIntent);
+                finish();
+
+            }
+        }, 1);
+    }
+
    public void back(View view){
         Intent myIntent = new Intent(Profile.this, MainActivity.class);
 
@@ -494,7 +508,8 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     void details () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.Details, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""
+                +Url.Details, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                //  Toast.makeText (Profile.this, "res: "+response, Toast.LENGTH_LONG ).show ( );
@@ -594,7 +609,8 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
     void updat () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.crear_child, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+
+                Url.crear_child, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(View.GONE);
@@ -749,10 +765,16 @@ public class Profile extends AppCompatActivity implements AdapterView.OnItemSele
 
     public void history(View view){
         Intent myIntent = new Intent(Profile.this, chilid_history.class);
-
         Profile.this.startActivity(myIntent);
 
     }
 
 
+    public void video_click(View view) {
+
+        Intent myIntent = new Intent(Profile.this, VideoView.class);
+        Profile.this.startActivity(myIntent);
+
+
+    }
 }

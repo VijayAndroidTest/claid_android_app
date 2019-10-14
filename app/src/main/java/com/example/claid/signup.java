@@ -58,6 +58,7 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_signup);
+
        // spinner_state=findViewById(R.id.spinner);
         editText_cpass=findViewById(R.id.editText_cpassword);
         editText_email=findViewById(R.id.editText_email);
@@ -67,7 +68,7 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
         button_go=findViewById(R.id.button_ok);
         button_go.getBackground().setAlpha(100);
       //  spinner_state.setOnItemSelectedListener(this);
-
+        editText_name.setHint(R.string.uNameChinese);
 
         getstate();
 
@@ -179,7 +180,7 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
                 editText_pass.setBackgroundResource(edit_text_focuses_bg);
                 
                 
-                if ( isValidPassword(editText_pass.getText().toString())==true){
+                if ( isValidPassword(editText_pass.getText().toString())==true) {
 
                  //   Toast.makeText(signup.this, " valid password ", Toast.LENGTH_SHORT).show();
                 }
@@ -350,17 +351,14 @@ signup extends AppCompatActivity implements AdapterView.OnItemSelectedListener, 
     }
 
 
-void toast(){
+void toast() {
     editText_phonenumber.requestFocus();
 }
 
 
-    public void go(View view){
-
-
+    public void go(View view) {
 
         button_go.animate().rotation(button_go.getRotation()+360).start();
-
        if(editText_name.getText().toString().isEmpty()){
 
 
@@ -394,6 +392,8 @@ void toast(){
                            log();
 
 
+
+
                        }
 
 
@@ -407,6 +407,17 @@ void toast(){
 
 
        }
+
+//        editText_name.setBackgroundResource(edit_text_normal_bg);
+//        editText_phonenumber.setBackgroundResource(edit_text_normal_bg);
+//        editText_pass.setBackgroundResource(edit_text_normal_bg);
+//        editText_cpass.setBackgroundResource(edit_text_normal_bg);
+//
+//
+//        editText_name.setCursorVisible(false);
+//        editText_phonenumber.setCursorVisible(false);
+//        editText_pass.setCursorVisible(false);
+//        editText_cpass.setCursorVisible(false);
     }
 
 
@@ -514,9 +525,6 @@ try {
         AppointmentAdapter adapter = new AppointmentAdapter();
      //   spinner_state.setAdapter(adapter);
 
-
-
-
 }
 
     @Override
@@ -608,10 +616,6 @@ try {
 
             return convertView;
         }
-
-
-
-
 
     }
 

@@ -119,13 +119,15 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_zoso_cam3);
+
+
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
         output_file_name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + File.separator + Constant.pose_name + ".jpeg";
 
          mOrientation = new Orientation(this);
-        mAttitudeIndicator = (AttitudeIndicator) findViewById(R.id.attitude_indicator);
+         mAttitudeIndicator = (AttitudeIndicator) findViewById(R.id.attitude_indicator);
         imageView=findViewById(R.id.imageView7);
         imageView.setImageResource(imageArray[Constant.pose_no]);
 
@@ -229,10 +231,11 @@ public class zoso_cam3 extends AppCompatActivity  implements SensorEventListener
 
         TextView tv = (TextView) findViewById( R.id.textView );
 
-
-
         if(count.equals(0)){
             tv.setText( "Left Side Bose uploading..." );
+
+
+
         }
         else if(count.equals(1)){
             tv.setText( "Front Bose uploading..." );

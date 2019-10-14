@@ -16,6 +16,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
 
     public final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
     private photography_pages context;
+
     private FragmentManager fragmentManager;
     private float scale;
 
@@ -23,7 +24,10 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         super(fm);
         this.fragmentManager = fm;
         this.context = context;
+
     }
+
+
 
     @Override
     public Fragment getItem(int position) {
@@ -36,10 +40,15 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
 
             position = position % photography_pages.count;
 
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return ItemFragment.newInstance(context, position, scale);
+
+
+
     }
 
     @Override
@@ -47,6 +56,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         int count = 0;
         try {
             count = photography_pages.count * photography_pages.LOOPS;
+
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

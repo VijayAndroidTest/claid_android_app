@@ -60,13 +60,11 @@ public class ItemFragment extends Fragment {
             "RIGHT SIDE","NECK RIGHT","FRONT POSE","NECK FRONT"};
 
 
-    public static Fragment newInstance(photography_pages context, int pos, float scale) {
+    public static Fragment newInstance(photography_pages context,int pos, float scale) {
 
         Bundle b = new Bundle();
         b.putInt(POSITON, pos);
         b.putFloat(SCALE, scale);
-
-
 
         return Fragment.instantiate(context, ItemFragment.class.getName(), b);
     }
@@ -97,8 +95,9 @@ public class ItemFragment extends Fragment {
         CarouselLinearLayout root = (CarouselLinearLayout) linearLayout.findViewById(R.id.root_container);
         ImageView imageView = (ImageView) linearLayout.findViewById(R.id.pagerImg);
         textView.setText("" + bose[postion]);
-         Constant.pose_name=bose[postion];
-         imageView.setLayoutParams(layoutParams);
+        Constant.pose_name=bose[postion];
+        imageView.setLayoutParams(layoutParams);
+
 //       Toast.makeText(container.getContext(), "cc"+Constant.cro_pose[postion]+ "pos  :"+postion, Toast.LENGTH_SHORT).show();
  //      imageView.setImageURI(Uri.parse(String.valueOf(Constant.cro_pose[postion])));
 

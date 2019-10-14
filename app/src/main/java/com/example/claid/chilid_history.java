@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
     private String[] name,age,sex,height,weight,fronturl,sideurl,id,date;
     private int json_val;
     SwipeMenuListView listView;
+    Button backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,12 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_profile);
+        //setContentView(R.layout.activity_profile);
         setContentView(R.layout.activity_chilid_history);
+
         listView=findViewById(R.id.listview);
         listView.setOnItemClickListener(this);
+        backbtn=findViewById(R.id.button28);
 
         details();
     }
@@ -59,7 +63,8 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
     {
 
 
-        StringRequest request = new StringRequest(StringRequest.Method.POST, ""+Url.get_child_profile, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(StringRequest.Method.POST,
+                ""+Url.get_child_profile, new Response.Listener<String>() {
             @Override
             public void onResponse(String response)
             {
@@ -138,8 +143,6 @@ public class chilid_history extends AppCompatActivity implements AdapterView.OnI
             sideurl[i]=obj.getString("sideurl");
             id[i]=obj.getString("userid");
             date[i]=obj.getString("date");
-
-
 
         }
         json_val=jsonArray.length();

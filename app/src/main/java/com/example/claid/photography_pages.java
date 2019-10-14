@@ -57,7 +57,9 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class photography_pages extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnTouchListener, CompoundButton.OnCheckedChangeListener {
+public class photography_pages extends AppCompatActivity
+        implements AdapterView.OnItemClickListener, View.OnTouchListener,
+        CompoundButton.OnCheckedChangeListener {
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapter adapter;
     private ArrayList<Game> games;
@@ -84,7 +86,6 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
     int pageMargin;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,8 +93,6 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_photography_pagess);
-
-
 
 
         log();
@@ -104,6 +103,8 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
       //  Toast.makeText(this, "sss", Toast.LENGTH_SHORT).show();
         pager.setPageMargin(-pageMargin);
         cpaadapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
+
+       // cpaadapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
         pager.setAdapter(cpaadapter);
         cpaadapter.notifyDataSetChanged();
         pager.addOnPageChangeListener(cpaadapter);
@@ -125,6 +126,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         button_next=findViewById(R.id.button9);
        // button_next.setTextColor(R.color.hintcolor);
         button_video=findViewById(R.id.button_video);
+        button_video.getBackground().setAlpha(10);
         switch_tc=findViewById(R.id.switch1);
         switch_tc.setOnCheckedChangeListener(this);
 
@@ -134,7 +136,8 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
 
             Constant.demo_viediostates = Integer.parseInt(Astatus);
 
-        }catch (Exception e){}
+        }
+        catch (Exception e){}
         Demo_video();
 //      coverFlow.setVisibility(View.GONE);
         log();
@@ -144,15 +147,10 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
          videoView.setVisibility(View.GONE);
 
           //  log();
-
             linearLayout.setVisibility(View.GONE);
             button_play.setVisibility(View.GONE);
             linearLayout.setVisibility(View.GONE);
-
-
           //  button_help.setVisibility(View.INVISIBLE);
-
-
             /*New Code*/
 //            button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
 //            button_cam.getBackground().setAlpha(250);
@@ -167,7 +165,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
 
             button_cam.setBackgroundResource(R.drawable.camera_on_onclick);
             button_cam.getBackground().setAlpha(250);
-            button_video.getBackground().setAlpha(100);
+            button_video.getBackground().setAlpha(10);
             button_next.getBackground().setAlpha(100);
             button_next.setEnabled(false);
             button_video.setBackgroundResource(R.drawable.video_onclick);
@@ -337,7 +335,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,Pathtouri);
           startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
-        }
+        }ConstantTwo
 */
 
     }
@@ -407,7 +405,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
 
 
 
-    public  void  play(View view){
+    public  void  play(View view) {
         Intent myIntent = new Intent(photography_pages.this, ozos_vidcam.class);
         photography_pages.this.startActivity(myIntent);
         videoView.setVisibility(View.GONE);
@@ -426,7 +424,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         return false;
     }
 
-
+/* Service call method to specify url, method, */
     void log () {
 
         //  Toast.makeText ( this, ""+STname+"_"+STpass, Toast.LENGTH_SHORT ).show ( );
@@ -456,7 +454,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
             }
         }) {
 
-
+/* Body value from service url session is 21 */
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -465,7 +463,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
                 return params;
             }
 
-
+/*Headers value from service url Authorization is : eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImMxZjY1....*/
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -484,6 +482,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
                 JSONArray jsonArray = new JSONArray(json);
                 error = new String[jsonArray.length()];
                 pos_name = new String[jsonArray.length()];
+                /*8 poses string from Constant class*/
                 Constant.cro_pose = new String[jsonArray.length()];
                 file = new String[jsonArray.length()];
                 String[] date = new String[jsonArray.length()];
@@ -493,8 +492,10 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
                 JSONObject obj = jsonArray.getJSONObject(i);
 
                 //Constant.cro_pose[i] = null;
+            /*Array of objects from json service*/
                 pos_name[i] = obj.getString("name");
                 file[i] = obj.getString("file");
+                /*Matching the Constant string name with service file name*/
                 Constant.cro_pose[i] = obj.getString("file");
                 Log.d("cor", ":" + obj.getString("file"));
 
@@ -502,7 +503,7 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
 
         }
 
-        pager.setVisibility(View.VISIBLE);
+         pager.setVisibility(View.VISIBLE);
 
     }
 
@@ -524,9 +525,6 @@ public class photography_pages extends AppCompatActivity implements AdapterView.
         Toast.makeText(this, "All Pose's Are Mandatory", Toast.LENGTH_SHORT).show();
         switch_tc.setChecked(false);
        }
-
-
-
 
 }else {
     button_next.getBackground().setAlpha(100);

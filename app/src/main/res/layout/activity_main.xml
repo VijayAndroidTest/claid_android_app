@@ -66,9 +66,8 @@
                         android:background="@drawable/flash_btn"
                         android:hint="user name"
                         android:maxLines="1"
-android:singleLine="true"
+                        android:singleLine="true"
                         android:ellipsize="end"
-
                         android:textAlignment="center"
                         android:textSize="@dimen/_8sdp" />
 
@@ -82,11 +81,9 @@ android:singleLine="true"
                         android:layout_weight="1"
                         android:background="@drawable/flash_btn"
                         android:hint="*********"
-android:singleLine="true"
+                        android:singleLine="true"
                         android:maxLines="1"
                         android:ellipsize="end"
-
-
                         android:textAlignment="center"
                         android:textSize="@dimen/_9sdp" />
 
@@ -102,6 +99,7 @@ android:singleLine="true"
                         android:id="@+id/button3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:onClick="forgot_password"
@@ -116,6 +114,7 @@ android:singleLine="true"
                         android:layout_weight="1"
                         android:background="@null"
                         android:onClick="create_ac"
+                        android:textSize="12dp"
                         android:text="create an account"
                         android:textColor="@color/colorwhite"
                         tools:ignore="OnClick" />

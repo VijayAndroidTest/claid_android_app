@@ -167,7 +167,6 @@
             android:id="@+id/button12"
             android:layout_marginBottom="@dimen/_25sdp"
             android:text="confirm"
-
             android:onClick="okk"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_gravity="center"

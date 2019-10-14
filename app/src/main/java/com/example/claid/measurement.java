@@ -91,12 +91,13 @@ public class measurement extends AppCompatActivity {
                 return headers;
             }
 
-
+/*  Confirm ID check here */
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("cid",Constant.child_id);
+                  params.put("cid",Constant.child_id);
+             //   params.put("oid",Constant.order_id);
 
                 return params;
             }
@@ -123,7 +124,6 @@ public class measurement extends AppCompatActivity {
             url_path[i]=obj.getString("url_path");
         }
         json_val=jsonArray.length();
-
         AppointmentAdapter2 adapter2=new AppointmentAdapter2();
         listView.setAdapter(adapter2);
 
@@ -187,10 +187,6 @@ public class measurement extends AppCompatActivity {
 
 
     {
-
-
-
-
         @Override
         public int getCount() {
 

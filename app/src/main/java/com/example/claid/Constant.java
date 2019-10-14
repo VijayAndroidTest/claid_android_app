@@ -15,6 +15,8 @@ public class Constant {
     //profile
     public  static  String mname="";
     public  static  String child_id="";
+    public static String order_id;
+
     public  static  String age="";
     public  static  String height="";
     public  static  String weight="";
@@ -34,11 +36,29 @@ public class Constant {
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckleft.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/backside.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/croatch.png",
-
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/rightpose.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckright.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/frontpose.png",
             "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckfront.png"};
+
+
+    public static String []cro_poseTwo ;
+
+
+    public static String dTwo []= {
+
+
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/leftpose.png",
+            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/frontpose.png"
+//            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckleft.png",
+//            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/backside.png",
+//            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/croatch.png",
+//            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/rightpose.png",
+//            "https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckright.png",
+            //"https://ozosmatrix.com/claid_revamp/v2/public/photopose/neckfront.png"
+    };
+
+
 
 
     public  static String img_path_left="";
